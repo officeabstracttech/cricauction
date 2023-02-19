@@ -1,0 +1,13 @@
+CREATE SCHEMA `cricauction` ;
+
+
+CREATE  TABLE `cricauction`.`user_master` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `email_id` VARCHAR(100) NOT NULL ,
+  `phone_no` VARCHAR(20) NULL ,
+  `pass` VARCHAR(100) NULL ,
+  `user_name` VARCHAR(200) NULL ,
+  `role` INT NULL ,
+  `status` INT NULL ,
+  PRIMARY KEY (`id`) )
+COMMENT = 'This table contents all the information of user. All Players, tournment creater and team data is been store in this table. Role defines that if 1 then tournment creator, 2 for team login and 3 for player.(0 for administrator) . Status field will enable and disable the login process of the particular user.';
