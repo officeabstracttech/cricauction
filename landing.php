@@ -171,14 +171,12 @@
         <div class="collapse navbar-collapse" id="navbarContainerNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link py-2 py-lg-3" href="./documentation/index.html">Login<span class="badge bg-dark rounded-pill ms-1"></span></a>
+              <a class="nav-link py-2 py-lg-3" href="./login.php">Login<span class="badge bg-dark rounded-pill ms-1"></span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link py-2 py-lg-3" href="https://htmlstream.com/contact-us" target="_blank">Sign Up </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link py-2 py-lg-3" href="https://themes.getbootstrap.com/product/front-admin-dashboard-template/" target="_blank">Support</a>
-            </li>
+            
           </ul>
         </div>
         <!-- End Collapse -->
