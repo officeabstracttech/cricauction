@@ -1,3 +1,12 @@
+<?php
+include("config.php");
+if(!isset($_SESSION["login_user"]))
+{
+    header("location:landing.php");
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
