@@ -6,14 +6,14 @@ if(isset($_POST["sbtn"]))
 
     include("config.php");
 
-    $result=mysqli_query($con,"select id,role from user_master where email_id='".$_POST["eml"]."' and pass='".$_POST["pwd"]."' ans status=1");
+    $result=mysqli_query($con,"select id from tournment_master where email_id='".$_POST["eml"]."' and pass='".$_POST["pwd"]."' and status=1");
 
 
-    if(mysqli_num_row($result)>0){
+    if(mysqli_num_rows($result) >0){
 
         $data=mysqli_fetch_row($result);
         $_SESSION["login_user"]=$data[0];
-        $_SESSION["login_role"]=$data[1];
+        $_SESSION["login_role"]='1';
         header("location:index.php");
     }
     else
