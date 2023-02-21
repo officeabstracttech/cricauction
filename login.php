@@ -225,7 +225,7 @@ if(isset($_POST["sbtn"]))
               <div class="d-grid mb-4">
                   <a class="btn btn-white btn-lg" href="signin.php">
                     <span class="d-flex justify-content-center align-items-center">
-                      Not Registered? Registration for Player's
+                      New to CricAuction? Register Here!
                     </span>
                   </a>
                 </div>
