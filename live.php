@@ -15,12 +15,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- CSS Implementing Plugins -->
-  <link rel="stylesheet" href="../assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="./assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
 
   <!-- CSS Front Template -->
 
-  <link rel="preload" href="../assets/css/theme.min.css" data-hs-appearance="default" as="style">
-  <link rel="preload" href="../assets/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
+  <link rel="preload" href="./assets/css/theme.min.css" data-hs-appearance="default" as="style">
+  <link rel="preload" href="./assets/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
 
   <style data-hs-appearance-onload-styles>
     *
@@ -242,16 +242,16 @@
   <!-- ========== END SECONDARY CONTENTS ========== -->
 
   <!-- JS Global Compulsory  -->
-  <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
-  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="./assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+  <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- JS Implementing Plugins -->
-  <script src="../assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
-  <script src="../assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
+  <script src="./assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
+  <script src="./assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
 
   <!-- JS Front -->
-  <script src="../assets/js/theme.min.js"></script>
+  <script src="./assets/js/theme.min.js"></script>
 
   <!-- JS Plugins Init. -->
   <script>
@@ -339,7 +339,6 @@
         })
       })()
     </script>
-
   <!-- End Style Switcher JS -->
 </body>
 </html>
