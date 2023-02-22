@@ -164,6 +164,9 @@ if(!isset($_SESSION["login_user"]))
         <!-- Navbar -->
         <ul class="navbar-nav">
           <li class="nav-item">
+          <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" onClick="changeTheme()" aria-expanded="false" data-bs-dropdown-animation=""><i class="bi-brightness-high"></i></button> 
+        </li>
+          <li class="nav-item">
             <!-- Account -->
             <div class="dropdown">
               <a class="navbar-dropdown-account-wrapper" href="javascript:;" id="accountNavbarDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" data-bs-dropdown-animation="">
@@ -233,7 +236,7 @@ if(!isset($_SESSION["login_user"]))
               
               if($_SESSION["login_role"]==1)
               {
-                $result=mysqli_query($con,"select process from user_master where id=".$_SESSION["login_user"]."");
+                $result=mysqli_query($con,"select process from tournment_master where id=".$_SESSION["login_user"]."");
                 $process=mysqli_fetch_row($result);
                 $process=$process[0];
 
@@ -286,3 +289,21 @@ if(!isset($_SESSION["login_user"]))
   </aside>
 
   <!-- End Navbar Vertical -->
+  <script>
+  var Themeflag=1;   
+function changeTheme()
+{
+if(Themeflag==1)
+{
+
+  HSThemeAppearance.setAppearance("dark")
+  Themeflag=2;
+}
+else
+{ 
+  HSThemeAppearance.setAppearance("default")
+  Themeflag=1;
+}
+}
+
+    </script>

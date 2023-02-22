@@ -6,7 +6,7 @@ if(isset($_POST["sbtn"]))
 
     include("config.php");
 
-    $result=mysqli_query($con,"select id from tournment_master where email_id='".$_POST["eml"]."' and pass='".$_POST["pwd"]."' and status=1");
+    $result=mysqli_query($con,"select id from tournment_master where phone_no='".$_POST["phone_no"]."' and pass='".$_POST["pwd"]."' and status=1");
 
 
     if(mysqli_num_rows($result) >0){
@@ -184,9 +184,9 @@ if(isset($_POST["sbtn"]))
 
               <!-- Form -->
               <div class="mb-4">
-                <label class="form-label" for="signinSrEmail">Your email</label>
-                <input type="email" class="form-control form-control-lg" name="eml" id="signinSrEmail" tabindex="1" placeholder="email@address.com" aria-label="email@address.com" required>
-                <span class="invalid-feedback">Please enter a valid email address.</span>
+                <label class="form-label" for="signinSrEmail">Your phone number</label>
+                <input type="text" class="form-control form-control-lg" name="phone_no" id="signinSrEmail" tabindex="1" placeholder="phone no" aria-label="email@address.com" required>
+                
               </div>
               <!-- End Form -->
 
@@ -195,7 +195,6 @@ if(isset($_POST["sbtn"]))
                 <label class="form-label w-100" for="signupSrPassword" tabindex="0">
                   <span class="d-flex justify-content-between align-items-center">
                     <span>Password</span>
-                    <a class="form-label-link mb-0" href="./authentication-reset-password-basic.html">Forgot Password?</a>
                   </span>
                 </label>
 
@@ -210,7 +209,6 @@ if(isset($_POST["sbtn"]))
                     <i id="changePassIcon" class="bi-eye"></i>
                   </a>
                 </div>
-
                 <span class="invalid-feedback">Please enter a valid password.</span>
               </div>
               <!-- End Form -->
