@@ -6,16 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Title -->
-  <title>CricAuction Live</title>
+  <title>Cric Live</title>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="../favicon.ico">
+  <link rel="shortcut icon" href="./favicon.ico">
 
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- CSS Implementing Plugins -->
   <link rel="stylesheet" href="./assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
+
+  <link rel="stylesheet" href="./assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
+  <link rel="stylesheet" href="./assets/vendor/daterangepicker/daterangepicker.css">
 
   <!-- CSS Front Template -->
 
@@ -119,128 +122,185 @@
             </script>
 </head>
 
-<body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl navbar-vertical-aside-closed-mode">
+<body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl   footer-offset">
 
-  <script src="../assets/js/hs.theme-appearance.js"></script>
+  <script src="./assets/js/hs.theme-appearance.js"></script>
+
+  <script src="./assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js"></script>
+
+  <!-- ========== HEADER ========== -->
+
+  <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered bg-white">
+    <div class="navbar-nav-wrap">
+      <!-- Logo -->
+      <a class="navbar-brand" href="./index.html" aria-label="Front">
+        <img class="navbar-brand-logo" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="default">
+        <img class="navbar-brand-logo-mini" src="./assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
+      </a>
+      <!-- End Logo -->
+
+      <div class="navbar-nav-wrap-content-start">
+        <!-- Navbar Vertical Toggle -->
+        <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
+          <i class="bi-arrow-bar-left navbar-toggler-short-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse"></i>
+          <i class="bi-arrow-bar-right navbar-toggler-full-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-bs-toggle="tooltip" data-bs-placement="right" title="Expand"></i>
+        </button>
+
+        <!-- End Navbar Vertical Toggle -->
+        <a class="btn btn-primary" href="#">Sell</a>
+
+
+        <!-- Bid Form -->
+        <div class="dropdown ms-2">
+          <!-- Input Group -->
+          <div class="d-none d-lg-block">
+            <div class="input-group input-group-merge input-group-borderless input-group-hover-light navbar-input-group">
+              <h3>Bid Price </h3>
+              <div class="input-group-prepend input-group-text">
+                
+              </div>
+
+              <input type="number" class="js-form-search form-control" placeholder="" aria-label="" >
+              <a class="input-group-append input-group-text" href="javascript:;">
+              </a>
+            </div>
+          </div>
+
+         
+          <!-- End Input Group -->
+
+
+        </div>
+
+        <!-- End Search Form -->
+      </div>
+      <a class="btn btn-primary" href="#">Skip</a>
+
+      <div class="navbar-nav-wrap-content-end">
+        <!-- Navbar -->
+        <ul class="navbar-nav">
+          <li class="nav-item d-none d-sm-inline-block">
+            
+          </li>
+
+          <li class="nav-item d-none d-sm-inline-block">
+       
+          </li>
+          <h1> </h1>
+
+          <li class="nav-item d-none d-sm-inline-block">
+            
+           
+          </li>
+
+          <li class="nav-item">
+          <a class="btn btn-primary" href="#">Next</a>
+
+             </li>
+        </ul>
+        <!-- End Navbar -->
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== END HEADER ========== -->
 
   <!-- ========== MAIN CONTENT ========== -->
   <!-- Navbar Vertical -->
+
   <aside class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered bg-white  ">
     <div class="navbar-vertical-container">
       <div class="navbar-vertical-footer-offset">
         <!-- Logo -->
 
-        <a class="navbar-brand" href="../index.html" aria-label="Front">
-          <img class="navbar-brand-logo" src="../assets/svg/logos/logo.svg" alt="Logo" data-hs-theme-appearance="default">
-          <img class="navbar-brand-logo" src="../assets/svg/logos-light/logo.svg" alt="Logo" data-hs-theme-appearance="dark">
-          <img class="navbar-brand-logo-mini" src="../assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
-          <img class="navbar-brand-logo-mini" src="../assets/svg/logos-light/logo-short.svg" alt="Logo" data-hs-theme-appearance="dark">
+        <a class="navbar-brand" href="#" aria-label="Front">
+          <img class="navbar-brand-logo" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="default">
+          <img class="navbar-brand-logo-mini" src="./assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
         </a>
 
         <!-- End Logo -->
-        <img src="../assets/AbstractLogo.png" alt="">
-        <img src="../assets/cricauctionlogo.jpg" alt="">
-        <img src="../assets/apllogo.jpg" alt="">
-        
-       
-        
 
+        <!-- Navbar Vertical Toggle -->
+       
+
+        <!-- End Navbar Vertical Toggle -->
+
+        
+        <div class="navbar-vertical-content">
+          <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
+            <!-- Team Names -->
+            <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck1">Team 1</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck2">Team 2</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck3">Team 3</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck4">Team 4</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck5">Team 5</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck6">Team 6</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck7">Team 7</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck8" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck8">Team 8</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck9" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck9">Team 9</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck10" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck10">Team 10</label>
+
+            </div>
+            <!-- End Team Names -->
+      </div>
     </div>
   </aside>
 
-  <!-- End Navbar Vertical -->
-
-  <main id="content" role="main" class="main splitted-content-main">
-    <!-- Fluid Content -->
-    <div class="splitted-content-fluid content-space">
-      <!-- Toggles -->
-      <div class="d-flex d-xl-none justify-content-end mt-3 me-3">
-        <ul class="list-inline">
-          <li class="list-inline-item">
-            <!-- Offcanvas Toggle -->
-            <button class="navbar-toggler splitted-content-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#splittedOffcanvasContent" aria-controls="splittedOffcanvasContent">
-              <span class="navbar-toggler-default">
-                <i class="bi-list"></i>
-              </span>
-              <span class="navbar-toggler-toggled">
-                <i class="bi-x"></i>
-              </span>
-            </button>
-            <!-- End Offcanvas Toggle -->
-          </li>
-
-          <li class="list-inline-item">
-            <!-- Navbar Vertical Toggle -->
-            <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler position-static">
-              <i class="bi-arrow-bar-left navbar-toggler-short-align" data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse"></i>
-              <i class="bi-arrow-bar-right navbar-toggler-full-align" data-bs-template='<div class="tooltip d-none d-sm-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-bs-toggle="tooltip" data-bs-placement="right" title="Expand"></i>
-            </button>
-            <!-- End Navbar Vertical Toggle -->
-          </li>
-        </ul>
-      </div>
-      <!-- End Toggles -->
-
-      <div class="mt-xl-10">
-        <!-- Title -->
-        <div class="text-center">
-          <img class="img-fluid mb-5" src="../assets/svg/layouts/Apl.svg" alt="Image Description" data-hs-theme-appearance="default" style="max-width: 15rem;">
-          <img class="img-fluid shadow-sm mb-5" src="../assets/svg/layouts-light/Apl.svg" alt="Image Description" data-hs-theme-appearance="dark" style="max-width: 15rem;">
-
-          <h1>Player name</h1>
-          <p>Player Information.</p>
-          
-        
-        </div>
-        <!-- End Title -->
-      </div>
+  <main id="content" role="main" class="main">
+    <!-- Content -->
+    <div class="content container-fluid">
+     <img src="" alt="">
     </div>
-    <!-- End Fluid Content -->
+    <!-- End Content -->
 
-    <!-- Offcanvas Content -->
-    <div class="offcanvas offcanvas-start splitted-content-small splitted-content-bordered d-flex flex-column" tabindex="-1" id="splittedOffcanvasContent">
-      <div class="offcanvas-body">
-        <div class="d-flex justify-content-right flex-column align-items-right h-100 py-10 py-xl-0">
-          <a class="btn btn-primary" href="#">team 1</a>
-          <h1> </h1>
-          <a class="btn btn-primary" href="#">team 2</a>
-          <h1> </h1>
-          <a class="btn btn-primary" href="#">team 3</a>
-          <h1> </h1>
-          <a class="btn btn-primary" href="#">team 4</a>
-          <h1> </h1>
-          <a class="btn btn-primary" href="#">team 5</a>
-          <h1> </h1>
-          <a class="btn btn-primary" href="#">team 6</a>
-          <h1> </h1>
-          <a class="btn btn-primary" href="#">team 7</a>
-          <h1> </h1>
-          <a class="btn btn-primary" href="#">team 8</a>
-          <h1> </h1>
-          <a class="btn btn-primary" href="#">team 9</a>
-          <h1> </h1>
-          <a class="btn btn-primary" href="#">team 10</a>
-          <h1> </h1>
+    <!-- Footer -->
 
-          <h1>Bid Price</h1>
-          <div class="row mb-4">
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="department" id="departmentLabel" placeholder="" aria-label="Human resources">
-            </div>
+    <div class="footer">
+      <div class="row justify-content-between align-items-center">
+        <div class="col">
+          <p class="fs-6 mb-0">&copy; CricAuction. <span class="d-none d-sm-inline-block">2023 Abstract Tech Solution.</span></p>
+        </div>
+        <!-- End Col -->
+
+        <div class="col-auto">
+          <div class="d-flex justify-content-end">
+            <!-- List Separator -->
+           
+              <li class="list-inline-item">
+               
+            </ul>
+            <!-- End List Separator -->
           </div>
-          <a class="btn btn-primary" href="#">Sale</a>
-          <h1> </h1>
-          <a class="btn btn-primary" href="#">Skip</a>
         </div>
+        <!-- End Col -->
       </div>
+      <!-- End Row -->
     </div>
-    <!-- End Offcanvas Content -->
+
+    <!-- End Footer -->
   </main>
   <!-- ========== END MAIN CONTENT ========== -->
 
   
-  <!-- ========== END SECONDARY CONTENTS ========== -->
-
   <!-- JS Global Compulsory  -->
   <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="./assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
@@ -250,55 +310,116 @@
   <script src="./assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
   <script src="./assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
 
+  <script src="./assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
+  <script src="./assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="./assets/vendor/clipboard/dist/clipboard.min.js"></script>
+  <script src="./assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+  <script src="./assets/vendor/daterangepicker/moment.min.js"></script>
+  <script src="./assets/vendor/daterangepicker/daterangepicker.js"></script>
+
   <!-- JS Front -->
   <script src="./assets/js/theme.min.js"></script>
+  <script src="./assets/js/hs.theme-appearance-charts.js"></script>
+
+  <!-- JS Plugins Init. -->
+  <script>
+    $(document).on('ready', function () {
+      // INITIALIZATION OF DATATABLES
+      // =======================================================
+      HSCore.components.HSDatatables.init($('#datatable'), {
+        select: {
+          style: 'multi',
+          selector: 'td:first-child input[type="checkbox"]',
+          classMap: {
+            checkAll: '#datatableCheckAll',
+            counter: '#datatableCounter',
+            counterInfo: '#datatableCounterInfo'
+          }
+        },
+        language: {
+          zeroRecords: `<div class="text-center p-4">
+              <img class="mb-3" src="./assets/svg/illustrations/oc-error.svg" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="default">
+              <img class="mb-3" src="./assets/svg/illustrations-light/oc-error.svg" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="dark">
+            <p class="mb-0">No data to show</p>
+            </div>`
+        }
+      });
+
+      const datatable = HSCore.components.HSDatatables.getItem(0)
+
+
+      // INITIALIZATION OF DATERANGEPICKER
+      // =======================================================
+      $('.js-daterangepicker').daterangepicker();
+
+      $('.js-daterangepicker-times').daterangepicker({
+        timePicker: true,
+        startDate: moment().startOf('hour'),
+        endDate: moment().startOf('hour').add(32, 'hour'),
+        locale: {
+          format: 'M/DD hh:mm A'
+        }
+      });
+
+      var start = moment();
+      var end = moment();
+
+      function cb(start, end) {
+        $('#js-daterangepicker-predefined .js-daterangepicker-predefined-preview').html(start.format('MMM D') + ' - ' + end.format('MMM D, YYYY'));
+      }
+
+      $('#js-daterangepicker-predefined').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+          'Today': [moment(), moment()],
+          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+      }, cb);
+
+      cb(start, end);
+    });
+  </script>
 
   <!-- JS Plugins Init. -->
   <script>
     (function() {
-      // INITIALIZATION OF NAVBAR VERTICAL ASIDE
-      // =======================================================
-      new HSSideNav('.js-navbar-vertical-aside').init()
+      window.onload = function () {
+        
+
+        // INITIALIZATION OF NAVBAR VERTICAL ASIDE
+        // =======================================================
+        new HSSideNav('.js-navbar-vertical-aside').init()
 
 
-      // INITIALIZATION OF FORM SEARCH
-      // =======================================================
-      new HSFormSearch('.js-form-search')
+        // INITIALIZATION OF FORM SEARCH
+        // =======================================================
+        new HSFormSearch('.js-form-search')
 
 
-      // INITIALIZATION OF BOOTSTRAP DROPDOWN
-      // =======================================================
-      HSBsDropdown.init()
+        // INITIALIZATION OF BOOTSTRAP DROPDOWN
+        // =======================================================
+        HSBsDropdown.init()
 
 
-      // INITIALIZATION OF SIDEBAR COMBINATIONS WITH OFFCANVAS
-      // =======================================================
-      const offcanvasInstance = new bootstrap.Offcanvas(document.querySelector('.offcanvas-start'))
-      const defaultTransition = window.getComputedStyle(offcanvasInstance._element).getPropertyValue('transition')
-      window.addEventListener('resize', function (e) {
-        if (window.innerWidth > 1200) {
-          if (offcanvasInstance._element.style.transition !== 'none 0s ease 0s' ) {
-            offcanvasInstance._element.style.transition = 'none'
-          }
+        // INITIALIZATION OF SELECT
+        // =======================================================
+        HSCore.components.HSTomSelect.init('.js-select')
 
-          // Reset offcanvas states
-          if (offcanvasInstance._isShown) {
-            offcanvasInstance._element.classList.remove('show')
-            offcanvasInstance._backdrop._element.remove()
-            offcanvasInstance._isShown = false
-            offcanvasInstance._backdrop._isAppended = false
-          }
 
-          // Show offcanvas if hidden on desktop
-          if (offcanvasInstance._element.style.visibility === 'hidden') {
-            offcanvasInstance._element.style.visibility = 'visible'
-          }
-        } else {
-          if (offcanvasInstance._element.style.transition === 'none 0s ease 0s' ) {
-            offcanvasInstance._element.style.removeProperty('transition')
-          }
-        }
-      })
+        // INITIALIZATION OF CLIPBOARD
+        // =======================================================
+        HSCore.components.HSClipboard.init('.js-clipboard')
+
+
+        // INITIALIZATION OF CHARTJS
+        // =======================================================
+        HSCore.components.HSChartJS.init('.js-chart')
+      }
     })()
   </script>
 
@@ -339,6 +460,7 @@
         })
       })()
     </script>
+
   <!-- End Style Switcher JS -->
 </body>
 </html>
