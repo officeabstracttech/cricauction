@@ -147,7 +147,6 @@
         </button>
 
         <!-- End Navbar Vertical Toggle -->
-        <a class="btn btn-primary" href="#">Sell</a>
 
 
         <!-- Bid Form -->
@@ -155,13 +154,36 @@
           <!-- Input Group -->
           <div class="d-none d-lg-block">
             <div class="input-group input-group-merge input-group-borderless input-group-hover-light navbar-input-group">
-              <h3>Bid Price </h3>
               <div class="input-group-prepend input-group-text">
                 
               </div>
+            <!-- Quantity -->
+<div class="quantity-counter">
+  <div class="js-quantity-counter row align-items-center">
+    <div class="col">
+      <span class="d-block small">Bid Price</span>
+      <input class="js-result form-control form-control-quantity-counter" type="number" value="50">
+    </div>
+    <!-- End Col -->
 
-              <input type="number" class="js-form-search form-control" placeholder="" aria-label="" >
-              <a class="input-group-append input-group-text" href="javascript:;">
+    <div class="col-auto">
+      <a class="js-minus btn btn-outline-secondary btn-xs btn-icon rounded-circle" href="javascript:;">
+        <svg width="8" height="2" viewBox="0 0 8 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 1C0 0.723858 0.223858 0.5 0.5 0.5H7.5C7.77614 0.5 8 0.723858 8 1C8 1.27614 7.77614 1.5 7.5 1.5H0.5C0.223858 1.5 0 1.27614 0 1Z" fill="currentColor"/>
+        </svg>
+      </a>
+      <a class="js-plus btn btn-outline-secondary btn-xs btn-icon rounded-circle" href="javascript:;">
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 0C4.27614 0 4.5 0.223858 4.5 0.5V3.5H7.5C7.77614 3.5 8 3.72386 8 4C8 4.27614 7.77614 4.5 7.5 4.5H4.5V7.5C4.5 7.77614 4.27614 8 4 8C3.72386 8 3.5 7.77614 3.5 7.5V4.5H0.5C0.223858 4.5 0 4.27614 0 4C0 3.72386 0.223858 3.5 0.5 3.5H3.5V0.5C3.5 0.223858 3.72386 0 4 0Z" fill="currentColor"/>
+        </svg>
+      </a>
+    </div>
+    <!-- End Col -->
+  </div>
+  <!-- End Row -->
+</div>
+<!-- End Quantity -->
+            
               </a>
             </div>
           </div>
@@ -174,7 +196,7 @@
 
         <!-- End Search Form -->
       </div>
-      <a class="btn btn-primary" href="#">Skip</a>
+
 
       <div class="navbar-nav-wrap-content-end">
         <!-- Navbar -->
@@ -184,17 +206,22 @@
           </li>
 
           <li class="nav-item d-none d-sm-inline-block">
-       
-          </li>
-          <h1> </h1>
+          <a class="btn btn-primary" href="#">Undo</a>
 
+          </li>
+        
+
+          
+         
           <li class="nav-item d-none d-sm-inline-block">
-            
-           
+          <a class="btn btn-primary" href="#">Summery</a>
+
+          </li>
+        
           </li>
 
           <li class="nav-item">
-          <a class="btn btn-primary" href="#">Next</a>
+          <a class="btn btn-primary" href="#">Next Player</a>
 
              </li>
         </ul>
@@ -231,33 +258,43 @@
             <!-- Team Names -->
             <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
             <label class="btn btn-outline-primary" for="btncheck1">Team 1</label>
+            <h1> </h1>
 
             <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
             <label class="btn btn-outline-primary" for="btncheck2">Team 2</label>
+            <h1> </h1>
 
             <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
             <label class="btn btn-outline-primary" for="btncheck3">Team 3</label>
+            <h1> </h1>
 
             <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
             <label class="btn btn-outline-primary" for="btncheck4">Team 4</label>
+            <h1> </h1>
 
             <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
             <label class="btn btn-outline-primary" for="btncheck5">Team 5</label>
+            <h1> </h1>
 
             <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
             <label class="btn btn-outline-primary" for="btncheck6">Team 6</label>
+            <h1> </h1>
 
             <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
             <label class="btn btn-outline-primary" for="btncheck7">Team 7</label>
+            <h1> </h1>
 
             <input type="checkbox" class="btn-check" id="btncheck8" autocomplete="off">
             <label class="btn btn-outline-primary" for="btncheck8">Team 8</label>
+            <h1> </h1>
 
             <input type="checkbox" class="btn-check" id="btncheck9" autocomplete="off">
             <label class="btn btn-outline-primary" for="btncheck9">Team 9</label>
+            <h1> </h1>
 
             <input type="checkbox" class="btn-check" id="btncheck10" autocomplete="off">
             <label class="btn btn-outline-primary" for="btncheck10">Team 10</label>
+            <h1> </h1>
 
             </div>
             <!-- End Team Names -->
@@ -266,17 +303,63 @@
   </aside>
 
   <main id="content" role="main" class="main">
-    <!-- Content -->
+      <!-- Content -->
     <div class="content container-fluid">
-     <img src="" alt="">
-    </div>
-    <!-- End Content -->
+     <!-- Profile Cover -->
+<div class="profile-cover">
+  <div class="profile-cover-img-wrapper">
+    <img class="profile-cover-img" src="./assets/img/1920x400/img1.jpg" alt="Image Description">
+  </div>
+</div>
+<!-- End Profile Cover -->
+<!-- Profile Header -->
+<div class="text-center mb-5">
+  <!-- Avatar -->
+  <div class="avatar avatar-xxl avatar-circle profile-cover-avatar">
+    <img class="avatar-img" src="./assets/player image.jpeg" alt="Image Description">
+    <span class="avatar-status avatar-status-success"></span>
+  </div>
+  <!-- End Avatar -->
 
+  <h1 class="page-header-title">Aditya Patil</h1>
+<h4>Batsman</h4>  <!-- List -->
+  <ul class="list-inline list-px-2">
+   
+
+    <li class="list-inline-item">
+      <i class="bi-geo-alt me-1"></i>
+      <a>Aurangabad</a>
+    </li>
+
+    <li class="list-inline-item">
+      <i class="bi-calendar-week me-1"></i>
+      <span>05/08/2004</span>
+    </li>
+  </ul>
+  <!-- End List -->
+  <a class="btn btn-primary" href="#">Sold</a>
+  <a class="btn btn-primary" href="#">Unsold</a>
+
+
+</div>
+<!-- End Profile Header -->
+<div class="sliding-img mb-5">
+        <div class="sliding-img-frame-to-start" style="background-image: url(./assets/img/others/img1-dark.png); height: 150px;weidth: 1000px"data-hs-theme-appearance="default"></div>
+        
+      </div>
+    <!-- End Content -->
+    </div>
+    <!-- End Heading -->
+
+   
+
+    </div>
     <!-- Footer -->
 
     <div class="footer">
       <div class="row justify-content-between align-items-center">
         <div class="col">
+        
           <p class="fs-6 mb-0">&copy; CricAuction. <span class="d-none d-sm-inline-block">2023 Abstract Tech Solution.</span></p>
         </div>
         <!-- End Col -->
@@ -309,6 +392,7 @@
   <!-- JS Implementing Plugins -->
   <script src="./assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
   <script src="./assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
+  <script src="./assets/vendor/hs-quantity-counter/dist/hs-quantity-counter.min.js"></script>
 
   <script src="./assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
   <script src="./assets/vendor/chart.js/dist/Chart.min.js"></script>
@@ -422,7 +506,13 @@
       }
     })()
   </script>
-
+<script>
+  (function() {
+    // INITIALIZATION OF  QUANTITY COUNTER
+    // =======================================================
+    new HSQuantityCounter('.js-quantity-counter')
+  })();
+</script>
   <!-- Style Switcher JS -->
 
   <script>
