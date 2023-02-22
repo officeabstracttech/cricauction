@@ -50,3 +50,14 @@ COMMENT = 'This table store all the details of a team';
 
 
 ALTER TABLE `cricauction`.`team_master` ADD COLUMN `phone_no` VARCHAR(20) NULL  AFTER `team_logo` , ADD COLUMN `pass` VARCHAR(100) NULL  AFTER `phone_no` ;
+
+
+CREATE  TABLE `cricauction`.`player_mapping_master` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `player_id` INT NULL ,
+  `team_id` INT NULL ,
+  `tournment_id` INT NULL ,
+  `sold_status` INT NULL ,
+  `sold_points` INT NULL ,
+  PRIMARY KEY (`id`) )
+COMMENT = 'This table map the player with the team';
