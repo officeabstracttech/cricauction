@@ -250,34 +250,21 @@ if(!isset($_SESSION["login_user"]))
                 </div>
                 ';
                 }
+                else
+                {
+                  
+                echo '<div class="nav-item">
+                <a class="nav-link" href="index.php" data-placement="left">
+                  <i class="bi-house nav-icon"></i>
+                  <span class="nav-link-title">Home</span>
+                </a>
+              </div>
+              ';
+                }
               }
               
               
               ?>
-   
-            <div class="nav-item">
-              <a class="nav-link " href="./apps-invoice-generator.html" data-placement="left">
-                <i class="bi-receipt nav-icon"></i>
-                <span class="nav-link-title">Invoice Generator</span>
-              </a>
-            </div>
-
-            <div class="nav-item">
-              <a class="nav-link " href="./apps-file-manager.html" data-placement="left">
-                <i class="bi-folder2-open nav-icon"></i>
-                <span class="nav-link-title">File Manager</span>
-              </a>
-            </div>
-
-            <span class="dropdown-header mt-4">Layouts</span>
-            <small class="bi-three-dots nav-subtitle-replacer"></small>
-
-            <div class="nav-item">
-              <a class="nav-link " href="./layouts/index.html" data-placement="left">
-                <i class="bi-grid-1x2 nav-icon"></i>
-                <span class="nav-link-title">Layouts</span>
-              </a>
-            </div>
 
           </div>
 

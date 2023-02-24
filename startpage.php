@@ -2,11 +2,38 @@
 
 include("header.php");
 
+if(isset($_GET["addnewplayer"]))
+{
+  mysqli_query($con,"insert into player_mapping_master(player_id,tournment_id,enrolled_status) values(".$_GET["addnewplayer"].",".$_SESSION["login_user"].",1); ");
+  echo "<script>window.location.href='startpage.php';</script>";
+}
+else if(isset($_GET["addplayer"]))
+{
+mysqli_query($con,"update player_mapping_master set tournment_id=".$_SESSION["login_user"].",enrolled_status=1");
+echo "<script>window.location.href='startpage.php';</script>";
+}
+else if(isset($_GET["removeplayer"]))
+{
+  mysqli_query($con,"update player_mapping_master set tournment_id=".$_SESSION["login_user"].",enrolled_status=0");
+  echo "<script>window.location.href='startpage.php';</script>";
+
+}
+
+
 if(isset($_GET["set"]))
 {
   if($_GET["set"]==3 || $_GET["set"]==4)
   {
     mysqli_query($con,"update tournment_master set process=".$_GET["set"]." where id=".$_SESSION["login_user"]."");
+    if($_GET["set"]==3)
+    {
+      echo "<script>window.location.href='startpage.php';</script>";
+    }
+    else if($_GET["set"]==4)
+    {
+      echo "<script>window.location.href='index.php';</script>";
+
+    }
   }
 }
 
@@ -539,10 +566,32 @@ if($process==3)
               </td>
               <td></td>
               <td>
-                <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
-                   Add 
-                </button>
-              </td>
+              ';
+              $mappingpointer=mysqli_query($con,"select * from player_mapping_master where player_id=".$data[0]."");
+              if(mysqli_num_rows($mappingpointer)>0)
+              {
+                $mappingrow=mysqli_fetch_row($mappingpointer);
+                if($mappingrow[6]==0){
+                  
+              echo  ' <a type="button" href="startpage.php?addplayer='.$mappingrow[0].'" class="btn btn-outline-success btn-sm">
+              Add Player
+           </a>';
+                }
+                else if($mappingrow[6]==1)
+                {
+              echo  ' <a type="button" href="startpage.php?removeplayer='.$mappingrow[0].'" class="btn btn-outline-danger btn-sm">
+              Remove Player
+           </a>'; 
+                }
+              }
+              else
+              {
+                echo  ' <a type="button" href="startpage.php?addnewplayer='.$data[0].'" class="btn btn-outline-success btn-sm">
+                Add Player
+             </a>';
+              }
+
+              echo '  </td>
             </tr>
   
               ';
