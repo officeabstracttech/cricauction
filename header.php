@@ -240,7 +240,7 @@ if(!isset($_SESSION["login_user"]))
                 $process=mysqli_fetch_row($result);
                 $process=$process[0];
 
-                if($process==1)
+                if($process<4)
                 {
                 echo '<div class="nav-item">
                   <a class="nav-link" href="startpage.php" data-placement="left">
