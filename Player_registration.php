@@ -13,10 +13,10 @@
 
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/vendor/flatpickr/dist/flatpickr.min.css">
 
   <!-- CSS Implementing Plugins -->
   <link rel="stylesheet" href="./assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
-
   <link rel="stylesheet" href="./assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
 
   <!-- CSS Front Template -->
@@ -121,272 +121,213 @@
             </script>
 </head>
 
-<body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl   footer-offset">
+<body>
 
   <script src="./assets/js/hs.theme-appearance.js"></script>
 
-  <script src="./assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js"></script>
-
-  <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered bg-white">
-    <div class="navbar-nav-wrap">
-      <!-- Logo -->
-      <a class="navbar-brand" href="./index.html" aria-label="Front">
-        <img class="navbar-brand-logo" src="./assets/svg/logos/logo.svg" alt="Logo" data-hs-theme-appearance="default">
-        <img class="navbar-brand-logo" src="./assets/svg/logos-light/logo.svg" alt="Logo" data-hs-theme-appearance="dark">
-        <img class="navbar-brand-logo-mini" src="./assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
-        <img class="navbar-brand-logo-mini" src="./assets/svg/logos-light/logo-short.svg" alt="Logo" data-hs-theme-appearance="dark">
-      </a>
-      <h1>Player Registration</h1>
-      <!-- End Logo -->
-     </div>
-  </header>
-
   <!-- ========== MAIN CONTENT ========== -->
-  <!-- Navbar Vertical -->
-
-  <aside class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered bg-white  ">
-    <div class="navbar-vertical-container">
-      <div class="navbar-vertical-footer-offset">
-        <!-- Logo -->
-
-        <a class="navbar-brand" href="./index.html" aria-label="Front">
-          <img class="navbar-brand-logo" src="./assets/svg/logos/logo.svg" alt="Logo" data-hs-theme-appearance="default">
-          <img class="navbar-brand-logo" src="./assets/svg/logos-light/logo.svg" alt="Logo" data-hs-theme-appearance="dark">
-          <img class="navbar-brand-logo-mini" src="./assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
-          <img class="navbar-brand-logo-mini" src="./assets/svg/logos-light/logo-short.svg" alt="Logo" data-hs-theme-appearance="dark">
-        </a>
-
-        <!-- End Logo -->
-
-        </div>
-    </div>
-  </aside>
-
   <main id="content" role="main" class="main">
-    <!-- Content -->
-    <div class="content container-fluid">
-      <!-- Step Form -->
-      <form class="js-step-form py-md-5" data-hs-step-form-options='{
-              "progressSelector": "#addUserStepFormProgress",
-              "stepsSelector": "#addUserStepFormContent",
-              "endSelector": "#addUserFinishBtn",
-              "isValidate": false
-            }'>
-        <div class="row justify-content-lg-center">
-          <div class="col-lg-8">
-            <!-- Step -->
-            <ul id="addUserStepFormProgress" class="js-step-progress step step-sm step-icon-sm step step-inline step-item-between mb-3 mb-md-5">
-              <li class="step-item">
-                <a class="step-content-wrapper" href="javascript:;" data-hs-step-form-next-options='{
-                    "targetSelector": "#addUserStepProfile"
-                  }'>
-                  <span class="step-icon step-icon-soft-dark">1</span>
-                  <div class="step-content">
-                    <span class="step-title">Profile</span>
-                  </div>
-                </a>
-              </li>
-
-              
-            </ul>
-            <!-- End Step -->
-
-            <!-- Content Step Form -->
-            <div id="addUserStepFormContent">
-              <!-- Card -->
-              <div id="addUserStepProfile" class="card card-lg active">
-                <!-- Body -->
-                <div class="card-body">
-                  <!-- Form -->
-                  <div class="row mb-4">
-                    <label class="col-sm-3 col-form-label form-label">Photo</label>
-
-                    <div class="col-sm-9">
-                      <div class="d-flex align-items-center">
-                        <!-- Avatar -->
-                        <label class="avatar avatar-xl avatar-circle avatar-uploader me-5" for="avatarUploader">
-                          <img id="avatarImg" class="avatar-img" src="./assets/img/160x160/img1.jpg" alt="Image Description">
-
-                          <input type="file" class="js-file-attach avatar-uploader-input" id="avatarUploader" data-hs-file-attach-options='{
-                                    "textTarget": "#avatarImg",
-                                    "mode": "image",
-                                    "targetAttr": "src",
-                                    "resetTarget": ".js-file-attach-reset-img",
-                                    "resetImg": "./assets/img/160x160/img1.jpg",
-                                    "allowTypes": [".png", ".jpeg", ".jpg"]
-                                 }'>
-
-                          <span class="avatar-uploader-trigger">
-                            <i class="bi-pencil avatar-uploader-icon shadow-sm"></i>
-                          </span>
-                        </label>
-                        <!-- End Avatar -->
-
-                        <button type="button" class="js-file-attach-reset-img btn btn-white">Delete</button>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End Form -->
-
-                  <!-- Form -->
-                  <div class="row mb-4">
-                    <label for="firstNameLabel" class="col-sm-3 col-form-label form-label">Full name <i class="bi-question-circle text-body ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Displayed on public forums, such as CricAuction."></i></label>
-
-                    <div class="col-sm-9">
-                      <div class="input-group input-group-sm-vertical">
-                        <input type="text" class="form-control" name="firstName" id="firstNameLabel" placeholder="First Name" aria-label="Clarice">
-                        <input type="text" class="form-control" name="lastName" id="lastNameLabel" placeholder="Last Name" aria-label="Boone">
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End Form -->
-
-                  <!-- Form -->
-                  <div class="row mb-4">
-                    <label for="emailLabel" class="col-sm-3 col-form-label form-label">Email</label>
-
-                    <div class="col-sm-9">
-                      <input type="email" class="form-control" name="email" id="emailLabel" placeholder="abc@gmail.com" aria-label="clarice@site.com">
-                    </div>
-                  </div>
-                  <!-- End Form -->
-
-                  <!-- Form -->
-                  <div class="js-add-field row mb-4" data-hs-add-field-options='{
-                          "template": "#addPhoneFieldTemplate",
-                          "container": "#addPhoneFieldContainer",
-                          "defaultCreated": 0
-                        }'>
-                    <label for="phoneLabel" class="col-sm-3 col-form-label form-label">Phone <span class="form-label-secondary"></span></label>
-
-                    <div class="col-sm-9">
-                      <div class="input-group input-group-sm-vertical">
-                        <input type="text" class="js-input-mask form-control" name="phone" id="phoneLabel" placeholder="+x(xxx)xxx-xx-xx" aria-label="+x(xxx)xxx-xx-xx" data-hs-mask-options='{
-                                 "mask": "+0(000)000-00-00"
-                               }'>
-
-                        <!-- Select -->
-                        
-                        <!-- End Select -->
-                      </div>
-
-                      
-                    </div>
-                  </div>
-                  <!-- End Form -->
-
-
-                  <!-- Form -->
-                  <div class="row mb-4">
-                    <label for="organizationLabel" class="col-sm-3 col-form-label form-label">Date Of Birth</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" name="organization" id="organizationLabel" placeholder="XX/XX/XXXX" aria-label="Htmlstream">
-                    </div>
-                  </div>
-                  <!-- End Form -->
-
-                  <!-- Form -->
-                  <div class="row mb-4">
-                    <label for="departmentLabel" class="col-sm-3 col-form-label form-label">Address</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" name="department" id="departmentLabel" placeholder="" aria-label="Human resources">
-                    </div>
-                  </div>
-                  <!-- End Form -->
-                   <!-- Form -->
-                   <div class="row mb-4">
-                    <label for="departmentLabel" class="col-sm-3 col-form-label form-label">Gender</label>
-
-                    <div class="col-sm-9">
-                    <select class="js-select form-select" data-hs-tom-select-options='{
-                                "searchInDropdown": false,
-                                "dropdownWidth": "auto"
-                              }'>
-                        <option value="privacy2" data-option-template='<div class="d-flex align-items-start"><div class="flex-shrink-0"><i class="bi-lock"></i></div><div class="flex-grow-1 ms-2"><span class="d-block fw-semibold">Only you</span><span class="tom-select-custom-hide small">Only visible to you.</span></div></div>'>Select You Gender</option>
-                        <option value="privacy2" data-option-template='<div class="d-flex align-items-start"><div class="flex-shrink-0"><i class="bi-lock"></i></div><div class="flex-grow-1 ms-2"><span class="d-block fw-semibold">Only you</span><span class="tom-select-custom-hide small">Only visible to you.</span></div></div>'>Male</option>
-                        <option value="privacy2" data-option-template='<div class="d-flex align-items-start"><div class="flex-shrink-0"><i class="bi-lock"></i></div><div class="flex-grow-1 ms-2"><span class="d-block fw-semibold">Only you</span><span class="tom-select-custom-hide small">Only visible to you.</span></div></div>'>Female</option>
-                        <option value="privacy2" data-option-template='<div class="d-flex align-items-start"><div class="flex-shrink-0"><i class="bi-lock"></i></div><div class="flex-grow-1 ms-2"><span class="d-block fw-semibold">Only you</span><span class="tom-select-custom-hide small">Only visible to you.</span></div></div>'>Others</option>
-                      </select>                    </div>
-                  </div>
-                  <!-- End Form -->
-                  
-                   <!-- Form -->
-                   <div class="row mb-4">
-                    <label for="departmentLabel" class="col-sm-3 col-form-label form-label">Speciality</label>
-
-                    <div class="col-sm-9">
-                    <select class="js-select form-select" data-hs-tom-select-options='{
-                                "searchInDropdown": false,
-                                "dropdownWidth": "auto"
-                              }'>
-                        <option value="privacy2" data-option-template='<div class="d-flex align-items-start"><div class="flex-shrink-0"><i class="bi-lock"></i></div><div class="flex-grow-1 ms-2"><span class="d-block fw-semibold">Only you</span><span class="tom-select-custom-hide small">Only visible to you.</span></div></div>'>Select You Speciality</option>
-                        <option value="privacy2" data-option-template='<div class="d-flex align-items-start"><div class="flex-shrink-0"><i class="bi-lock"></i></div><div class="flex-grow-1 ms-2"><span class="d-block fw-semibold">Only you</span><span class="tom-select-custom-hide small">Only visible to you.</span></div></div>'>Batsman</option>
-                        <option value="privacy2" data-option-template='<div class="d-flex align-items-start"><div class="flex-shrink-0"><i class="bi-lock"></i></div><div class="flex-grow-1 ms-2"><span class="d-block fw-semibold">Only you</span><span class="tom-select-custom-hide small">Only visible to you.</span></div></div>'>Baller</option>
-                        <option value="privacy2" data-option-template='<div class="d-flex align-items-start"><div class="flex-shrink-0"><i class="bi-lock"></i></div><div class="flex-grow-1 ms-2"><span class="d-block fw-semibold">Only you</span><span class="tom-select-custom-hide small">Only visible to you.</span></div></div>'>All-Rounder</option>
-                        <option value="privacy2" data-option-template='<div class="d-flex align-items-start"><div class="flex-shrink-0"><i class="bi-lock"></i></div><div class="flex-grow-1 ms-2"><span class="d-block fw-semibold">Only you</span><span class="tom-select-custom-hide small">Only visible to you.</span></div></div>'>Wicket-Keeper</option>
-                      </select>                    </div>
-                  </div>
-                  <!-- End Form -->
-
-                  <!-- Form -->
-                  
-                        <!-- End Radio Check -->
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End Form -->
-                </div>
-                <!-- End Body -->
-
-                <!-- Footer -->
-                
-                <div class="card-footer d-flex justify-content-end align-items-center">
-                  <button type="button" class="btn btn-primary" data-hs-step-form-next-options='{
-                            "targetSelector": "#addUserStepBillingAddress"
-                          }'>
-                    Submit <i class="bi-chevron-right"></i>
-                  </button>
-                </div>
-                <!-- End Footer -->
-              </div>
-              <!-- End Card -->
-
-
-    <!-- Footer -->
-
-    <div class="footer">
-      <div class="row justify-content-between align-items-center">
-        <div class="col">
-          <p class="fs-6 mb-0">&copy; CricAuction. <span class="d-none d-sm-inline-block">2023 Abstract Tech Solution.</span></p>
-        </div>
-        <!-- End Col -->
-
-        </div>
-        <!-- End Col -->
+    <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url(./assets/svg/components/card-6.svg);">
+      <!-- Shape -->
+      <div class="shape shape-bottom zi-1">
+        <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
+          <polygon fill="#fff" points="0,273 1921,273 1921,0 " />
+        </svg>
       </div>
-      <!-- End Row -->
+      <!-- End Shape -->
     </div>
 
-    <!-- End Footer -->
+    <!-- Content -->
+    <div class="container py-5 py-sm-7">
+      <a class="d-flex justify-content-center mb-5" href="./index.html">
+        <img class="zi-2" src="./assets/svg/logos/logo.svg" alt="Image Description" style="width: 8rem;">
+      </a>
+
+      <div class="mx-auto" style="max-width: 30rem;">
+        <!-- Card -->
+        <div class="card card-lg mb-5">
+          <div class="card-body">
+            <!-- Form -->
+            <form class="js-validate needs-validation" novalidate>
+              <div class="text-center">
+                <div class="mb-5">
+                  <h1 class="display-5">Create your account</h1>
+                  <p>Already have an account? <a class="link" href="./authentication-login-basic.html">Sign in here</a></p>
+                </div>
+               </div>
+
+              <label class="form-label" for="fullNameSrEmail">Full name</label>
+
+              <!-- Form -->
+              <div class="row">
+                <div class="col-sm-6">
+                  <!-- Form -->
+                  <div class="mb-4">
+                    <input type="text" class="form-control form-control-lg" name="fullName" id="fullNameSrEmail" placeholder=" " aria-label=" " required>
+                    <span class="invalid-feedback">Please enter your first name.</span>
+                  </div>
+                  <!-- End Form -->
+                </div>
+
+                <div class="col-sm-6">
+                  <!-- Form -->
+                  <div class="mb-4">
+                    <input type="text" class="form-control form-control-lg" placeholder=" " aria-label=" " required>
+                    <span class="invalid-feedback">Please enter your last name.</span>
+                  </div>
+                  <!-- End Form -->
+                </div>
+              </div>
+              <!-- End Form -->
+               <!-- Form Group -->
+               <div class="form-group">
+                
+               <label for="projectDeadlineFlatpickrNewProjectLabel" class="input-label">Date of Birth</label>
+
+                  <div id="projectDeadlineNewProjectFlatpickr" class="js-flatpickr flatpickr-custom input-group"
+                         data-hs-flatpickr-options='{
+                            "appendTo": "#projectDeadlineNewProjectFlatpickr",
+                            "dateFormat": "d/m/Y",
+                             "wrap": true
+                               }'>
+                 <div class="input-group-prepend input-group-text" data-bs-toggle>
+                       <i class="bi-calendar-week"></i>
+                           </div>
+                          <h1> </h1>
+                 <input type="text" class="flatpickr-custom-form-control form-control" id="projectDeadlineFlatpickrNewProjectLabel" placeholder="Select dates" data-input value="29/06/2020">
+                     </div>
+                    </div>
+              <!-- End Form Group -->
+
+                 <!-- Select -->
+              <div class="tom-select-custom">
+                <h1> </h1>
+                <h1> </h1>
+                <h6>Specialization</h6>
+                  <select class="js-select form-select" autocomplete="off"
+                      data-hs-tom-select-options='{
+                        "placeholder": "Select a Specialization...",
+                        "hideSearch": true
+                      }'>
+                    <option value="">Select a Specialization...</option>
+                    <option value="4">Batsman</option>
+                    <option value="1">Baller</option>
+                    <option value="3">All-Rounder</option>
+                    <option value="5">Wicket-Keeper</option>
+                  </select>
+                </div>
+                <!-- End Select -->
+
+              <!-- Form -->
+              <div class="mb-4">
+                <h1> </h1>
+                <label class="form-label" for="signupSrMob">Mobile Number</label>
+                <input type="email" class="form-control form-control-lg" name="mob.no" id="signupSrEmail" placeholder="" aria-label="" required>
+                <span class="invalid-feedback">Please enter a valid Mobile address.</span>
+              </div>
+              <!-- End Form -->
+
+      
+              <!-- Form -->
+              <div class="mb-4">
+                <label class="form-label" for="signupSrEmail">Jersy Number</label>
+                <input type="email" class="form-control form-control-lg" name="email" id="signupSrjno" placeholder="" aria-label="" required>
+                <span class="invalid-feedback"> </span>
+              </div>
+              <!-- End Form -->
+
+                 <!-- Form -->
+             <div class="mb-4">
+                <label class="form-label" for="signupSrEmail">Jersy Size</label>
+                <input type="email" class="form-control form-control-lg" name="email" id="signupSejrsz" placeholder="" aria-label="" required>
+                <span class="invalid-feedback"></span>
+              </div>
+              <!-- End Form -->
+
+              <!-- Form -->
+              <div class="mb-4">
+                <label class="form-label" for="signupSrPassword">Password</label>
+
+                <div class="input-group input-group-merge" data-hs-validation-validate-class>
+                  <input type="password" class="js-toggle-password form-control form-control-lg" name="password" id="signupSrPassword" placeholder="8+ characters required" aria-label="8+ characters required" required minlength="8" data-hs-toggle-password-options='{
+                           "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
+                           "defaultClass": "bi-eye-slash",
+                           "showClass": "bi-eye",
+                           "classChangeTarget": ".js-toggle-password-show-icon-1"
+                         }'>
+                  <a class="js-toggle-password-target-1 input-group-append input-group-text" href="javascript:;">
+                    <i class="js-toggle-password-show-icon-1 bi-eye"></i>
+                  </a>
+                </div>
+
+                <span class="invalid-feedback">Your password is invalid. Please try again.</span>
+              </div>
+              <!-- End Form -->
+
+              <!-- Form -->
+              <div class="mb-4">
+                <label class="form-label" for="signupSrConfirmPassword">Confirm password</label>
+
+                <div class="input-group input-group-merge" data-hs-validation-validate-class>
+                  <input type="password" class="js-toggle-password form-control form-control-lg" name="confirmPassword" id="signupSrConfirmPassword" placeholder="8+ characters required" aria-label="8+ characters required" required minlength="8" data-hs-toggle-password-options='{
+                           "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
+                           "defaultClass": "bi-eye-slash",
+                           "showClass": "bi-eye",
+                           "classChangeTarget": ".js-toggle-password-show-icon-2"
+                         }'>
+                  <a class="js-toggle-password-target-2 input-group-append input-group-text" href="javascript:;">
+                    <i class="js-toggle-password-show-icon-2 bi-eye"></i>
+                  </a>
+                </div>
+
+                <span class="invalid-feedback">Password does not match the confirm password.</span>
+              </div>
+              <!-- End Form -->
+
+
+              <!-- Form Check -->
+              <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" value="" id="termsCheckbox" required>
+                <label class="form-check-label" for="termsCheckbox">
+                  I accept the <a href="#">Terms and Conditions</a>
+                </label>
+                <span class="invalid-feedback">Please accept our Terms and Conditions.</span>
+              </div>
+              <!-- End Form Check -->
+
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">Create an account</button>
+
+                
+              </div>
+            </form>
+            <!-- End Form -->
+          </div>
+        </div>
+        <!-- End Card -->
+
+        <!-- Footer -->
+        <div class="position-relative text-center zi-1">
+          <small class="text-cap text-body mb-4">World's Best Auction Software</small>
+
+          
+        </div>
+        <!-- End Footer -->
+      </div>
+    </div>
+    <!-- End Content -->
   </main>
   <!-- ========== END MAIN CONTENT ========== -->
 
- 
   <!-- JS Global Compulsory  -->
   <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="./assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
   <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- JS Implementing Plugins -->
-  <script src="./assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
-  <script src="./assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
-
-  <script src="./assets/vendor/hs-file-attach/dist/hs-file-attach.min.js"></script>
-  <script src="./assets/vendor/hs-step-form/dist/hs-step-form.min.js"></script>
-  <script src="./assets/vendor/hs-add-field/dist/hs-add-field.min.js"></script>
-  <script src="./assets/vendor/imask/dist/imask.min.js"></script>
+  <script src="./assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js"></script>
+  <script src="./assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
+  <script src="./assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
   <script src="./assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
 
   <!-- JS Front -->
@@ -394,129 +335,37 @@
 
   <!-- JS Plugins Init. -->
   <script>
+  (function() {
+    // INITIALIZATION OF SELECT
+    // =======================================================
+    HSCore.components.HSTomSelect.init('.js-select')
+  })();
+</script>
+  <script>
+  (function() {
+    // INITIALIZATION OF FLATPICKR
+    // =======================================================
+    HSCore.components.HSFlatpickr.init('.js-flatpickr')
+  })();
+</script>
+  <script>
     (function() {
       window.onload = function () {
-        
-
-        // INITIALIZATION OF NAVBAR VERTICAL ASIDE
+        // INITIALIZATION OF BOOTSTRAP VALIDATION
         // =======================================================
-        new HSSideNav('.js-navbar-vertical-aside').init()
-
-
-        // INITIALIZATION OF FORM SEARCH
-        // =======================================================
-        new HSFormSearch('.js-form-search')
-
-
-        // INITIALIZATION OF BOOTSTRAP DROPDOWN
-        // =======================================================
-        HSBsDropdown.init()
-
-
-        // INITIALIZATION OF FILE ATTACH
-        // =======================================================
-        new HSFileAttach('.js-file-attach')
-
-
-        // INITIALIZATION OF STEP FORM
-        // =======================================================
-        new HSStepForm('.js-step-form', {
-          finish: () => {
-            document.getElementById("addUserStepFormProgress").style.display = 'none'
-            document.getElementById("addUserStepProfile").style.display = 'none'
-            document.getElementById("addUserStepBillingAddress").style.display = 'none'
-            document.getElementById("addUserStepConfirmation").style.display = 'none'
-            document.getElementById("successMessageContent").style.display = 'block'
-            scrollToTop('#header');
-            const formContainer = document.getElementById('formContainer')
-          },
-          onNextStep: function () {
-            scrollToTop()
-          },
-          onPrevStep: function () {
-            scrollToTop()
-          }
-        })
-
-        function scrollToTop(el = '.js-step-form') {
-          el = document.querySelector(el)
-          window.scrollTo({
-            top: (el.getBoundingClientRect().top + window.scrollY) - 30,
-            left: 0,
-            behavior: 'smooth'
-          })
-        }
-
-
-        // INITIALIZATION OF ADD FIELD
-        // =======================================================
-        new HSAddField('.js-add-field', {
-          addedField: field => {
-            HSCore.components.HSTomSelect.init(field.querySelector('.js-select-dynamic'))
-            HSCore.components.HSMask.init(field.querySelector('.js-input-mask'))
+        HSBsValidation.init('.js-validate', {
+          onSubmit: data => {
+            data.event.preventDefault()
+            alert('Submited')
           }
         })
 
 
-        // INITIALIZATION OF SELECT
+        // INITIALIZATION OF TOGGLE PASSWORD
         // =======================================================
-        HSCore.components.HSTomSelect.init('.js-select', {
-          render: {
-            'option': function (data, escape) {
-              return data.optionTemplate || `<div>${data.text}</div>>`
-            },
-            'item': function (data, escape) {
-              return data.optionTemplate || `<div>${data.text}</div>>`
-            }
-          }
-        })
-
-
-        // INITIALIZATION OF INPUT MASK
-        // =======================================================
-        HSCore.components.HSMask.init('.js-input-mask')
+        new HSTogglePassword('.js-toggle-password')
       }
     })()
   </script>
-
-  <!-- Style Switcher JS -->
-
-  <script>
-      (function () {
-        // STYLE SWITCHER
-        // =======================================================
-        const $dropdownBtn = document.getElementById('selectThemeDropdown') // Dropdowon trigger
-        const $variants = document.querySelectorAll(`[aria-labelledby="selectThemeDropdown"] [data-icon]`) // All items of the dropdown
-
-        // Function to set active style in the dorpdown menu and set icon for dropdown trigger
-        const setActiveStyle = function () {
-          $variants.forEach($item => {
-            if ($item.getAttribute('data-value') === HSThemeAppearance.getOriginalAppearance()) {
-              $dropdownBtn.innerHTML = `<i class="${$item.getAttribute('data-icon')}" />`
-              return $item.classList.add('active')
-            }
-
-            $item.classList.remove('active')
-          })
-        }
-
-        // Add a click event to all items of the dropdown to set the style
-        $variants.forEach(function ($item) {
-          $item.addEventListener('click', function () {
-            HSThemeAppearance.setAppearance($item.getAttribute('data-value'))
-          })
-        })
-
-        // Call the setActiveStyle on load page
-        setActiveStyle()
-
-        // Add event listener on change style to call the setActiveStyle function
-        window.addEventListener('on-hs-appearance-change', function () {
-          setActiveStyle()
-        })
-      })()
-    </script>
-
-  <!-- End Style Switcher JS -->
 </body>
 </html>
