@@ -5,56 +5,9 @@ include("header.php");
 ?>
 
 
-
-
-
-
-
-
-
-            
+      
 </div>
-    <!-- End Content -->
-
-    <!-- Footer -->
-
-    <div class="footer">
-      <div class="row justify-content-between align-items-center">
-        <div class="col">
-          <p class="fs-6 mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2022 Htmlstream.</span></p>
-        </div>
-        <!-- End Col -->
-
-        <div class="col-auto">
-          <div class="d-flex justify-content-end">
-            <!-- List Separator -->
-            <ul class="list-inline list-separator">
-              <li class="list-inline-item">
-                <a class="list-separator-link" href="#">FAQ</a>
-              </li>
-
-              <li class="list-inline-item">
-                <a class="list-separator-link" href="#">License</a>
-              </li>
-
-              <li class="list-inline-item">
-                <!-- Keyboard Shortcuts Toggle -->
-                <button class="btn btn-ghost-secondary btn btn-icon btn-ghost-secondary rounded-circle" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasKeyboardShortcuts" aria-controls="offcanvasKeyboardShortcuts">
-                  <i class="bi-command"></i>
-                </button>
-                <!-- End Keyboard Shortcuts Toggle -->
-              </li>
-            </ul>
-            <!-- End List Separator -->
-          </div>
-        </div>
-        <!-- End Col -->
-      </div>
-      <!-- End Row -->
-    </div>
-
-    <!-- End Footer -->
-  </main>
+</div>
   <!-- ========== END MAIN CONTENT ========== -->
 
   <!-- ========== SECONDARY CONTENTS ========== -->
@@ -225,6 +178,81 @@ include("header.php");
     })()
   </script>
 
+<div>
+</div>
+<main id="content" role="main" class="main">
+    <!-- Content -->
+    <div class="content container-fluid">
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="row align-items-end">
+<div class="content container-fluid">
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="row align-items-end">
+            
+                <div class="col-sm mb-2 mb-sm-0">
+            
+                <h1 class="page-header-title">Create Tournment</h1>
+                </div>
+          
+                          
+          <!-- End Col -->
+
+          
+          <!-- End Col -->
+        </div>
+        <!-- End Row -->
+      </div>
+      <!-- End Page Header -->
+   <!-- Stats -->
+   <div class="row">   
+   <div class="col-sm-6 col-lg-6 mb-3 mb-lg-5">
+       <!-- Card -->
+       <div class="card h-100">
+       <div class="tab-pane fade p-4 show active" id="nav-result14" role="tabpanel" aria-labelledby="nav-resultTab14">
+         <div class="w-md-50">
+             <form action="editteam.php" method="post" enctype="multipart/form-data" >
+              <input hidden type="text" value="<?php echo $_GET['id'] ?>" name="id">
+           <!-- Form -->
+           <div class="mb-3">
+             <label for="formControlLightFullName" class="form-label">Team Name</label>
+
+             <input type="text" class="form-control form-control-light" id="formControlLightFullName" placeholder="Enter Team Name" name="team_name">
+           </div>
+           <!-- End Form -->
+
+           <div class="mb-3">
+             <label for="formControlLightFullName" class="form-label">Phone number</label>
+
+             <input  type="text" class="form-control form-control-light" id="formControlLightFullName" placeholder="Enter phone Number" name="phone_no">
+           </div>
+           <!-- End Form -->
+           
+           <div class="mb-3">
+             <label for="formControlLightFullName" class="form-label">Password </label>
+
+             <input type="text" class="form-control form-control-light" id="formControlLightFullName" placeholder="Enter Password" name="pass">
+           </div>
+           <!-- End Form -->
+         
+           <
+           <button type="submit" name="edt_btn" class="btn btn-success">change</button>
+     </form>
+         </div>
+       </div>
+    
+     </div>
+       <!-- End Card -->
+     </div>
+
+   </div>
+   <!-- End Stats -->
+
+
+            
+    </div>
+
   <!-- Style Switcher JS -->
 
   <script>
@@ -266,3 +294,11 @@ include("header.php");
   <!-- End Style Switcher JS -->
 </body>
 </html>
+<?php
+	if(isset($_POST['edt_btn']))
+	{
+	  mysqli_query($con,"update team_master set team_name='".$_POST["team_name"]."',phone_no='".$_POST["phone_no"]."',pass='".$_POST["pass"]."' where id=".$_POST["id"]."");
+    echo "<script>window.location.href='startpage.php';</script>";
+		//echo "update team_master set team_name='".$_POST["team_name"]."',phone_no='".$_POST["phone_no"]."',pass='".$_POST["pass"]."' where id=".$_POST["id"]."";
+	}
+?>
