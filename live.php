@@ -256,44 +256,34 @@
         <div class="navbar-vertical-content">
           <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
             <!-- Team Names -->
-            <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck1">Team 1</label>
+            <button type="button" class="btn btn-outline-primary">Team Name</button>
             <h1> </h1>
 
-            <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck2">Team 2</label>
+            <button type="button" class="btn btn-outline-primary">Team Name</button>
             <h1> </h1>
 
-            <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck3">Team 3</label>
+            <button type="button" class="btn btn-outline-primary">Team Name</button>
+            <h1> </h1>
+            
+            <button type="button" class="btn btn-outline-primary">Team Name</button>
             <h1> </h1>
 
-            <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck4">Team 4</label>
+            <button type="button" class="btn btn-outline-primary">Team Name</button>
             <h1> </h1>
 
-            <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck5">Team 5</label>
+            <button type="button" class="btn btn-outline-primary">Team Name</button>
             <h1> </h1>
 
-            <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck6">Team 6</label>
+            <button type="button" class="btn btn-outline-primary">Team Name</button>
             <h1> </h1>
 
-            <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck7">Team 7</label>
+            <button type="button" class="btn btn-outline-primary">Team Name</button>
             <h1> </h1>
 
-            <input type="checkbox" class="btn-check" id="btncheck8" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck8">Team 8</label>
+            <button type="button" class="btn btn-outline-primary">Team Name</button>
             <h1> </h1>
 
-            <input type="checkbox" class="btn-check" id="btncheck9" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck9">Team 9</label>
-            <h1> </h1>
-
-            <input type="checkbox" class="btn-check" id="btncheck10" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck10">Team 10</label>
+            <button type="button" class="btn btn-outline-primary">Team Name</button>
             <h1> </h1>
 
             </div>
@@ -302,56 +292,68 @@
     </div>
   </aside>
 
+  <!-- Card -->
+<div class="card card-dashed shadow-none ">
+<div class="min-h-100">
+  <div class="card-body text-center">
   <main id="content" role="main" class="main">
-      <!-- Content -->
-    <div class="content container-fluid">
-     <!-- Profile Cover -->
+
+
+<!-- Content -->
+<div class="content container-fluid">
+<!-- Profile Cover -->
 <div class="profile-cover">
   <div class="profile-cover-img-wrapper">
-    <img class="profile-cover-img" src="./assets/img/1920x400/img1.jpg" alt="Image Description">
+      <img class="profile-cover-img" src="./assets/img/1920x400/img1.jpg" alt="Image Description">
   </div>
 </div>
 <!-- End Profile Cover -->
 <!-- Profile Header -->
 <div class="text-center mb-5">
-  <!-- Avatar -->
-  <div class="avatar avatar-xxl avatar-circle profile-cover-avatar">
-    <img class="avatar-img" src="./assets/player image.jpeg" alt="Image Description">
-    <span class="avatar-status avatar-status-success"></span>
-  </div>
-  <!-- End Avatar -->
+<!-- Avatar -->
+<div class="avatar avatar-xxl avatar-circle profile-cover-avatar">
+<img class="avatar-img" src="./assets/player image.jpeg" alt="Image Description">
+<span class="avatar-status avatar-status-success"></span>
+</div>
+<!-- End Avatar -->
 
-  <h1 class="page-header-title">Aditya Patil</h1>
+<h1 class="page-header-title">Aditya Patil</h1>
 <h4>Batsman</h4>  <!-- List -->
-  <ul class="list-inline list-px-2">
-   
+<ul class="list-inline list-px-2">
 
-    <li class="list-inline-item">
-      <i class="bi-geo-alt me-1"></i>
-      <a>Aurangabad</a>
-    </li>
 
-    <li class="list-inline-item">
-      <i class="bi-calendar-week me-1"></i>
-      <span>05/08/2004</span>
-    </li>
-  </ul>
-  <!-- End List -->
-  <a class="btn btn-primary" href="#">Sold</a>
-  <a class="btn btn-primary" href="#">Unsold</a>
+<li class="list-inline-item">
+<i class="bi-geo-alt me-1"></i>
+<a>Aurangabad</a>
+</li>
+
+<li class="list-inline-item">
+<i class="bi-calendar-week me-1"></i>
+<span>05/08/2004</span>
+</li>
+</ul>
+<!-- End List -->
+
+<a class="btn btn-primary btn-lg" href="#" >Sold</a>
+<a class="btn btn-primary btn-lg" href="#">Unsold</a>
 
 
 </div>
 <!-- End Profile Header -->
-<div class="sliding-img mb-5">
+
+<!-- End Content -->
+</div>
+  </div>
+</div>
+</div>
+<!-- End Card -->
+    <!-- End Heading -->
+    
+
+    <div class="sliding-img mb-5">
         <div class="sliding-img-frame-to-start" style="background-image: url(./assets/img/others/img1-dark.png); height: 150px;weidth: 1000px"data-hs-theme-appearance="default"></div>
         
       </div>
-    <!-- End Content -->
-    </div>
-    <!-- End Heading -->
-
-   
 
     </div>
     <!-- Footer -->

@@ -153,7 +153,7 @@ if(isset($_POST["sbtn"]))
 
   <!-- ========== MAIN CONTENT ========== -->
   <main id="content" role="main" class="main">
-    <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url(./assets/svg/components/card-6.svg);">
+    <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url();">
       <!-- Shape -->
       <div class="shape shape-bottom zi-1">
         <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
@@ -166,7 +166,7 @@ if(isset($_POST["sbtn"]))
     <!-- Content -->
     <div class="container py-5 py-sm-7">
       <a class="d-flex justify-content-center mb-5" href="./login.php">
-        <img class="zi-2" src="./assets/svg/logos/logo.svg" alt="Image Description" style="width: 8rem;">
+        <img class="zi-2" src="./assets/cricauctionlogo.svg" alt="Image Description" style="width: 16rem;">
       </a>
 
       <div class="mx-auto" style="max-width: 30rem;">

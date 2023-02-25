@@ -174,7 +174,7 @@
               <a class="nav-link py-2 py-lg-3" href="./login.php">Login<span class="badge bg-dark rounded-pill ms-1"></span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link py-2 py-lg-3" href="https://htmlstream.com/contact-us" target="_blank">Sign Up </a>
+              <a class="nav-link py-2 py-lg-3" href="./Player_registration.php" target="_blank">Sign Up </a>
             </li>
             
           </ul>
