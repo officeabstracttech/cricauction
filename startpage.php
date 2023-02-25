@@ -559,7 +559,7 @@ if($process==3)
                 <span class="d-block h5 mb-0">'.$data[2].'</span>
                 
               </td>
-              <td>'.$data[3].'</td>
+              <td>'.$data[6].'</td>
               <td>
               </td>
               <td>
@@ -590,7 +590,6 @@ if($process==3)
                 Add Player
              </a>';
               }
-
               echo '  </td>
             </tr>
   

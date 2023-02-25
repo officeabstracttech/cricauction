@@ -1,3 +1,7 @@
+<?php
+include("config.php");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -255,107 +259,98 @@
         
         <div class="navbar-vertical-content">
           <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
-            <!-- Team Names -->
-            <button type="button" class="btn btn-outline-primary">Team Name</button>
-            <h1> </h1>
 
-            <button type="button" class="btn btn-outline-primary">Team Name</button>
-            <h1> </h1>
+<?php
+$result=mysqli_query($con,"select * from team_master where tournment_id=".$_SESSION["login_user"]."");
+while($data=mysqli_fetch_row($result))
+{
+  echo '  <button type="button" class="btn btn-outline-primary">'.$data[2].'</button>
+  <h1> </h1>
+';
+}
 
-            <button type="button" class="btn btn-outline-primary">Team Name</button>
-            <h1> </h1>
+?>
+          <!-- Team Names -->
+          
+
+
             
-            <button type="button" class="btn btn-outline-primary">Team Name</button>
-            <h1> </h1>
-
-            <button type="button" class="btn btn-outline-primary">Team Name</button>
-            <h1> </h1>
-
-            <button type="button" class="btn btn-outline-primary">Team Name</button>
-            <h1> </h1>
-
-            <button type="button" class="btn btn-outline-primary">Team Name</button>
-            <h1> </h1>
-
-            <button type="button" class="btn btn-outline-primary">Team Name</button>
-            <h1> </h1>
-
-            <button type="button" class="btn btn-outline-primary">Team Name</button>
-            <h1> </h1>
-
-            <button type="button" class="btn btn-outline-primary">Team Name</button>
-            <h1> </h1>
-
             </div>
             <!-- End Team Names -->
       </div>
     </div>
   </aside>
 
-  <!-- Card -->
-<div class="card card-dashed shadow-none ">
-<div class="min-h-100">
-  <div class="card-body text-center">
   <main id="content" role="main" class="main">
-
-
-<!-- Content -->
-<div class="content container-fluid">
-<!-- Profile Cover -->
-<div class="profile-cover">
-  <div class="profile-cover-img-wrapper">
-      <img class="profile-cover-img" src="./assets/img/1920x400/img1.jpg" alt="Image Description">
-  </div>
-</div>
-<!-- End Profile Cover -->
-<!-- Profile Header -->
-<div class="text-center mb-5">
-<!-- Avatar -->
-<div class="avatar avatar-xxl avatar-circle profile-cover-avatar">
-<img class="avatar-img" src="./assets/player image.jpeg" alt="Image Description">
-<span class="avatar-status avatar-status-success"></span>
-</div>
-<!-- End Avatar -->
-
-<h1 class="page-header-title">Aditya Patil</h1>
-<h4>Batsman</h4>  <!-- List -->
-<ul class="list-inline list-px-2">
-
-
-<li class="list-inline-item">
-<i class="bi-geo-alt me-1"></i>
-<a>Aurangabad</a>
-</li>
-
-<li class="list-inline-item">
-<i class="bi-calendar-week me-1"></i>
-<span>05/08/2004</span>
-</li>
-</ul>
-<!-- End List -->
-
-<a class="btn btn-primary btn-lg" href="#" >Sold</a>
-<a class="btn btn-primary btn-lg" href="#">Unsold</a>
-
-
-</div>
-<!-- End Profile Header -->
-
-<!-- End Content -->
-</div>
-  </div>
-</div>
-</div>
-<!-- End Card -->
-    <!-- End Heading -->
+    <!-- Content -->
+    <div class="content container-fluid">
     
+      <!-- Stats -->
+      <div class="row">
+        
+      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
 
-    <div class="sliding-img mb-5">
-        <div class="sliding-img-frame-to-start" style="background-image: url(./assets/img/others/img1-dark.png); height: 150px;weidth: 1000px"data-hs-theme-appearance="default"></div>
+        <!-- Card -->
+        <div class="card">
+          <div class="card-body">
+          <span class="d-block small">Bid Price</span>
+      <input class="js-result form-control form-control-quantity-counter" type="number" value="50">
+
+          
+          </div>
+        </div>
+        <!-- End Card -->
+
+      </div>
+   
+
+      <div class="col-sm-6 col-lg-8 mb-3 mb-lg-5">
+
+        <!-- Card -->
+        <div class="card">
+          <div class="card-body">
+              <!-- End Profile Cover -->
+              <!-- Profile Header -->
+              <div class="text-center mb-5">
+              <!-- Avatar -->
+              
+              <!-- End Avatar -->
+              <span class="avatar avatar-xxl avatar-4x3">
+  <img class="avatar-img" src="./assets/player image.jpeg" alt="Image Description">
+</span>
+              </br></br>
+              <h1>Aditya Patil</h1>
+              <h4>Batsman</h4>  <!-- List -->
+
+
+
+              </div>
+              <!-- End Profile Header -->
+
+
+              <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_8edlac32.json"  background="transparent"  speed="1"  style="width: 500px; height: 500px;"   class="zi-1"   autoplay></lottie-player>
+
+
+
+
+          </div>
+
+        </div>
+        <!-- End Card -->
         
       </div>
 
+
+      </div>
+      <!-- End Stats -->
+
     </div>
+    <!-- End Content -->
+
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+
     <!-- Footer -->
 
     <div class="footer">
