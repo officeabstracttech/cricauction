@@ -150,53 +150,6 @@ include("config.php");
           <i class="bi-arrow-bar-right navbar-toggler-full-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-bs-toggle="tooltip" data-bs-placement="right" title="Expand"></i>
         </button>
 
-        <!-- End Navbar Vertical Toggle -->
-
-
-        <!-- Bid Form -->
-        <div class="dropdown ms-2">
-          <!-- Input Group -->
-          <div class="d-none d-lg-block">
-            <div class="input-group input-group-merge input-group-borderless input-group-hover-light navbar-input-group">
-              <div class="input-group-prepend input-group-text">
-                
-              </div>
-            <!-- Quantity -->
-<div class="quantity-counter">
-  <div class="js-quantity-counter row align-items-center">
-    <div class="col">
-      <span class="d-block small">Bid Price</span>
-      <input class="js-result form-control form-control-quantity-counter" type="number" value="50">
-    </div>
-    <!-- End Col -->
-
-    <div class="col-auto">
-      <a class="js-minus btn btn-outline-secondary btn-xs btn-icon rounded-circle" href="javascript:;">
-        <svg width="8" height="2" viewBox="0 0 8 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 1C0 0.723858 0.223858 0.5 0.5 0.5H7.5C7.77614 0.5 8 0.723858 8 1C8 1.27614 7.77614 1.5 7.5 1.5H0.5C0.223858 1.5 0 1.27614 0 1Z" fill="currentColor"/>
-        </svg>
-      </a>
-      <a class="js-plus btn btn-outline-secondary btn-xs btn-icon rounded-circle" href="javascript:;">
-        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 0C4.27614 0 4.5 0.223858 4.5 0.5V3.5H7.5C7.77614 3.5 8 3.72386 8 4C8 4.27614 7.77614 4.5 7.5 4.5H4.5V7.5C4.5 7.77614 4.27614 8 4 8C3.72386 8 3.5 7.77614 3.5 7.5V4.5H0.5C0.223858 4.5 0 4.27614 0 4C0 3.72386 0.223858 3.5 0.5 3.5H3.5V0.5C3.5 0.223858 3.72386 0 4 0Z" fill="currentColor"/>
-        </svg>
-      </a>
-    </div>
-    <!-- End Col -->
-  </div>
-  <!-- End Row -->
-</div>
-<!-- End Quantity -->
-            
-              </a>
-            </div>
-          </div>
-
-         
-          <!-- End Input Group -->
-
-
-        </div>
 
         <!-- End Search Form -->
       </div>
@@ -261,15 +214,37 @@ include("config.php");
           <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
 
 <?php
+
+
 $result=mysqli_query($con,"select * from team_master where tournment_id=".$_SESSION["login_user"]."");
 while($data=mysqli_fetch_row($result))
 {
-  echo '  <button type="button" class="btn btn-outline-primary">'.$data[2].'</button>
+  $r=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
+  $d=mysqli_fetch_row($r);
+  $maxpoint=$data[6]-(($d[4]-$data[7]-1)*$d[3]);
+  echo '  <button type="button" onclick="teamfunc('.$data[0].',\''.$data[2].'\','.$maxpoint.')" class="btn btn-outline-primary" >'.$data[2].'</button>
   <h1> </h1>
+  
 ';
 }
 
+
 ?>
+
+<script>
+  function teamfunc(id,tname,maxpoint)
+  {
+      var team_name=document.getElementById("biding_team_name");
+      team_name.value=tname;
+      var team_id=document.getElementById("biding_team_id");
+      team_id=id;
+      var biding_points=document.getElementById("biding_max_point");
+      biding_points.value=""+maxpoint;
+     
+
+  }
+
+</script>
           <!-- Team Names -->
           
 
@@ -281,12 +256,6 @@ while($data=mysqli_fetch_row($result))
     </div>
   </aside>
 
-<<<<<<< HEAD
-=======
-  <!-- Card -->
-<div class="card card-dashed shadow-none ">
-  <div class="card-body text-center">
->>>>>>> 9600b3e1e1bac0075cd355ac95ff5ab7a3933868
   <main id="content" role="main" class="main">
     <!-- Content -->
     <div class="content container-fluid">
@@ -296,25 +265,109 @@ while($data=mysqli_fetch_row($result))
         
       <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
 
+
         <!-- Card -->
         <div class="card">
           <div class="card-body">
-          <span class="d-block small">Bid Price</span>
-      <input class="js-result form-control form-control-quantity-counter" type="number" value="50">
+          <span class="d-block "><h1>BID CONTROLES</h1></span>
+          <form action="live.php" method="post">
+            <div class="mb-3">
+              <label class="form-label" for="exampleFormControlTitleInput2">BIDING TEAM</label>
+              <input type="text" id="biding_team_name" class="form-control form-control-light" placeholder="selected team" disabled>
+              <input type="text" hidden id="biding_team_id" class="form-control form-control-title" placeholder="selected team" disabled>
+              <input type="text" hidden id="biding_player_id" class="form-control form-control-title" placeholder="selected team" disabled>
+              
+              <input type="text" hidden id="biding_max_point" value="0" class="form-control form-control-title" placeholder="selected team" disabled>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="exampleFormControlTitleInput2">BIDING POINTS</label>
+              <input type="text" id="biding_team_points" value="50" class="form-control form-control-title" placeholder="points">
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-lg-1 mb-3 mb-lg-5">
+              <button type="button" onclick="decrementpoints()" class="btn btn-outline-primary">-</button>
+              
+              </div>        
+              <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+              <button type="button"  onclick="incrementpoint()" class="btn btn-outline-primary">+</button>
+              </div>        
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-lg-6 mb-3 mb-lg-5">
+              <button type="submit"  name="sold_btn" id="sold_btn" disabled="false" class="btn btn-outline-success">SOLD</button>
+              </div>        
+              <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+              <button type="submit" class="btn btn-outline-danger">UNSOLD</button>
+              </div>        
+            </div>
 
-          
+            <div class="mb-3">
+                <label for="formControlLightFullName" class="form-label">SET BIDING INCREMENTOR</label>
+                <input type="number" class="form-control form-control-light" id="biding_incrementor" placeholder="Incrementor" value="5" aria-label="Mark Williams">
+              </div>
+          </form>
           </div>
         </div>
         <!-- End Card -->
-
       </div>
    
+<script>
+function incrementpoint()
+{
+  var bidingteampoints=document.getElementById("biding_team_points");
+  var ele=document.getElementById("biding_incrementor");
+  let i=parseInt(ele.value);
+  let num=parseInt(bidingteampoints.value);
+  let bid=num+i;
+  let maxpoint=parseInt(document.getElementById("biding_max_point").value);
+  if(maxpoint<bid)
+  {
+      document.getElementById("sold_btn").disabled=true;
+  }
+  else
+  {
+    document.getElementById("sold_btn").disabled=false;
+  }
+  bidingteampoints.value=""+(bid);
+
+}
+
+function decrementpoints()
+{
+  var bidingteampoints=document.getElementById("biding_team_points");
+  var ele=document.getElementById("biding_incrementor");
+  let i=parseInt(ele.value);
+  let num=parseInt(bidingteampoints.value);
+  let bid=num-i;
+  let maxpoint=parseInt(document.getElementById("biding_max_point").value);
+  if(maxpoint<bid)
+  {
+      document.getElementById("sold_btn").disabled=true;
+  }
+  else
+  {
+    document.getElementById("sold_btn").disabled=false;
+  }
+  bidingteampoints.value=""+(bid);
+
+}
+
+</script>
+
 
       <div class="col-sm-6 col-lg-8 mb-3 mb-lg-5">
 
         <!-- Card -->
         <div class="card">
           <div class="card-body">
+            <!-- Profile Cover -->
+<div class="profile-cover">
+  <div class="profile-cover-img-wrapper">
+      <img class="profile-cover-img" src="./assets/img/1920x400/img1.jpg" alt="Image Description">
+  </div>
+</div>
+<!-- End Profile Cover -->
+
               <!-- End Profile Cover -->
               <!-- Profile Header -->
               <div class="text-center mb-5">
@@ -326,9 +379,8 @@ while($data=mysqli_fetch_row($result))
 </span>
               </br></br>
               <h1>Aditya Patil</h1>
-              <h4>Batsman</h4>  <!-- List -->
-
-
+              <h2>Batsman</h2>  <!-- List -->
+              <h2>+91 1111111111</h2>
 
               </div>
               <!-- End Profile Header -->
