@@ -26,7 +26,7 @@ include("header.php");
 
       <!-- Stats -->
       <div class="row">
-        <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
+        <div class="col-sm-6 col-lg-6 mb-3 mb-lg-5">
           <!-- Card -->
           <a class="card card-hover-shadow h-100" href="#">
             <div class="card-body">

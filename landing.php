@@ -174,7 +174,11 @@
               <a class="nav-link py-2 py-lg-3" href="./login.php">Login<span class="badge bg-dark rounded-pill ms-1"></span></a>
             </li>
             <li class="nav-item">
+<<<<<<< HEAD
               <a class="nav-link py-2 py-lg-3" href="./Player_registration.php" target="_blank">Sign Up </a>
+=======
+              <a class="nav-link py-2 py-lg-3" href="./signin.php" >Sign Up </a>
+>>>>>>> 2cd56b84e209e41e5c84c19f835338b6ef63990b
             </li>
             
           </ul>
