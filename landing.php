@@ -152,7 +152,7 @@
         <!-- Secondary Content -->
         <div class="navbar-nav-wrap-secondary-content">
           
-          <a class="btn btn-primary navbar-btn" href="#">Contact Us</a>
+          <a class="btn btn-primary navbar-btn" href="./contact.php">Contact Us</a>
         </div>
         <!-- End Secondary Content -->
 
@@ -340,7 +340,7 @@ CricAuction can be used for a variety of different types of auctions, including 
       </div>
 
       <div class="d-grid mx-auto" style="max-width: 15rem;">
-        <a class="btn btn-primary btn-lg" href="#">Get Quote</a>
+        <a class="btn btn-primary btn-lg" href="./contact.php">Get Quote</a>
       </div>
     </div>
     <!-- End Tools -->
@@ -372,7 +372,7 @@ CricAuction can be used for a variety of different types of auctions, including 
       </li>
 
       <li class="list-inline-item">
-        <a class="btn btn-soft-secondary btn-sm btn-icon rounded-circle" href="https://www.instagram.com/htmlstream/">
+        <a class="btn btn-soft-secondary btn-sm btn-icon rounded-circle" href="https://instagram.com/abstract_tech_solutions?igshid=YmMyMTA2M2Y=">
           <i class="bi-instagram"></i>
         </a>
       </li>
