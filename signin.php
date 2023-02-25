@@ -18,6 +18,7 @@
   <!-- CSS Implementing Plugins -->
   <link rel="stylesheet" href="./assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
   <link rel="stylesheet" href="./assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
+  
 
   <!-- CSS Front Template -->
 
@@ -152,10 +153,35 @@
               <div class="text-center">
                 <div class="mb-5">
                   <h1 class="display-5">Create your account</h1>
-                  <p>Already have an account? <a class="link" href="./authentication-login-basic.html">Sign in here</a></p>
+                  <p>Already have an account? <a class="link" href="./login.php">Sign in here</a></p>
                 </div>
                </div>
-
+               <form>
+                 <!-- Media -->
+                 <div class="d-flex align-items-center">
+                   <!-- Avatar -->
+                   <label class="avatar avatar-xl avatar-circle" for="avatarUploader">
+                     <img id="avatarImg" class="avatar-img" src="./assets/img/160x160/img1.jpg" alt="Image Description">
+                   </label>
+                                    
+                   <div class="d-flex gap-3 ms-4">
+                     <div class="form-attachment-btn btn btn-sm btn-primary">Upload photo
+                       <input type="file" class="js-file-attach form-attachment-btn-label" id="avatarUploader"
+                              data-hs-file-attach-options='{
+                                 "textTarget": "#avatarImg",
+                                 "mode": "image",
+                                 "targetAttr": "src",
+                                 "resetTarget": ".js-file-attach-reset-img",
+                                 "resetImg": "../assets/img/160x160/img1.jpg",
+                                 "allowTypes": [".png", ".jpeg", ".jpg"]
+                              }'>
+                     </div>
+                     <!-- End Avatar -->
+                            
+                   </div>
+                 </div>
+                 <!-- End Media -->
+                </Form>
               <label class="form-label" for="fullNameSrEmail">Full name</label>
 
               <!-- Form -->
@@ -236,14 +262,29 @@
               </div>
               <!-- End Form -->
 
-                 <!-- Form -->
-             <div class="mb-4">
-                <label class="form-label" for="signupSrEmail">Jersy Size</label>
-                <input type="email" class="form-control form-control-lg" name="email" id="signupSejrsz" placeholder="" aria-label="" required>
-                <span class="invalid-feedback"></span>
-              </div>
-              <!-- End Form -->
+                <!-- Select -->
+                <div class="tom-select-custom">
+                <h1> </h1>
+                <h1> </h1>
+                <h6>Jersy Size</h6>
+                  <select class="js-select form-select" autocomplete="off"
+                      data-hs-tom-select-options='{
+                        "placeholder": "Select a Specialization...",
+                        "hideSearch": true
+                      }'>
+                    <option value="">Select a Size...</option>
+                    <option value="4">S</option>
+                    <option value="1">M</option>
+                    <option value="3">L</option>
+                    <option value="5">XL</option>
+                    <option value="6">XXL</option>
+                    <option value="7">XXXL</option>
 
+
+                  </select>
+                </div>
+                <!-- End Select -->
+               
               <!-- Form -->
               <div class="mb-4">
                 <label class="form-label" for="signupSrPassword">Password</label>
@@ -289,7 +330,7 @@
               <div class="form-check mb-4">
                 <input class="form-check-input" type="checkbox" value="" id="termsCheckbox" required>
                 <label class="form-check-label" for="termsCheckbox">
-                  I accept the <a href="#">Terms and Conditions</a>
+                  I accept the <a>Terms and Conditions</a>
                 </label>
                 <span class="invalid-feedback">Please accept our Terms and Conditions.</span>
               </div>
@@ -329,11 +370,19 @@
   <script src="./assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
   <script src="./assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
   <script src="./assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
+  <script src="./assets/vendor/hs-file-attach/dist/hs-file-attach.min.js"></script>
 
   <!-- JS Front -->
   <script src="./assets/js/theme.min.js"></script>
 
   <!-- JS Plugins Init. -->
+  <script>
+  (function() {
+    // INITIALIZATION OF FILE ATTACH
+    // =======================================================
+    new HSFileAttach('.js-file-attach')
+  })();
+</script>
   <script>
   (function() {
     // INITIALIZATION OF SELECT

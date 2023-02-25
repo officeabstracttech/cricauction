@@ -294,7 +294,6 @@
 
   <!-- Card -->
 <div class="card card-dashed shadow-none ">
-<div class="min-h-100">
   <div class="card-body text-center">
   <main id="content" role="main" class="main">
 
