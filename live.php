@@ -281,6 +281,12 @@ while($data=mysqli_fetch_row($result))
     </div>
   </aside>
 
+<<<<<<< HEAD
+=======
+  <!-- Card -->
+<div class="card card-dashed shadow-none ">
+  <div class="card-body text-center">
+>>>>>>> 9600b3e1e1bac0075cd355ac95ff5ab7a3933868
   <main id="content" role="main" class="main">
     <!-- Content -->
     <div class="content container-fluid">
