@@ -25,6 +25,7 @@ if(isset($_GET["edit"]) && $_GET["edit"]==1)
       $updatedpoints=$teamresult[6]+$editresult[5];
       mysqli_query($con,"update team_master set team_points=".$updatedpoints.", players_taken=".$updatedplayer." where id=".$teamresult[0]."");
     mysqli_query($con,"update player_mapping_master set sold_status=0,sold_points=0, team_id=0 where id=".$editresult[0]."");
+  
   }
   else if($editresult[4]==2)
   {
