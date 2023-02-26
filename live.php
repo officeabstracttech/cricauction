@@ -10,8 +10,13 @@ if(isset($_GET["back"]) && $_GET["back"]==1)
   $currentcounter=mysqli_query($con,"select current_player_count from auction_traker where tournment_id=".$_SESSION["login_user"]."");
   $currentcounter=mysqli_fetch_row($currentcounter);
   $currentcounter=$currentcounter[0]-1;
-  mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]."");
+  if($currentcounter!=0)
+  {
+
+    mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]."");
+  }
   header("location:live.php");  
+  
 }
 if(isset($_GET["edit"]) && $_GET["edit"]==1)
   {
@@ -25,6 +30,7 @@ if(isset($_GET["edit"]) && $_GET["edit"]==1)
       $updatedpoints=$teamresult[6]+$editresult[5];
       mysqli_query($con,"update team_master set team_points=".$updatedpoints.", players_taken=".$updatedplayer." where id=".$teamresult[0]."");
     mysqli_query($con,"update player_mapping_master set sold_status=0,sold_points=0, team_id=0 where id=".$editresult[0]."");
+    header("location:live.php");  
   
   }
   else if($editresult[4]==2)
@@ -82,16 +88,16 @@ if(mysqli_num_rows($result)>0){
  }
  else
 {
-  $count=mysqli_query($con,"select count(id) from player_mapping_master where tournment_id=".$_SESSION["login_user"]."");
+  $count=mysqli_query($con,"select count(id) from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1");
   $count=mysqli_fetch_row($count);
   mysqli_query($con,"insert into auction_traker(tournment_id,total_player,current_player_count,process) values(".$_SESSION["login_user"].",".$count[0].",1,1)");
+  echo "<script>alert('insert into auction_traker(tournment_id,total_player,current_player_count,process) values(".$_SESSION["login_user"].",".$count[0].",1,1)');</script>";
   $counter=1; 
-  echo '<script>alert("insert into auction_traker(tournment_id,total_player,current_player_count,process) values('.$_SESSION["login_user"].','.$count[0].',1,1)");</script>';
-
+  
 }
 
 $i=1;
-$mappingresult=mysqli_query($con,"select * from player_mapping_master where tournment_id=".$_SESSION["login_user"]."");
+$mappingresult=mysqli_query($con,"select * from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1 ");
 $mappingdata=0;
 while($mappingdata=mysqli_fetch_row($mappingresult) )
 {
@@ -251,7 +257,7 @@ $soldflag=2;
       <!-- Logo -->
       <a class="navbar-brand" href="./index.html" aria-label="Front">
         <img class="navbar-brand-logo" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="default">
-        <img class="navbar-brand-logo-mini" src="./assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
+        <img class="navbar-brand-logo" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="dark">
       </a>
       <!-- End Logo -->
 
@@ -267,7 +273,7 @@ $soldflag=2;
       </div>
 
 
-      <div class="navbar-nav-wrap-content-end">
+      <div class="navbar-nav-wrap-content-start">
         <!-- Navbar -->
         <ul class="navbar-nav">
           <li class="nav-item d-none d-sm-inline-block">
@@ -283,13 +289,13 @@ $soldflag=2;
           <a class="btn btn-primary" href="live.php?back=1">Back</a>
           </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a class="btn btn-outline-primary" href="live.php?edit=1&id=<?php echo $mappingdata[0];?>">Edit</a>
+          <a class="btn btn-outline-warning" href="live.php?edit=1&id=<?php echo $mappingdata[0];?>">Edit</a>
 
           </li>
 
          
           <li class="nav-item d-none d-sm-inline-block">
-          <a class="btn btn-primary" href="index.php">Home</a>
+          <a class="btn btn-outline-success" href="index.php">Home</a>
           </li>
         <?php
         if($final==1)

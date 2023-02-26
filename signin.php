@@ -1,3 +1,79 @@
+<?php
+if(isset($_POST["sub_btn"]))
+{
+  include("config.php");
+  
+  echo "<script>alert('Hello');</script>";
+  if($_POST["pass"]!=$_POST["confirm_pass"])
+  {
+      echo "<script>alert('Pass and Confirm password not matched.');</script>";
+      header("location:sigin.php");
+  }
+
+  $logotargetdir="upload/playerlogo/";
+  $logofilepath = "";
+
+      function createPathName($temp)
+      {
+
+          if(!file_exists($temp))
+          {
+              return false;
+          }
+          return true;
+      }
+
+
+      function checkImage()
+      {
+          $check=getimagesize($_FILES["player_logo"]["tmp_name"]);
+          if($check !==false)
+          {
+              return true;
+          }
+          else{
+              return false;    
+          }
+      }
+
+
+      if(checkImage())
+      {
+          $filetype=strtolower(pathinfo($_FILES["player_logo"]["name"],PATHINFO_EXTENSION));
+          $logofilepath=$logotargetdir."".$_POST["phone_no"].".".$filetype;
+          $i=1;
+          while(createPathName($logofilepath))
+          {
+              $logofilepath=$logotargetdir.$_POST["phone_no"].$i.".".$filetype;
+              $i+=1;
+          }
+
+          if($filetype != "jpg" && $filetype != "png" && $filetype != "jpeg")
+          {
+              echo "<script>alert('file type only png, jpeg,jpg is supported');window.location.href='signin.php'; </script>";
+          }
+          else
+          {
+              if(move_uploaded_file($_FILES["player_logo"]["tmp_name"],$logofilepath))
+              {
+                mysqli_query($con,"insert into player_master(player_name,player_role,player_dob,player_jersy_size,player_jersy_no,phone_no,pass,player_logo,status) values('".$_POST['player_name']."','".$_POST['player_role']."','".$_POST['player_dob']."','".$_POST['player_jersy_size']."',".$_POST['player_jersy_no'].",'".$_POST['phone_no']."','".$_POST['pass']."','".$logofilepath."','1')");
+
+
+                echo "<script>alert('Player Added successfully. Please login'); window.location.href='login.php'</script>";
+                
+              }
+              else
+              {
+                  echo "<script>alert('photo not uploaded');</script>";
+              }
+          }
+
+      }
+
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,8 +197,8 @@
 }
             </script>
 </head>
-
 <body>
+  
 
   <script src="./assets/js/hs.theme-appearance.js"></script>
 
@@ -149,14 +225,13 @@
         <div class="card card-lg mb-5">
           <div class="card-body">
             <!-- Form -->
-            <form class="js-validate needs-validation" novalidate>
               <div class="text-center">
                 <div class="mb-5">
                   <h1 class="display-5">Create your account</h1>
                   <p>Already have an account? <a class="link" href="./login.php">Sign in here</a></p>
                 </div>
                </div>
-               <form>
+               <form action="signin.php" method="post" enctype="multipart/form-data">
                  <!-- Media -->
                  <div class="d-flex align-items-center">
                    <!-- Avatar -->
@@ -166,7 +241,7 @@
                                     
                    <div class="d-flex gap-3 ms-4">
                      <div class="form-attachment-btn btn btn-sm btn-primary">Upload photo
-                       <input type="file" class="js-file-attach form-attachment-btn-label" id="avatarUploader"
+                       <input type="file" class="js-file-attach form-attachment-btn-label" id="avatarUploader" name="player_logo"
                               data-hs-file-attach-options='{
                                  "textTarget": "#avatarImg",
                                  "mode": "image",
@@ -181,7 +256,7 @@
                    </div>
                  </div>
                  <!-- End Media -->
-                </Form>
+               
               <label class="form-label" for="fullNameSrEmail">Full name</label>
 
               <!-- Form -->
@@ -189,21 +264,13 @@
                 <div class="col-sm-6">
                   <!-- Form -->
                   <div class="mb-4">
-                    <input type="text" class="form-control form-control-lg" name="fullName" id="fullNameSrEmail" placeholder=" " aria-label=" " required>
+                    <input type="text" class="form-control form-control-lg" name="player_name" id="fullNameSrEmail"  placeholder=" " aria-label=" " required>
                     <span class="invalid-feedback">Please enter your first name.</span>
                   </div>
                   <!-- End Form -->
                 </div>
 
-                <div class="col-sm-6">
-                  <!-- Form -->
-                  <div class="mb-4">
-                    <input type="text" class="form-control form-control-lg" placeholder=" " aria-label=" " required>
-                    <span class="invalid-feedback">Please enter your last name.</span>
-                  </div>
-                  <!-- End Form -->
-                </div>
-              </div>
+      
               <!-- End Form -->
                <!-- Form Group -->
                <div class="form-group">
@@ -213,14 +280,14 @@
                   <div id="projectDeadlineNewProjectFlatpickr" class="js-flatpickr flatpickr-custom input-group"
                          data-hs-flatpickr-options='{
                             "appendTo": "#projectDeadlineNewProjectFlatpickr",
-                            "dateFormat": "d/m/Y",
+                            "dateFormat": "Y-m-d",
                              "wrap": true
                                }'>
                  <div class="input-group-prepend input-group-text" data-bs-toggle>
                        <i class="bi-calendar-week"></i>
                            </div>
                           <h1> </h1>
-                 <input type="text" class="flatpickr-custom-form-control form-control" id="projectDeadlineFlatpickrNewProjectLabel" placeholder="Select dates" data-input value="29/06/2020">
+                 <input type="text" class="flatpickr-custom-form-control form-control" id="projectDeadlineFlatpickrNewProjectLabel" placeholder="Select dates" data-input value="29/06/2020" name="player_dob">
                      </div>
                     </div>
               <!-- End Form Group -->
@@ -234,12 +301,12 @@
                       data-hs-tom-select-options='{
                         "placeholder": "Select a Specialization...",
                         "hideSearch": true
-                      }'>
-                    <option value="">Select a Specialization...</option>
-                    <option value="4">Batsman</option>
-                    <option value="1">Baller</option>
-                    <option value="3">All-Rounder</option>
-                    <option value="5">Wicket-Keeper</option>
+                      }' name="player_role">
+                    <option value="Not Specified">Select a Specialization...</option>
+                    <option value="Batsman">Batsman</option>
+                    <option value="Baller">Baller</option>
+                    <option value="All-Rounder">All-Rounder</option>
+                    <option value="Wicket-Keeper">Wicket-Keeper</option>
                   </select>
                 </div>
                 <!-- End Select -->
@@ -248,7 +315,7 @@
               <div class="mb-4">
                 <h1> </h1>
                 <label class="form-label" for="signupSrMob">Mobile Number</label>
-                <input type="email" class="form-control form-control-lg" name="mob.no" id="signupSrEmail" placeholder="" aria-label="" required>
+                <input type="text" class="form-control form-control-lg" name="phone_no" id="signupSrEmail" placeholder="" aria-label="" required>
                 <span class="invalid-feedback">Please enter a valid Mobile address.</span>
               </div>
               <!-- End Form -->
@@ -257,7 +324,7 @@
               <!-- Form -->
               <div class="mb-4">
                 <label class="form-label" for="signupSrEmail">Jersy Number</label>
-                <input type="email" class="form-control form-control-lg" name="email" id="signupSrjno" placeholder="" aria-label="" required>
+                <input type="text" class="form-control form-control-lg" name="player_jersy_no" id="signupSrjno" placeholder="" aria-label="" required>
                 <span class="invalid-feedback"> </span>
               </div>
               <!-- End Form -->
@@ -271,16 +338,14 @@
                       data-hs-tom-select-options='{
                         "placeholder": "Select a Specialization...",
                         "hideSearch": true
-                      }'>
-                    <option value="">Select a Size...</option>
-                    <option value="4">S</option>
-                    <option value="1">M</option>
-                    <option value="3">L</option>
-                    <option value="5">XL</option>
-                    <option value="6">XXL</option>
-                    <option value="7">XXXL</option>
-
-
+                      }' name="player_jersy_size">
+                    <option value="Not Specified">Select a Size...</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                    <option value="XXXL">XXXL</option>
                   </select>
                 </div>
                 <!-- End Select -->
@@ -290,7 +355,7 @@
                 <label class="form-label" for="signupSrPassword">Password</label>
 
                 <div class="input-group input-group-merge" data-hs-validation-validate-class>
-                  <input type="password" class="js-toggle-password form-control form-control-lg" name="password" id="signupSrPassword" placeholder="8+ characters required" aria-label="8+ characters required" required minlength="8" data-hs-toggle-password-options='{
+                  <input type="password" class="js-toggle-password form-control form-control-lg" name="pass" id="signupSrPassword" placeholder="8+ characters required" aria-label="8+ characters required" required minlength="8" data-hs-toggle-password-options='{
                            "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
                            "defaultClass": "bi-eye-slash",
                            "showClass": "bi-eye",
@@ -310,7 +375,7 @@
                 <label class="form-label" for="signupSrConfirmPassword">Confirm password</label>
 
                 <div class="input-group input-group-merge" data-hs-validation-validate-class>
-                  <input type="password" class="js-toggle-password form-control form-control-lg" name="confirmPassword" id="signupSrConfirmPassword" placeholder="8+ characters required" aria-label="8+ characters required" required minlength="8" data-hs-toggle-password-options='{
+                  <input type="password" class="js-toggle-password form-control form-control-lg" name="confirm_pass" id="signupSrConfirmPassword" placeholder="8+ characters required" aria-label="8+ characters required" required minlength="8" data-hs-toggle-password-options='{
                            "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
                            "defaultClass": "bi-eye-slash",
                            "showClass": "bi-eye",
@@ -337,9 +402,7 @@
               <!-- End Form Check -->
 
               <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary btn-lg">Create an account</button>
-
-                
+                <button type="submit" name="sub_btn" class="btn btn-primary btn-lg">Create an account</button>         
               </div>
             </form>
             <!-- End Form -->
@@ -402,12 +465,6 @@
       window.onload = function () {
         // INITIALIZATION OF BOOTSTRAP VALIDATION
         // =======================================================
-        HSBsValidation.init('.js-validate', {
-          onSubmit: data => {
-            data.event.preventDefault()
-            alert('Submited')
-          }
-        })
 
 
         // INITIALIZATION OF TOGGLE PASSWORD
