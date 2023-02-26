@@ -42,6 +42,149 @@ include("header.php");
             </a>
             <!-- End Card -->
       </div>
+      <br><br>
+      <span class="divider-center"><h1>Tournament Details</h1></span>
+      <br><br><br><br>
+      <h1> </h1>
+          <!-- Card -->
+          <div class="card" style="max-width: 20rem;">
+            <div class="card-body">
+              <h1 class="card-title">Max Points</h1>
+              <h2>00</h2>
+              
+            </div>
+          </div>
+          <!-- End Card --><!-- Card -->
+          <div class="card" style="max-width: 20rem;">
+            <div class="card-body">
+              <h1 class="card-title">Base Points</h1>
+              <h2>00</h2>
+
+            </div>
+          </div>
+          <!-- End Card --><!-- Card -->
+          <div class="card" style="max-width: 20rem;">
+            <div class="card-body">
+              <h1 class="card-title">Total Players</h1>
+              <h2>00</h2>
+
+            </div>
+          </div>
+          <!-- End Card -->
+           <!-- End Card --><!-- Card -->
+           <div class="card" style="max-width: 20rem;">
+            <div class="card-body">
+              <h1 class="card-title">Total Teams</h1>
+              <h2>00</h2>
+
+            </div>
+          </div>
+          <!-- End Card -->
+          <h1> </h1>
+          <br><br>
+      <span class="divider-center"><h1>All Teams</h1></span>
+      <h1> <br><br></h1>
+      <!-- Card -->
+        <div class="card" style="max-width: 20rem;">
+          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h1 class="card-title">Sameer Backchods</h1>
+           <h3>Remaining Points <h3>00</h3></h3>
+           <h3>Remaining Players<h3>00</h3></h3>
+
+            </p>
+          </div>
+        </div>
+       <!-- End Card -->
+        <!-- Card -->
+        <div class="card" style="max-width: 20rem;">
+          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h1 class="card-title">Sameer Backchods</h1>
+           <h3>Remaining Points <h3>00</h3></h3>
+           <h3>Remaining Players<h3>00</h3></h3>
+
+            </p>
+          </div>
+        </div>
+       <!-- End Card --><!-- Card -->
+        <div class="card" style="max-width: 20rem;">
+          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h1 class="card-title">Sameer Backchods</h1>
+           <h3>Remaining Points <h3>00</h3></h3>
+           <h3>Remaining Players<h3>00</h3></h3>
+
+            </p>
+          </div>
+        </div>
+       <!-- End Card --><!-- Card -->
+        <div class="card" style="max-width: 20rem;">
+          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h1 class="card-title">Sameer Backchods</h1>
+           <h3>Remaining Points <h3>00</h3></h3>
+           <h3>Remaining Players<h3>00</h3></h3>
+
+            </p>
+          </div>
+        </div>
+       <!-- End Card --><!-- Card -->
+        <div class="card" style="max-width: 20rem;">
+          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h1 class="card-title">Sameer Backchods</h1>
+           <h3>Remaining Points <h3>00</h3></h3>
+           <h3>Remaining Players<h3>00</h3></h3>
+
+            </p>
+          </div>
+        </div>
+       <!-- End Card --><!-- Card -->
+        <div class="card" style="max-width: 20rem;">
+          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h1 class="card-title">Sameer Backchods</h1>
+           <h3>Remaining Points <h3>00</h3></h3>
+           <h3>Remaining Players<h3>00</h3></h3>
+
+            </p>
+          </div>
+        </div>
+       <!-- End Card --><!-- Card -->
+        <div class="card" style="max-width: 20rem;">
+          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h1 class="card-title">Sameer Backchods</h1>
+           <h3>Remaining Points <h3>00</h3></h3>
+           <h3>Remaining Players<h3>00</h3></h3>
+
+            </p>
+          </div>
+        </div>
+       <!-- End Card --><!-- Card -->
+        <div class="card" style="max-width: 20rem;">
+          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h1 class="card-title">Sameer Backchods</h1>
+           <h3>Remaining Points <h3>00</h3></h3>
+           <h3>Remaining Players<h3>00</h3></h3>
+
+            </p>
+          </div>
+        </div>
+       <!-- End Card --><!-- Card -->
+        <div class="card" style="max-width: 20rem;">
+          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h1 class="card-title">Sameer Backchods</h1>
+           <h3>Remaining Points <h3>00</h3></h3>
+           <h3>Remaining Players<h3>00</h3></h3>
+
+            </p>
+          </div>
+        </div>
+       <!-- End Card -->
    
       </div>
       <!-- End Stats -->
@@ -54,7 +197,7 @@ include("header.php");
     <div class="footer">
       <div class="row justify-content-between align-items-center">
         <div class="col">
-          <p class="fs-6 mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2022 Htmlstream.</span></p>
+          <p class="fs-6 mb-0">&copy; CricAuction. <span class="d-none d-sm-inline-block">2023 Abstract Tech Solution.</span></p>
         </div>
         <!-- End Col -->
 
@@ -62,20 +205,9 @@ include("header.php");
           <div class="d-flex justify-content-end">
             <!-- List Separator -->
             <ul class="list-inline list-separator">
+             
               <li class="list-inline-item">
-                <a class="list-separator-link" href="#">FAQ</a>
-              </li>
-
-              <li class="list-inline-item">
-                <a class="list-separator-link" href="#">License</a>
-              </li>
-
-              <li class="list-inline-item">
-                <!-- Keyboard Shortcuts Toggle -->
-                <button class="btn btn-ghost-secondary btn btn-icon btn-ghost-secondary rounded-circle" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasKeyboardShortcuts" aria-controls="offcanvasKeyboardShortcuts">
-                  <i class="bi-command"></i>
-                </button>
-                <!-- End Keyboard Shortcuts Toggle -->
+               
               </li>
             </ul>
             <!-- End List Separator -->

@@ -142,6 +142,7 @@ if(!isset($_SESSION["login_user"]))
     <div class="navbar-nav-wrap">
       <!-- Logo -->
       <a class="navbar-brand" href="./index.html" aria-label="CricAuction">
+        <img src="./assets/cricauction.svg" alt="">
         <img class="navbar-brand-logo" src="./asstes/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="default">
         <img class="navbar-brand-logo" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="dark">
         <img class="navbar-brand-logo-mini" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="default">
@@ -206,7 +207,7 @@ if(!isset($_SESSION["login_user"]))
         <!-- Logo -->
 
         <a class="navbar-brand" href="index.php" aria-label="Front">
-          <img class="navbar-brand-logo" src="assets/img/auctioniconfinal.png" alt="Logo" data-hs-theme-appearance="default">
+          <img class="navbar-brand-logo" src="assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="default">
           <img class="navbar-brand-logo" src="assets/img/auctioniconfinal.png" alt="Logo" data-hs-theme-appearance="dark">
           <img class="navbar-brand-logo-mini" src="./assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
           <img class="navbar-brand-logo-mini" src="./assets/svg/logos-light/logo-short.svg" alt="Logo" data-hs-theme-appearance="dark">
