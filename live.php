@@ -5,6 +5,34 @@ if(!isset($_SESSION["login_user"]))
 {
   header("location:landing.php");
 }
+if(isset($_GET["back"]) && $_GET["back"]==1)
+{
+  $currentcounter=mysqli_query($con,"select current_player_count from auction_traker where tournment_id=".$_SESSION["login_user"]."");
+  $currentcounter=mysqli_fetch_row($currentcounter);
+  $currentcounter=$currentcounter[0]-1;
+  mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]."");
+  header("location:live.php");  
+}
+if(isset($_GET["edit"]) && $_GET["edit"]==1)
+  {
+  $editresult=mysqli_query($con,"select * from player_mapping_master where id=".$_GET["id"]."");
+  $editresult=mysqli_fetch_row($editresult);
+  if($editresult[4]==1)
+  {
+      $teamresult=mysqli_query($con,"select * from team_master where id=".$editresult[2]."");
+      $teamresult=mysqli_fetch_row($teamresult);
+      $updatedplayer=$teamresult[7]-1;
+      $updatedpoints=$teamresult[6]+$editresult[5];
+      mysqli_query($con,"update team_master set team_points=".$updatedpoints.", players_taken=".$updatedplayer." where id=".$teamresult[0]."");
+    mysqli_query($con,"update player_mapping_master set sold_status=0,sold_points=0, team_id=0 where id=".$editresult[0]."");
+  }
+  else if($editresult[4]==2)
+  {
+    mysqli_query($con,"update player_mapping_master set sold_status=0 where id=".$_GET["id"]."");
+    header("location:live.php");
+  }
+
+}
 
 if(isset($_GET["next"]) && $_GET["next"]==1)
 {
@@ -27,12 +55,16 @@ $newteampoints=$teamdata[0]-$_POST["biding_team_points"];
 $newplayertaken=$teamdata[1]+1;
 mysqli_query($con,"update team_master set team_points=".$newteampoints.", players_taken=".$newplayertaken." where id=".$_POST["biding_team_id"]." and tournment_id=".$_SESSION["login_user"]."");
 $soldflag=1;
+
+header("location:live.php");
 }
 if(isset($_POST["unsold_btn"]))
 {
  
-mysqli_query($con,"update player_mapping_master set  sold_status=2 where player_id=".$_POST["biding_player_id"]." and tournment_id=".$_SESSION["login_user"]."");
+mysqli_query($con,"update player_mapping_master set  sold_status=2, sold_points=0 where player_id=".$_POST["biding_player_id"]." and tournment_id=".$_SESSION["login_user"]."");
+echo "<script>alert('update player_mapping_master set  sold_status=2, sold_points=0 where player_id=".$_POST["biding_player_id"]." and tournment_id=".$_SESSION["login_user"]."');</script>";
  $soldflag=2;
+ header("location:live.php");
 }
 
 
@@ -245,10 +277,18 @@ $soldflag=2;
           <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" onClick="changeTheme()" aria-expanded="false" data-bs-dropdown-animation=""><i class="bi-brightness-high"></i></button> 
         </li>
          
+        
+        <li class="nav-item d-none d-sm-inline-block">
+          <a class="btn btn-primary" href="live.php?back=1">Back</a>
+          </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a class="btn btn-outline-primary" href="live.php?edit=1&id=<?php echo $mappingdata[0];?>">Edit</a>
+
+          </li>
+
          
           <li class="nav-item d-none d-sm-inline-block">
           <a class="btn btn-primary" href="index.php">Home</a>
-
           </li>
         <?php
         if($final==1)
@@ -379,7 +419,7 @@ while($temp=mysqli_fetch_row($resultteam))
               <label class="form-label" for="exampleFormControlTitleInput2">BIDING TEAM</label>
               <input type="text" id="biding_team_name" name="biding_team_name" class="form-control form-control-light" placeholder="selected team" disabled>
               <input type="text" hidden id="biding_team_id" name="biding_team_id" class="form-control form-control-title" placeholder="selected team" disabled>
-              <input type="text" hidden id="biding_player_id" name="biding_player_id" class="form-control form-control-title" placeholder="selected team" value="<?php echo $mappingdata[1];?>" disabled>
+              <input type="text" hidden id="biding_player_id" name="biding_player_id" class="form-control form-control-title" placeholder="selected team" value="'.$mappingdata[1].'" disabled>
               
               <input type="text" hidden id="biding_max_point" value="0" class="form-control form-control-title" placeholder="selected team" disabled>
             </div>

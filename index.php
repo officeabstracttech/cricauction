@@ -29,10 +29,10 @@ include("header.php");
               <img class="card-img-top" src="./assets/gif/live_animation.gif" alt="Card image cap">
               <div class="card-body">
                 <?php 
-                $result=mysqli_query($con,"select tournment_name from tournment_master where id=".$_SESSION["login_user"]."");
+                $result=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
                 $data=mysqli_fetch_row($result);
                 echo '
-                <h3 class="card-title">'.$data[0].'</h3>';
+                <h3 class="card-title">'.$data[1].'</h3>';
                 ?>
                 <p class="card-text">Go to  Auction...</p>
                 <p class="card-text">
@@ -50,7 +50,7 @@ include("header.php");
           <div class="card" style="max-width: 20rem;">
             <div class="card-body">
               <h1 class="card-title">Max Points</h1>
-              <h2>00</h2>
+              <h2><?php echo $data[2];?></h2>
               
             </div>
           </div>
@@ -58,7 +58,7 @@ include("header.php");
           <div class="card" style="max-width: 20rem;">
             <div class="card-body">
               <h1 class="card-title">Base Points</h1>
-              <h2>00</h2>
+              <h2><?php echo $data[3];?></h2>
 
             </div>
           </div>
@@ -66,7 +66,11 @@ include("header.php");
           <div class="card" style="max-width: 20rem;">
             <div class="card-body">
               <h1 class="card-title">Total Players</h1>
-              <h2>00</h2>
+              <h2><?php $totalplayer=mysqli_query($con,"select count(player_id) from player_mapping_master where tournment_id=".$_SESSION["login_user"]."");
+              $totalplayer=mysqli_fetch_row($totalplayer);
+              echo $totalplayer[0];
+              
+              ?></h2>
 
             </div>
           </div>
@@ -75,7 +79,11 @@ include("header.php");
            <div class="card" style="max-width: 20rem;">
             <div class="card-body">
               <h1 class="card-title">Total Teams</h1>
-              <h2>00</h2>
+              <?php  $count=mysqli_query($con,"select count(id) from team_master where tournment_id=".$_SESSION["login_user"]."");
+              $count=mysqli_fetch_row($count);
+              echo '
+              <h2>'.$count[0].'</h2>';
+              ?>
 
             </div>
           </div>
