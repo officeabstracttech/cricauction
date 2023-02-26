@@ -46,24 +46,19 @@ include("header.php");
       <span class="divider-center"><h1>Tournament Details</h1></span>
       <br><br><br><br>
       <h1> </h1>
-          <!-- Card -->
-          <div class="card" style="max-width: 20rem;">
-            <div class="card-body">
-              <h1 class="card-title">Max Points</h1>
-              <h2><?php echo $data[2];?></h2>
-              
-            </div>
-          </div>
-          <!-- End Card --><!-- Card -->
-          <div class="card" style="max-width: 20rem;">
+      <div class="row">    
+      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+      <div class="card" style="max-width: 20rem;">
             <div class="card-body">
               <h1 class="card-title">Base Points</h1>
               <h2><?php echo $data[3];?></h2>
 
             </div>
           </div>
-          <!-- End Card --><!-- Card -->
-          <div class="card" style="max-width: 20rem;">
+        
+    </div>
+      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+      <div class="card" style="max-width: 20rem;">
             <div class="card-body">
               <h1 class="card-title">Total Players</h1>
               <h2><?php $totalplayer=mysqli_query($con,"select count(player_id) from player_mapping_master where tournment_id=".$_SESSION["login_user"]."");
@@ -74,9 +69,10 @@ include("header.php");
 
             </div>
           </div>
-          <!-- End Card -->
-           <!-- End Card --><!-- Card -->
-           <div class="card" style="max-width: 20rem;">
+        
+    </div>
+      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+      <div class="card" style="max-width: 20rem;">
             <div class="card-body">
               <h1 class="card-title">Total Teams</h1>
               <?php  $count=mysqli_query($con,"select count(id) from team_master where tournment_id=".$_SESSION["login_user"]."");
@@ -87,113 +83,39 @@ include("header.php");
 
             </div>
           </div>
-          <!-- End Card -->
-          <h1> </h1>
+        
+    </div>
+      
+      </div>
           <br><br>
       <span class="divider-center"><h1>All Teams</h1></span>
       <h1> <br><br></h1>
-      <!-- Card -->
-        <div class="card" style="max-width: 20rem;">
-          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h1 class="card-title">Sameer Backchods</h1>
-           <h3>Remaining Points <h3>00</h3></h3>
-           <h3>Remaining Players<h3>00</h3></h3>
-
-            </p>
-          </div>
-        </div>
-       <!-- End Card -->
-        <!-- Card -->
-        <div class="card" style="max-width: 20rem;">
-          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h1 class="card-title">Sameer Backchods</h1>
-           <h3>Remaining Points <h3>00</h3></h3>
-           <h3>Remaining Players<h3>00</h3></h3>
-
-            </p>
-          </div>
-        </div>
-       <!-- End Card --><!-- Card -->
-        <div class="card" style="max-width: 20rem;">
-          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h1 class="card-title">Sameer Backchods</h1>
-           <h3>Remaining Points <h3>00</h3></h3>
-           <h3>Remaining Players<h3>00</h3></h3>
-
-            </p>
-          </div>
-        </div>
-       <!-- End Card --><!-- Card -->
-        <div class="card" style="max-width: 20rem;">
-          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h1 class="card-title">Sameer Backchods</h1>
-           <h3>Remaining Points <h3>00</h3></h3>
-           <h3>Remaining Players<h3>00</h3></h3>
-
-            </p>
-          </div>
-        </div>
-       <!-- End Card --><!-- Card -->
-        <div class="card" style="max-width: 20rem;">
-          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h1 class="card-title">Sameer Backchods</h1>
-           <h3>Remaining Points <h3>00</h3></h3>
-           <h3>Remaining Players<h3>00</h3></h3>
-
-            </p>
-          </div>
-        </div>
-       <!-- End Card --><!-- Card -->
-        <div class="card" style="max-width: 20rem;">
-          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h1 class="card-title">Sameer Backchods</h1>
-           <h3>Remaining Points <h3>00</h3></h3>
-           <h3>Remaining Players<h3>00</h3></h3>
-
-            </p>
-          </div>
-        </div>
-       <!-- End Card --><!-- Card -->
-        <div class="card" style="max-width: 20rem;">
-          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h1 class="card-title">Sameer Backchods</h1>
-           <h3>Remaining Points <h3>00</h3></h3>
-           <h3>Remaining Players<h3>00</h3></h3>
-
-            </p>
-          </div>
-        </div>
-       <!-- End Card --><!-- Card -->
-        <div class="card" style="max-width: 20rem;">
-          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h1 class="card-title">Sameer Backchods</h1>
-           <h3>Remaining Points <h3>00</h3></h3>
-           <h3>Remaining Players<h3>00</h3></h3>
-
-            </p>
-          </div>
-        </div>
-       <!-- End Card --><!-- Card -->
-        <div class="card" style="max-width: 20rem;">
-          <img class="card-img-top" src="./assets/apllogo.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h1 class="card-title">Sameer Backchods</h1>
-           <h3>Remaining Points <h3>00</h3></h3>
-           <h3>Remaining Players<h3>00</h3></h3>
-
-            </p>
-          </div>
-        </div>
-       <!-- End Card -->
-   
+      <div class="row">
+        
+      <?php  
+      $teamresult=mysqli_query($con,"select * from team_master where tournment_id=".$_SESSION["login_user"]."");
+      while($team=mysqli_fetch_row($teamresult))
+      {
+       echo '
+       
+      <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
+       <!-- Card -->
+       <div class="card" style="max-width: 20rem;">
+         <img class="card-img-top" src="'.$team[3].'" alt="Card image cap">
+         <div class="card-body">
+           <h1 class="card-title">'.$team[2].'</h1>
+          <h3>Remaining Points <h3>'.$team[6].'</h3></h3>
+          <h3>Players Taken<h3>'.$team[7].'</h3>
+           
+         </div>
+       </div>
+      <!-- End Card -->
+      </div>
+      ';  
+      }
+      
+      ?>
+      </div>
       </div>
       <!-- End Stats -->
 
