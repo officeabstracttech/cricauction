@@ -4,7 +4,7 @@
     $con="";
     $db="cricauction";
     $server="localhost";
-    $pwd="abc12345";
+    $pwd="Admin@123";
     $usr="root";
     $port=3306;
 
