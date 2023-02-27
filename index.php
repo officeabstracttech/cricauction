@@ -47,6 +47,17 @@ include("header.php");
       <br><br><br><br>
       <h1> </h1>
       <div class="row">    
+        
+      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+      <div class="card" style="max-width: 20rem;">
+            <div class="card-body">
+              <h1 class="card-title">Max Points</h1>
+              <h2><?php echo $data[2];?></h2>
+
+            </div>
+          </div>
+        
+    </div>
       <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
       <div class="card" style="max-width: 20rem;">
             <div class="card-body">
