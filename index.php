@@ -26,7 +26,7 @@ include("header.php");
 
             <!-- Card -->
             <a href="live.php" class="card"  style="max-width: 20rem;">
-              <img class="card-img-top" src="./assets/gif/live_animation.gif" alt="Card image cap">
+              <img class="card-img-top" src="./assets/gif/liveauction.gif" alt="Card image cap">
               <div class="card-body">
                 <?php 
                 $result=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
