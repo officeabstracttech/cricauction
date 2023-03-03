@@ -581,7 +581,7 @@ echo '    <div class="col-sm-6 col-lg-12 mb-3 mb-lg-5">
                     <div class="col-md-4">
                  
               <span class="avatar avatar-xxl avatar-4x3">
-                <img class="avatar-img" src="<?php  echo $playerdata[8];?>" alt="player image">
+                <img class="avatar-img" src="data:image/jpg;charset=utf8;base64,<?php  echo base64_encode($playerdata[8]);?>" alt="player image">
               </span>
                     </div>
                     <div class="col-md-6">

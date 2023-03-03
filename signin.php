@@ -1,76 +1,45 @@
 <?php
+
 if(isset($_POST["sub_btn"]))
 {
   include("config.php");
   
-  echo "<script>alert('Hello');</script>";
   if($_POST["pass"]!=$_POST["confirm_pass"])
   {
       echo "<script>alert('Pass and Confirm password not matched.');</script>";
-      header("location:sigin.php");
+      header("location:signin.php");
   }
 
-  $logotargetdir="upload/playerlogo/";
-  $logofilepath = "";
+  if(!empty($_FILES["player_logo"]["name"])) { 
+    // Get file info 
+    $fileName = basename($_FILES["player_logo"]["name"]); 
+    $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+     
+    // Allow certain file formats 
+    $allowTypes = array('jpg','png','jpeg','JPG','PNG','JPEG'); 
+    if(in_array($fileType, $allowTypes)){ 
+        $image = $_FILES['player_logo']['tmp_name']; 
+        $imgContent = addslashes(file_get_contents($image)); 
+     
+        // Insert image content into database 
+        $insert = mysqli_query($con,"insert into player_master(player_name,player_role,player_dob,player_jersy_size,player_jersy_no,phone_no,pass,player_logo,status) values('".$_POST['player_name']."','".$_POST['player_role']."','".$_POST['player_dob']."','".$_POST['player_jersy_size']."',".$_POST['player_jersy_no'].",'".$_POST['phone_no']."','".$_POST['pass']."','".$imgContent."','1')");
 
-      function createPathName($temp)
-      {
+        if($insert){ 
+          echo "<script>alert('Player registered Successfully');window.location.href='login.php'; </script>";
+       
+        }else{ 
+          echo "<script>alert('Photo not uploaded');window.location.href='signin.php'; </script>";
+        }  
+    }else{ 
+      echo "<script>alert('file type only png,jpeg,jpg is supported');window.location.href='signin.php'; </script>";
 
-          if(!file_exists($temp))
-          {
-              return false;
-          }
-          return true;
-      }
-
-
-      function checkImage()
-      {
-          $check=getimagesize($_FILES["player_logo"]["tmp_name"]);
-          if($check !==false)
-          {
-              return true;
-          }
-          else{
-              return false;    
-          }
-      }
-
-
-      if(checkImage())
-      {
-          $filetype=strtolower(pathinfo($_FILES["player_logo"]["name"],PATHINFO_EXTENSION));
-          $logofilepath=$logotargetdir."".$_POST["phone_no"].".".$filetype;
-          $i=1;
-          while(createPathName($logofilepath))
-          {
-              $logofilepath=$logotargetdir.$_POST["phone_no"].$i.".".$filetype;
-              $i+=1;
-          }
-
-          if($filetype != "jpg" && $filetype != "png" && $filetype != "jpeg")
-          {
-              echo "<script>alert('file type only png, jpeg,jpg is supported');window.location.href='signin.php'; </script>";
-          }
-          else
-          {
-              if(move_uploaded_file($_FILES["player_logo"]["tmp_name"],$logofilepath))
-              {
-                mysqli_query($con,"insert into player_master(player_name,player_role,player_dob,player_jersy_size,player_jersy_no,phone_no,pass,player_logo,status) values('".$_POST['player_name']."','".$_POST['player_role']."','".$_POST['player_dob']."','".$_POST['player_jersy_size']."',".$_POST['player_jersy_no'].",'".$_POST['phone_no']."','".$_POST['pass']."','".$logofilepath."','1')");
-
-
-                echo "<script>alert('Player Added successfully. Please login'); window.location.href='login.php'</script>";
-                
-              }
-              else
-              {
-                  echo "<script>alert('photo not uploaded');</script>";
-              }
-          }
-
-      }
+    } 
+}else{ 
+  echo "<script>alert('Please select the photo');window.location.href='signin.php'; </script>";
 
 }
+}
+
 ?>
 
 

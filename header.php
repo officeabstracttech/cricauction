@@ -261,6 +261,20 @@ if(!isset($_SESSION["login_user"]))
                 </a>
               </div>
               ';
+              echo '<div class="nav-item">
+              <a class="nav-link" href="team_management.php" data-placement="left">
+                <i class="bi-basket nav-icon"></i>
+                <span class="nav-link-title">Team Overview</span>
+              </a>
+            </div>
+            ';
+              echo '<div class="nav-item">
+              <a class="nav-link" href="player_management.php" data-placement="left">
+                <i class="bi-people nav-icon"></i>
+                <span class="nav-link-title">Player Overview</span>
+              </a>
+            </div>
+            ';
                 }
               }
               
