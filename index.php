@@ -112,7 +112,7 @@ include("header.php");
       <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
        <!-- Card -->
        <div class="card" style="max-width: 20rem;">
-         <img class="card-img-top" src="'.$team[3].'" alt="Card image cap">
+         <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,'.base64_encode($team[3]).'" alt="Card image cap">
          <div class="card-body">
            <h1 class="card-title">'.$team[2].'</h1>
           <h3>Remaining Points <h3>'.$team[6].'</h3></h3>

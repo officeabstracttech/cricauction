@@ -37,138 +37,77 @@ if(isset($_GET["set"]))
   }
 }
 
+
 if(isset($_POST["new_team_btn"]))
 {
-    $logotargetdir="upload/teamlogo/";
-    $logofilepath = "";
+  if(!empty($_FILES["team_logo"]["name"])) { 
+      // Get file info 
+      $fileName = basename($_FILES["team_logo"]["name"]); 
+      $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+       
+      // Allow certain file formats 
+      $allowTypes = array('jpg','png','jpeg'); 
+      if(in_array($fileType, $allowTypes)){ 
+          $image = $_FILES['team_logo']['tmp_name']; 
+          $imgContent = addslashes(file_get_contents($image)); 
+       
+          // Insert image content into database 
+          $result=mysqli_query($con,"select max_point from tournment_master where id=".$_SESSION["login_user"]."");
+          $result=mysqli_fetch_row($result);
+          $maxpoint=$result[0];
+          $insert = mysqli_query($con,"insert into team_master(tournment_id,team_name,team_logo,team_points,players_taken,status,phone_no,pass) values(".$_SESSION["login_user"].",'".$_POST["team_name"]."','".$imgContent."',".$maxpoint.",0,1,'".$_POST["phone_no"]."','".$_POST["pass"]."')");
+         
+          if($insert){ 
+            echo "<script>alert('Team added Successfully');window.location.href='startpage.php'; </script>";
+         
+          }else{ 
+            echo "<script>alert('Logo not uploaded');window.location.href='startpage.php'; </script>";
+      
+          }  
+      }else{ 
+        echo "<script>alert('file type only png,jpeg,jpg is supported');window.location.href='startpage.php'; </script>";
+ 
+      } 
+  }else{ 
+    echo "<script>alert('Please select the logo');window.location.href='startpage.php'; </script>";
 
-        function createPathName($temp)
-        {
-
-            if(!file_exists($temp))
-            {
-                return false;
-            }
-            return true;
-        }
-
-
-        function checkImage()
-        {
-            $check=getimagesize($_FILES["team_logo"]["tmp_name"]);
-            if($check !==false)
-            {
-                return true;
-            }
-            else{
-                return false;    
-            }
-        }
-
-  
-        if(checkImage())
-        {
-            $filetype=strtolower(pathinfo($_FILES["team_logo"]["name"],PATHINFO_EXTENSION));
-            $logofilepath=$logotargetdir."".$_POST["team_name"].".".$filetype;
-            $i=1;
-            while(createPathName($logofilepath))
-            {
-                $logofilepath=$logotargetdir.$_POST["team_name"].$i.".".$filetype;
-                $i+=1;
-            }
-
-            if($filetype != "jpg" && $filetype != "png" && $filetype != "jpeg")
-            {
-                echo "<script>alert('file type only png, jpeg,jpg is supported');window.location.href='startpage.php'; </script>";
-            }
-            else
-            {
-                if(move_uploaded_file($_FILES["team_logo"]["tmp_name"],$logofilepath))
-                {
-                    $result=mysqli_query($con,"select max_point from tournment_master where id=".$_SESSION["login_user"]."");
-                    $result=mysqli_fetch_row($result);
-                    $maxpoint=$result[0];
-                    mysqli_query($con,"insert into team_master(tournment_id,team_name,team_logo,team_points,players_taken,status,phone_no,pass) values(".$_SESSION["login_user"].",'".$_POST["team_name"]."','".$logofilepath."',".$maxpoint.",0,1,'".$_POST["phone_no"]."','".$_POST["pass"]."')");
-                    echo "<script>alert('Team Added successfully'); window.location.href='startpage.php'</script>";
-                    
-                }
-                else
-                {
-                    echo "<script>alert('not uploaded');</script>";
-                }
-            }
-
-        }
-
-
-
+  }   
 }
+
 
 if(isset($_POST["tournment_btn"]))
 {
-    
-    $logotargetdir="upload/tournmentlogo/";
-    $logofilepath = "";
+  if(!empty($_FILES["tournment_logo"]["name"])) { 
+      // Get file info 
+      $fileName = basename($_FILES["tournment_logo"]["name"]); 
+      $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+       
+      // Allow certain file formats 
+      $allowTypes = array('jpg','png','jpeg','JPG','PNG','JPEG'); 
+      if(in_array($fileType, $allowTypes)){ 
+          $image = $_FILES['tournment_logo']['tmp_name']; 
+          $imgContent = addslashes(file_get_contents($image)); 
+       
+          // Insert image content into database 
+       
+          $insert = mysqli_query($con,"update tournment_master set tournment_name='".$_POST["tournment_name"]."',max_point=".$_POST["max_point"].",base_point=".$_POST["base_point"].",max_player=".$_POST["max_player"].",tournment_logo='".$imgContent."',process=2 where id=".$_SESSION["login_user"]." ");
+       
+          if($insert){ 
+            echo "<script>alert('Torunment added Successfully');window.location.href='startpage.php'; </script>";
+         
+          }else{ 
+            echo "<script>alert('Logo not uploaded');window.location.href='startpage.php'; </script>";
+          }  
+      }else{ 
+        echo "<script>alert('file type only png,jpeg,jpg is supported');window.location.href='startpage.php'; </script>";
+ 
+      } 
+  }else{ 
+    echo "<script>alert('Please select the logo');window.location.href='startpage.php'; </script>";
 
-        function createPathName($temp)
-        {
-
-            if(!file_exists($temp))
-            {
-                return false;
-            }
-            return true;
-        }
-
-
-        function checkImage()
-        {
-            $check=getimagesize($_FILES["tournment_logo"]["tmp_name"]);
-            if($check !==false)
-            {
-                return true;
-            }
-            else{
-                return false;    
-            }
-        }
-
-  
-        if(checkImage())
-        {
-            $filetype=strtolower(pathinfo($_FILES["tournment_logo"]["name"],PATHINFO_EXTENSION));
-            $logofilepath=$logotargetdir."".$_POST["tournment_name"].".".$filetype;
-            $i=1;
-            while(createPathName($logofilepath))
-            {
-                $logofilepath=$logotargetdir.$_POST["tournment_name"].$i.".".$filetype;
-                $i+=1;
-            }
-
-            if($filetype != "jpg" && $filetype != "png" && $filetype != "jpeg")
-            {
-                echo "<script>alert('file type only png, jpeg,jpg is supported');window.location.href='startpage.php'; </script>";
-            }
-            else
-            {
-                if(move_uploaded_file($_FILES["tournment_logo"]["tmp_name"],$logofilepath))
-                {
-                    mysqli_query($con,"update tournment_master set tournment_name='".$_POST["tournment_name"]."',max_point=".$_POST["max_point"].",base_point=".$_POST["base_point"].",max_player=".$_POST["max_player"].",tournment_logo='".$logofilepath."',process=2 where id=".$_SESSION["login_user"]." ");
-                    echo "<script>alert('File uploaded successfully');window.location.href='startpage.php'</script>";
-                    
-                }
-                else
-                {
-                    echo "<script>alert('file not uploaded');</script>";
-                }
-            }
-
-        }
-
-
-
-
+  }   
 }
+
 
 
 
