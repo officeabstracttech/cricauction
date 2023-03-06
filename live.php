@@ -69,7 +69,6 @@ if(isset($_POST["unsold_btn"]))
 {
  
 mysqli_query($con,"update player_mapping_master set  sold_status=2, sold_points=0 where player_id=".$_POST["biding_player_id"]." and tournment_id=".$_SESSION["login_user"]."");
-echo "<script>alert('update player_mapping_master set  sold_status=2, sold_points=0 where player_id=".$_POST["biding_player_id"]." and tournment_id=".$_SESSION["login_user"]."');</script>";
  $soldflag=2;
 // header("location:live.php");
 }
@@ -91,7 +90,6 @@ if(mysqli_num_rows($result)>0){
   $count=mysqli_query($con,"select count(id) from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1");
   $count=mysqli_fetch_row($count);
   mysqli_query($con,"insert into auction_traker(tournment_id,total_player,current_player_count,process) values(".$_SESSION["login_user"].",".$count[0].",1,1)");
-  echo "<script>alert('insert into auction_traker(tournment_id,total_player,current_player_count,process) values(".$_SESSION["login_user"].",".$count[0].",1,1)');</script>";
   $counter=1; 
   
 }
