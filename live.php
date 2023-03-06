@@ -15,7 +15,7 @@ if(isset($_GET["back"]) && $_GET["back"]==1)
 
     mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]."");
   }
-  header("location:live.php");  
+//  header("location:live.php");  
   
 }
 if(isset($_GET["edit"]) && $_GET["edit"]==1)
@@ -30,13 +30,13 @@ if(isset($_GET["edit"]) && $_GET["edit"]==1)
       $updatedpoints=$teamresult[6]+$editresult[5];
       mysqli_query($con,"update team_master set team_points=".$updatedpoints.", players_taken=".$updatedplayer." where id=".$teamresult[0]."");
     mysqli_query($con,"update player_mapping_master set sold_status=0,sold_points=0, team_id=0 where id=".$editresult[0]."");
-    header("location:live.php");  
+ //   header("location:live.php");  
   
   }
   else if($editresult[4]==2)
   {
     mysqli_query($con,"update player_mapping_master set sold_status=0 where id=".$_GET["id"]."");
-    header("location:live.php");
+//    header("location:live.php");
   }
 
 }
@@ -47,7 +47,7 @@ if(isset($_GET["next"]) && $_GET["next"]==1)
   $currentcounter=mysqli_fetch_row($currentcounter);
   $currentcounter=$currentcounter[0]+1;
   mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]."");
-  header("location:live.php");
+//  header("location:live.php");
 }
 
 
@@ -63,7 +63,7 @@ $newplayertaken=$teamdata[1]+1;
 mysqli_query($con,"update team_master set team_points=".$newteampoints.", players_taken=".$newplayertaken." where id=".$_POST["biding_team_id"]." and tournment_id=".$_SESSION["login_user"]."");
 $soldflag=1;
 
-header("location:live.php");
+//header("location:live.php");
 }
 if(isset($_POST["unsold_btn"]))
 {
@@ -71,7 +71,7 @@ if(isset($_POST["unsold_btn"]))
 mysqli_query($con,"update player_mapping_master set  sold_status=2, sold_points=0 where player_id=".$_POST["biding_player_id"]." and tournment_id=".$_SESSION["login_user"]."");
 echo "<script>alert('update player_mapping_master set  sold_status=2, sold_points=0 where player_id=".$_POST["biding_player_id"]." and tournment_id=".$_SESSION["login_user"]."');</script>";
  $soldflag=2;
- header("location:live.php");
+// header("location:live.php");
 }
 
 
@@ -116,7 +116,6 @@ else if($mappingdata[4]==2)
 {
 $soldflag=2;
 }
-
 
 ?>
 
