@@ -205,12 +205,12 @@ if(isset($_POST["sub_btn"]))
                  <div class="d-flex align-items-center">
                    <!-- Avatar -->
                    <label class="avatar avatar-xl avatar-circle" for="avatarUploader">
-                     <img id="avatarImg" class="avatar-img" src="./assets/img/160x160/img1.jpg" alt="Image Description">
+                     <img id="avatarImg" class="avatar-img" src="./assets/avatar.png" alt="Image Description">
                    </label>
                                     
                    <div class="d-flex gap-3 ms-4">
                      <div class="form-attachment-btn btn btn-sm btn-primary">Upload photo
-                       <input type="file" class="js-file-attach form-attachment-btn-label" id="avatarUploader" name="player_logo"
+                       <input type="file" required class="js-file-attach form-attachment-btn-label" id="avatarUploader" name="player_logo"
                               data-hs-file-attach-options='{
                                  "textTarget": "#avatarImg",
                                  "mode": "image",

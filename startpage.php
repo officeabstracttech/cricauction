@@ -160,7 +160,7 @@ $process=$process[0];
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        Are you sure you want to processed ?
+                        Are you sure you want to procesed ?
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
@@ -198,7 +198,7 @@ $process=$process[0];
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        Are you sure you want to processed ?
+                        Are you sure you want to procesed ?
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>

@@ -30,8 +30,12 @@ $process=$process[0];
       <div class="row">
       <?php  
       $teamresult=mysqli_query($con,"select * from team_master where tournment_id=".$_SESSION["login_user"]."");
+   
+  $r=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
+  $d=mysqli_fetch_row($r);
       while($team=mysqli_fetch_row($teamresult))
       {
+        $maxpoint=$team[6]-(($d[4]-$team[7]-1)*$d[3]);
        echo '
        
       <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
@@ -40,9 +44,9 @@ $process=$process[0];
          <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,'.base64_encode($team[3]).'" alt="Card image cap">
          <div class="card-body">
            <h1 class="card-title">'.$team[2].'</h1>
-          <h3>Remaining Points <h3>'.$team[6].'</h3></h3>
+          <h3>Remaining Points <h3>'.$team[6].'</h3>
+          <h3>Player Max Points <h3>'.$maxpoint.'</h3>
           <h3>Players Taken<h3>'.$team[7].'</h3>
-           
          </div>
        </a>
       <!-- End Card -->
