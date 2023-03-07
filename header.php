@@ -4,6 +4,7 @@ if(!isset($_SESSION["login_user"]))
 {
     header("location:landing.php");
 }
+$process=0;
 ?>
 
 
@@ -141,9 +142,9 @@ if(!isset($_SESSION["login_user"]))
   <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered bg-white">
     <div class="navbar-nav-wrap">
       <!-- Logo -->
-      <a class="navbar-brand" href="./index.html" aria-label="CricAuction">
+      <a class="navbar-brand" href="./index.php" aria-label="CricAuction">
         <img src="./assets/cricauction.svg" alt="">
-        <img class="navbar-brand-logo" src="./asstes/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="default">
+        <img class="navbar-brand-logo" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="default">
         <img class="navbar-brand-logo" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="dark">
         <img class="navbar-brand-logo-mini" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="default">
         <img class="navbar-brand-logo-mini" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="dark">
@@ -172,7 +173,7 @@ if(!isset($_SESSION["login_user"]))
             <div class="dropdown">
               <a class="navbar-dropdown-account-wrapper" href="javascript:;" id="accountNavbarDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" data-bs-dropdown-animation="">
                 <div class="avatar avatar-sm avatar-circle">
-                  <img class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
+                  <img class="avatar-img" src="./assets/avatar.png" alt="Image Description">
                   <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                 </div>
               </a>
@@ -208,9 +209,9 @@ if(!isset($_SESSION["login_user"]))
 
         <a class="navbar-brand" href="index.php" aria-label="Front">
           <img class="navbar-brand-logo" src="assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="default">
-          <img class="navbar-brand-logo" src="assets/img/auctioniconfinal.png" alt="Logo" data-hs-theme-appearance="dark">
+          <img class="navbar-brand-logo" src="assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="dark">
           <img class="navbar-brand-logo-mini" src="./assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
-          <img class="navbar-brand-logo-mini" src="./assets/svg/logos-light/logo-short.svg" alt="Logo" data-hs-theme-appearance="dark">
+          <img class="navbar-brand-logo-mini" src="./assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="dark">
         </a>
 
         <!-- End Logo -->
@@ -277,8 +278,16 @@ if(!isset($_SESSION["login_user"]))
             ';
                 }
               }
-              
-              
+              else if($_SESSION["login_role"]==2)
+              {
+                echo '<div class="nav-item">
+                <a class="nav-link" href="reviewteam.php" data-placement="left">
+                  <i class="bi-house nav-icon"></i>
+                  <span class="nav-link-title">Review Team</span>
+                </a>
+              </div>
+              ';
+              }
               ?>
 
           </div>

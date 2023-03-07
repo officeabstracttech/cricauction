@@ -1,6 +1,5 @@
 <?php
 
-$flag=1;
 if(isset($_POST["sbtn"]))
 {
 
@@ -18,7 +17,18 @@ if(isset($_POST["sbtn"]))
     }
     else
     {
-        $flag=2;
+      $result=mysqli_query($con,"select id from team_master where phone_no='".$_POST["phone_no"]."' and pass='".$_POST["pwd"]."' and status=1");
+    if(mysqli_num_rows($result) >0){
+
+      $data=mysqli_fetch_row($result);
+      $_SESSION["login_user"]=$data[0];
+      $_SESSION["login_role"]='2';
+      header("location:reviewteam.php");
+    }
+    else
+    {
+
+    }
     }
 
 }
@@ -250,70 +260,6 @@ if(isset($_POST["sbtn"]))
 
 
 
-
-  <!-- Welcome Message Modal -->
-  <div class="modal fade" id="welcomeMessageModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <!-- Header -->
-        <div class="modal-close">
-          <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm" data-bs-dismiss="modal" aria-label="Close">
-            <i class="bi-x-lg"></i>
-          </button>
-        </div>
-        <!-- End Header -->
-
-        <!-- Body -->
-        <div class="modal-body p-sm-5">
-          <div class="text-center">
-            <div class="w-75 w-sm-50 mx-auto mb-4">
-              <img class="img-fluid" src="./assets/svg/illustrations/oc-collaboration.svg" alt="Image Description" data-hs-theme-appearance="default">
-              <img class="img-fluid" src="./assets/svg/illustrations-light/oc-collaboration.svg" alt="Image Description" data-hs-theme-appearance="dark">
-            </div>
-
-            <h4 class="h1">Welcome to Front</h4>
-
-            <p>We're happy to see you in our community.</p>
-          </div>
-        </div>
-        <!-- End Body -->
-
-        <!-- Footer -->
-        <div class="modal-footer d-block text-center py-sm-5">
-          <small class="text-cap text-muted">Trusted by the world's best teams</small>
-
-          <div class="w-85 mx-auto">
-            <div class="row justify-content-between">
-              <div class="col">
-                <img class="img-fluid" src="./assets/svg/brands/gitlab-gray.svg" alt="Image Description">
-              </div>
-              <div class="col">
-                <img class="img-fluid" src="./assets/svg/brands/fitbit-gray.svg" alt="Image Description">
-              </div>
-              <div class="col">
-                <img class="img-fluid" src="./assets/svg/brands/flow-xo-gray.svg" alt="Image Description">
-              </div>
-              <div class="col">
-                <img class="img-fluid" src="./assets/svg/brands/layar-gray.svg" alt="Image Description">
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Footer -->
-      </div>
-    </div>
-  </div>
-
-  <!-- End Welcome Message Modal -->
-
-
-
-
-
-
-
-
-
   <!-- JS Global Compulsory  -->
   <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="./assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
@@ -328,35 +274,6 @@ if(isset($_POST["sbtn"]))
 
   <!-- JS Plugins Init. -->
   <script>
-    (function() {
-      window.onload = function () {
-        // INITIALIZATION OF BOOTSTRAP VALIDATION
-        // =======================================================
-        HSBsValidation.init('.js-validate', {
-          onSubmit: data => {
-            data.event.preventDefault()
-            alert('Submited')
-          }
-        })
-
-
-        // INITIALIZATION OF TOGGLE PASSWORD
-        // =======================================================
-        new HSTogglePassword('.js-toggle-password')
-      }
-    })();
-<?php
-
-if(flag==2)
-{
-    echo "$(window).load(function() {
-   
-        $('#welcomeMessageModal').modal('show');
-         
-        });
-        ";
-}
-?>
     
 
   </script>

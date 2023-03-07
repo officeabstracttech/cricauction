@@ -138,7 +138,7 @@
     <!-- Content -->
     <div class="container py-5 py-sm-7">
       <a class="d-flex justify-content-center mb-5" href="./landing.php">
-        <img class="zi-2" src="./assets/cricauctionlogo.png.png" alt="Image Description" style="width: 8rem;">
+        <img class="zi-2" src="./assets/cricauctionlogo.png" alt="Image Description" style="width: 8rem;">
       </a>
 
       <div class="mx-auto" style="max-width: 30rem;">
@@ -146,9 +146,8 @@
         <div class="card card-lg mb-5">
           <div class="card-body text-center">
             <div class="mb-4">
-              <img class="avatar avatar-xxl avatar-4x3" src="./assets/AbstractPNG.png" alt="Image Description" data-hs-theme-appearance="default">
-              <img class="avatar avatar-xxl avatar-4x3" src="./assets/svg/illustrations-light/oc-email-verification.svg" alt="Image Description" data-hs-theme-appearance="dark">
-            </div>
+              <img class="avatar avatar-xxl avatar-4x3" src="./assets/abstracttech.png" alt="Image Description" data-hs-theme-appearance="default">
+              </div>
 
             <h1 class="display-5">Abstract Tech Solution</h1>
 

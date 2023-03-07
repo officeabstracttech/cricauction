@@ -2,10 +2,11 @@
 
 include("header.php");
 
-$result=mysqli_query($con,"select process from tournment_master where id=".$_SESSION["login_user"]."");
-$process=mysqli_fetch_row($result);
-$process=$process[0];
+$result=mysqli_query($con,"select * from team_master where id=".$_SESSION["login_user"]."");
+$TeamData=mysqli_fetch_row($result);
 
+$result=mysqli_query($con,"select * from tournment_master where id=".$TeamData[1]."");
+$TournmentData=mysqli_fetch_row($result);
 
 
 ?>
@@ -17,9 +18,12 @@ $process=$process[0];
       <!-- Page Header -->
       <div class="page-header">
         <div class="row align-items-end">
+                      
           <!-- End Col -->
-
-          <span ><h1>All Teams</h1></span>
+          <div class="col">
+            <h1 class="page-header-title"><?php echo $TournmentData[1];?> welcome's team # <?php echo $TeamData[2];?> #</h1>
+          </div>
+       
           
           <!-- End Col -->
         </div>
@@ -27,212 +31,97 @@ $process=$process[0];
       </div>
       <!-- End Page Header -->
 
-      <div class="row">
-      <?php  
-      $teamresult=mysqli_query($con,"select * from team_master where tournment_id=".$_SESSION["login_user"]."");
-   
-  $r=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
-  $d=mysqli_fetch_row($r);
-      while($team=mysqli_fetch_row($teamresult))
-      {
-        $maxpoint=$team[6]-(($d[4]-$team[7]-1)*$d[3]);
-       echo '
-       
-      <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
-       <!-- Card -->
-       <a class="card" data-bs-toggle="modal" data-bs-target="#TeamData'.$team[0].'" style="max-width: 20rem;">
-         <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,'.base64_encode($team[3]).'" alt="Card image cap">
-         <div class="card-body">
-           <h1 class="card-title">'.$team[2].'</h1>
-          <h3>Remaining Points <h3>'.$team[6].'</h3>
-          <h3>Player Max Points <h3>'.$maxpoint.'</h3>
-          <h3>Players Taken<h3>'.$team[7].'</h3>
-         </div>
-       </a>
-      <!-- End Card -->
-      </div>
-
-
-      <!-- Modal -->
-      <div class="modal fade" id="TeamData'.$team[0].'"  tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-          <div class="modal-content">
+<?php
+  $maxpoint=$TeamData[6]-(($TournmentData[4]-$TeamData[7]-1)*$TournmentData[3]);
+  echo '
+  
+ <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
+  <!-- Card -->
+  <div class="card" style="max-width: 20rem;">
+    <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,'.base64_encode($TeamData[3]).'" alt="Card image cap">
+    <div class="card-body">
+      <h1 class="card-title">'.$TeamData[2].'</h1>
+     <h3>Remaining Points <h3>'.$TeamData[6].'</h3>
+     
+     <h3>Player Max Points <h3>'.$maxpoint.'</h3>
+     <h3>Players Taken<h3>'.$TeamData[7].'</h3>
       
-            <div class="modal-header">
-              <h5 class="modal-title h4" id="myExtraLargeModalLabel">'.$team[2].'</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <!-- Card -->
-            <div class="card ">
-              <!-- Header -->
-              <div class="card-header card-header-content-md-between">
-                <div class="mb-2 mb-md-0">
-                  <form>
-                    <!-- Search -->
-                    <div class="input-group input-group-merge input-group-flush">
-                      <div class="input-group-prepend input-group-text">
-                        <i class="bi-search"></i>
-                      </div>
-                      <input id="datatableSearch" type="search" class="form-control" placeholder="Search users" aria-label="Search users">
-                    </div>
-                    <!-- End Search -->
-                  </form>
-                </div>
-          
-              </div>
-              <!-- End Header -->
-          
-              <!-- Table -->
-              <div class="table-responsive datatable-custom position-relative">
-                <table id="datatable" class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options=\'{
-                         "columnDefs": [{
-                            "targets": [0, 7],
-                            "orderable": false
-                          }],
-                         "order": [],
-                         "info": {
-                           "totalQty": "#datatableWithPaginationInfoTotalQty"
-                         },
-                         "search": "#datatableSearch",
-                         "entries": "#datatableEntries",
-                         "pageLength": 15,
-                         "isResponsive": false,
-                         "isShowPaging": false,
-                         "pagination": "datatablePagination"
-                       }\'>
-                  <thead class="thead-light">
-                    <tr>
-                      <th class="table-column-pe-0">
-                        
-                      </th>
-                      <th class="table-column-ps-0">Player Name</th>
-                      <th>Player Role</th>
-                      <th>Phone number</th>
-                      <th>Player DOB</th>
-                      <th>Sold Points</th>
-                      <th></th>
-                      <th></th>
-                    </tr>
-                  </thead>
-          
-                  <tbody>
-                    
-                      ';
-                      
-                      $result=mysqli_query($con,"
-                      SELECT player_name,player_role,phone_no,player_dob,sold_points from player_master inner join player_mapping_master on player_master.id=player_mapping_master.player_id and player_mapping_master.team_id=".$team[0]."");
-                      while($data=mysqli_fetch_row($result))
-                      {
-                        echo '
-                        <tr>
-                        <td class="table-column-pe-0">
-                          
-                        </td>
-                        <td class="table-column-ps-0">
-                          <div class="ms-3">
-                              <span class="d-block h5 text-inherit mb-0">'.$data[0].'</span>
-                          </div>  
-                        </td>
-                        <td>
-                          <span class="d-block h5 mb-0">'.$data[1].'</span>
-                          
-                        </td>
-                        <td>'.$data[2].'</td>
-                        <td>'.$data[3].'</td>
-                          <td>'.$data[4].'</td>
-                          <td></td>
-                          <td></td>
-                          ';
-                        
-                        
-                        echo ' </tr>';
-                      }
-          
-          
-                      echo '
-          
-              
-                  
-               
-                  </tbody>
-                </table>
-              </div>
-              <!-- End Table -->
-          
-              <!-- Footer -->
-              <div class="card-footer">
-                <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
-                  <div class="col-sm mb-2 mb-sm-0">
-                    <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
-                      <span class="me-2">Showing:</span>
-          
-                      <!-- Select -->
-                      <div class="tom-select-custom">
-                        <select id="datatableEntries" class="js-select form-select form-select-borderless w-auto" autocomplete="off" data-hs-tom-select-options=\'{
-                                  "searchInDropdown": false,
-                                  "hideSearch": true
-                                }\'>
-                          <option value="10">10</option>
-                          <option value="15" selected>15</option>
-                          <option value="20">20</option>
-                        </select>
-                      </div>
-                      <!-- End Select -->
-          
-                      <span class="text-secondary me-2">of</span>
-          
-                      <!-- Pagination Quantity -->
-                      <span id="datatableWithPaginationInfoTotalQty"></span>
-                    </div>
-                  </div>
-                  <!-- End Col -->
-          
-                  <div class="col-sm-auto">
-                    <div class="d-flex justify-content-center justify-content-sm-end">
-                      <!-- Pagination -->
-                      <nav id="datatablePagination" aria-label="Activity pagination"></nav>
-                    </div>
-                  </div>
-                  <!-- End Col -->
-                </div>
-                <!-- End Row -->
-              </div>
-              <!-- End Footer -->
-            </div>
-            <!-- End Card -->
+    </div>
+  </div>
+ <!-- End Card -->
+ </div>';
 
+?>
+
+      <br><br>
+      <span class="divider-center"><h1>Tournament Details</h1></span>
+      <br><br><br><br>
+      <h1> </h1>
+      <div class="row">    
+        
+      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+      <div class="card" style="max-width: 20rem;">
+            <div class="card-body">
+              <h1 class="card-title">Max Points</h1>
+              <h2><?php echo $TournmentData[2];?></h2>
 
             </div>
           </div>
-        </div>
-      </div>
-      <!-- End Modal -->
+        
+    </div>
+      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+      <div class="card" style="max-width: 20rem;">
+            <div class="card-body">
+              <h1 class="card-title">Base Points</h1>
+              <h2><?php echo $TournmentData[3];?></h2>
 
+            </div>
+          </div>
+        
+    </div>
+      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+      <div class="card" style="max-width: 20rem;">
+            <div class="card-body">
+              <h1 class="card-title">Total Players</h1>
+              <h2><?php $totalplayer=mysqli_query($con,"select count(player_id) from player_mapping_master where tournment_id=".$TournmentData[0]."");
+              $totalplayer=mysqli_fetch_row($totalplayer);
+              echo $totalplayer[0];
+              
+              ?></h2>
 
+            </div>
+          </div>
+        
+    </div>
+      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+      <div class="card" style="max-width: 20rem;">
+            <div class="card-body">
+              <h1 class="card-title">Total Teams</h1>
+              <?php  $count=mysqli_query($con,"select count(id) from team_master where tournment_id=".$TournmentData[0]."");
+              $count=mysqli_fetch_row($count);
+              echo '
+              <h2>'.$count[0].'</h2>';
+              ?>
 
-
-
-
-
-      ';  
-      }
+            </div>
+          </div>
+        
+    </div>
       
-      ?>
-     
-
       </div>
 
 
 
 
+      <br><br>
+      <span class="divider-center"><h1>Players Details</h1></span>
+      
 
 <?php
-if($process==3)
-{
+
   echo '
   <!-- Card -->
-  <div class="card">
+  <div class="card ">
     <!-- Header -->
     <div class="card-header card-header-content-md-between">
       <div class="mb-2 mb-md-0">
@@ -277,10 +166,10 @@ if($process==3)
             <th class="table-column-ps-0">Player Name</th>
             <th>Player Role</th>
             <th>Phone number</th>
+            <th>Player DOB</th>
+            <th>Sold Points</th>
             <th></th>
             <th></th>
-            <th></th>
-            <th>Action</th>
           </tr>
         </thead>
 
@@ -288,7 +177,8 @@ if($process==3)
           
             ';
             
-            $result=mysqli_query($con,"select * from player_master");
+            $result=mysqli_query($con,"
+            SELECT player_name,player_role,phone_no,player_dob,sold_points from player_master inner join player_mapping_master on player_master.id=player_mapping_master.player_id and player_mapping_master.team_id=".$_SESSION["login_user"]."");
             while($data=mysqli_fetch_row($result))
             {
               echo '
@@ -298,48 +188,22 @@ if($process==3)
               </td>
               <td class="table-column-ps-0">
                 <div class="ms-3">
-                    <span class="d-block h5 text-inherit mb-0">'.$data[1].'</span>
+                    <span class="d-block h5 text-inherit mb-0">'.$data[0].'</span>
                 </div>  
               </td>
               <td>
-                <span class="d-block h5 mb-0">'.$data[2].'</span>
+                <span class="d-block h5 mb-0">'.$data[1].'</span>
                 
               </td>
-              <td>'.$data[6].'</td>
-              <td>
-              </td>
-              <td>
-              </td>
-              <td></td>
-              <td>
-              ';
-              $mappingpointer=mysqli_query($con,"select * from player_mapping_master where player_id=".$data[0]." and tournment_id=".$_SESSION["login_user"]."");
-              if(mysqli_num_rows($mappingpointer)>0)
-              {
-                $mappingrow=mysqli_fetch_row($mappingpointer);
-                if($mappingrow[6]==0){
-                  
-              echo  ' <a type="button" href="startpage.php?addplayer='.$mappingrow[0].'" class="btn btn-outline-success btn-sm">
-              Add Player
-           </a>';
-                }
-                else if($mappingrow[6]==1)
-                {
-              echo  ' <a type="button" href="startpage.php?removeplayer='.$mappingrow[0].'" class="btn btn-outline-danger btn-sm">
-              Remove Player
-           </a>'; 
-                }
-              }
-              else
-              {
-                echo  ' <a type="button" href="startpage.php?addnewplayer='.$data[0].'" class="btn btn-outline-success btn-sm">
-                Add Player
-             </a>';
-              }
-              echo '  </td>
-            </tr>
-  
-              ';
+              <td>'.$data[2].'</td>
+              <td>'.$data[3].'</td>
+                <td>'.$data[4].'</td>
+                <td></td>
+                <td></td>
+                ';
+              
+              
+              echo ' </tr>';
             }
 
 
@@ -393,8 +257,8 @@ if($process==3)
     </div>
     <!-- End Footer -->
   </div>
-  <!-- End Card -->';
-}
+  <!-- End Card -->
+';
 
 ?>
 
@@ -404,16 +268,6 @@ if($process==3)
     </div>
     <!-- End Content -->
 
-
-
-
-
-
-
-
-
-
-    
     <!-- Footer -->
 
     <div class="footer">

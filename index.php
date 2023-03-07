@@ -1,6 +1,9 @@
 <?php
 include("header.php");
-
+if($_SESSION["login_role"]!=1)
+{
+  echo "<script>windows.location.href='logout.php';</script>";
+}
 ?>
   <main id="content" role="main" class="main">
     <!-- Content -->
@@ -22,18 +25,20 @@ include("header.php");
       <!-- Stats -->
       <div class="row">
         
-      <div class="col-sm-6 col-lg-6 mb-3 mb-lg-5">
+                <?php
+                if($process>=2 && $_SESSION["login_role"]==1)
+                {
+                echo '<div class="col-sm-6 col-lg-6 mb-3 mb-lg-5">
 
-            <!-- Card -->
-            <a href="live.php" class="card"  style="max-width: 20rem;">
-              <img class="card-img-top" src="./assets/gif/liveauction.gif" alt="Card image cap">
-              <div class="card-body">
-                <?php 
+                <!-- Card -->
+                <a href="live.php" class="card"  style="max-width: 20rem;">
+                  <img class="card-img-top" src="./assets/gif/liveauction.gif" alt="Card image cap">
+                  <div class="card-body">
+          '; 
                 $result=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
                 $data=mysqli_fetch_row($result);
                 echo '
-                <h3 class="card-title">'.$data[1].'</h3>';
-                ?>
+                <h3 class="card-title">'.$data[1].'</h3>
                 <p class="card-text">Go to  Auction...</p>
                 <p class="card-text">
                   <small class="text-muted">cricauction is live.</small>
@@ -42,6 +47,10 @@ include("header.php");
             </a>
             <!-- End Card -->
       </div>
+                ';
+            }
+                ?>
+          
       <br><br>
       <span class="divider-center"><h1>Tournament Details</h1></span>
       <br><br><br><br>
@@ -98,15 +107,22 @@ include("header.php");
     </div>
       
       </div>
-          <br><br>
-      <span class="divider-center"><h1>All Teams</h1></span>
-      <h1> <br><br></h1>
-      <div class="row">
-        
-      <?php  
+      <?php 
+    if($process>=3 && $_SESSION["login_role"]==1)
+    {  
+      echo '
+      <br><br>
+  <span class="divider-center"><h1>All Teams</h1></span>
+  <h1> <br><br></h1>
+  <div class="row">
+    ';
       $teamresult=mysqli_query($con,"select * from team_master where tournment_id=".$_SESSION["login_user"]."");
+      
+  $r=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
+  $d=mysqli_fetch_row($r);
       while($team=mysqli_fetch_row($teamresult))
       {
+  $maxpoint=$team[6]-(($d[4]-$team[7]-1)*$d[3]);
        echo '
        
       <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
@@ -115,7 +131,9 @@ include("header.php");
          <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,'.base64_encode($team[3]).'" alt="Card image cap">
          <div class="card-body">
            <h1 class="card-title">'.$team[2].'</h1>
-          <h3>Remaining Points <h3>'.$team[6].'</h3></h3>
+          <h3>Remaining Points <h3>'.$team[6].'</h3>
+          
+          <h3>Player Max Points <h3>'.$maxpoint.'</h3>
           <h3>Players Taken<h3>'.$team[7].'</h3>
            
          </div>
@@ -124,12 +142,13 @@ include("header.php");
       </div>
       ';  
       }
-      
-      ?>
-      </div>
+      echo ' </div>
       </div>
       <!-- End Stats -->
-
+';
+    } 
+      ?>
+     
     </div>
     <!-- End Content -->
 
