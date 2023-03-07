@@ -1,6 +1,9 @@
 <?php
 include("header.php");
-
+if($_SESSION["login_role"]!=1)
+{
+  echo "<script>windows.location.href='logout.php';</script>";
+}
 ?>
   <main id="content" role="main" class="main">
     <!-- Content -->

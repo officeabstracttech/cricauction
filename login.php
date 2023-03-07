@@ -1,6 +1,5 @@
 <?php
 
-$flag=1;
 if(isset($_POST["sbtn"]))
 {
 
@@ -18,7 +17,18 @@ if(isset($_POST["sbtn"]))
     }
     else
     {
-        $flag=2;
+      $result=mysqli_query($con,"select id from team_master where phone_no='".$_POST["phone_no"]."' and pass='".$_POST["pwd"]."' and status=1");
+    if(mysqli_num_rows($result) >0){
+
+      $data=mysqli_fetch_row($result);
+      $_SESSION["login_user"]=$data[0];
+      $_SESSION["login_role"]='2';
+      header("location:reviewteam.php");
+    }
+    else
+    {
+
+    }
     }
 
 }
