@@ -36,6 +36,9 @@ $process=$process[0];
       while($team=mysqli_fetch_row($teamresult))
       {
         $maxpoint=$team[6]-(($d[4]-$team[7]-1)*$d[3]);
+
+        $playercounter=mysqli_query($con,"SELECT count(player_mapping_master.id) from player_mapping_master left join player_master on player_mapping_master.player_id=player_master.id where team_id=".$team[0]." and player_age>=37");
+        $playercounter=mysqli_fetch_row($playercounter);
        echo '
        
       <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
@@ -44,9 +47,10 @@ $process=$process[0];
          <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,'.base64_encode($team[3]).'" alt="Card image cap">
          <div class="card-body">
            <h1 class="card-title">'.$team[2].'</h1>
-          <h3>Remaining Points <h3>'.$team[6].'</h3>
-          <h3>Player Max Points <h3>'.$maxpoint.'</h3>
-          <h3>Players Taken<h3>'.$team[7].'</h3>
+          <h3>Remaining Points: <span style="font-size:24px;"> '.$team[6].'</span></h3>
+          <h3>Player Max Points: <span style="font-size:24px;"> '.$maxpoint.'</span></h3>
+          <h3>Players Taken : <span style="font-size:24px;">'.$team[7].'</span></h3>
+          <h3>Players Taken Age +37 : <span style="font-size:24px;">'.$playercounter[0].'</span></h3>
          </div>
        </a>
       <!-- End Card -->

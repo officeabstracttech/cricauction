@@ -1,4 +1,14 @@
 <?php
+        function ageCalculator($dob){
+          if(!empty($dob)){
+              $birthdate = new DateTime($dob);
+              $today   = new DateTime('today');
+              $age = $birthdate->diff($today)->y;
+              return $age;
+          }else{
+              return 0;
+          }
+        }
 
 if(isset($_POST["sub_btn"]))
 {
@@ -21,8 +31,10 @@ if(isset($_POST["sub_btn"]))
         $image = $_FILES['player_logo']['tmp_name']; 
         $imgContent = addslashes(file_get_contents($image)); 
      
+        
+
         // Insert image content into database 
-        $insert = mysqli_query($con,"insert into player_master(player_name,player_role,player_dob,player_jersy_size,player_jersy_no,phone_no,pass,additional_layout,status) values('".$_POST['player_name']."','".$_POST['player_role']."','".$_POST['player_dob']."','".$_POST['player_jersy_size']."',".$_POST['player_jersy_no'].",'".$_POST['phone_no']."','".$_POST['pass']."','".$imgContent."','1')");
+        $insert = mysqli_query($con,"insert into player_master(player_name,player_role,player_dob,player_jersy_size,player_jersy_no,phone_no,pass,additional_layout,status,player_age) values('".$_POST['player_name']."','".$_POST['player_role']."','".$_POST['player_dob']."','".$_POST['player_jersy_size']."',".$_POST['player_jersy_no'].",'".$_POST['phone_no']."','".$_POST['pass']."','".$imgContent."','1',".ageCalculator($_POST["player_dob"]).")");
 
         if($insert){ 
           echo "<script>alert('Player registered Successfully');window.location.href='login.php'; </script>";

@@ -99,6 +99,10 @@ if(mysqli_num_rows($result)>0){
   mysqli_query($con,"insert into auction_traker(tournment_id,total_player,current_player_count,process) values(".$_SESSION["login_user"].",".$count[0].",1,2)");
   mysqli_query($con,"update into player_mapping_master set sold_status=0 where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1 and sold_status=2");
   $counter=1; 
+  if($count[0]==1)
+  {
+    $final=1;
+  }
   
 }
 

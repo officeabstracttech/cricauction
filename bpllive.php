@@ -81,7 +81,7 @@ mysqli_query($con,"update player_mapping_master set  sold_status=2, sold_points=
 }
 
 
-$result=mysqli_query($con,"select * from auction_traker where tournment_id=".$_SESSION["login_user"]."");
+$result=mysqli_query($con,"select * from auction_traker where tournment_id=".$_SESSION["login_user"]." and process=1");
 $counter=0;
 $final=0;
 if(mysqli_num_rows($result)>0){
@@ -94,15 +94,18 @@ if(mysqli_num_rows($result)>0){
  }
  else
 {
-  $count=mysqli_query($con,"select count(id) from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1");
+  $count=mysqli_query($con,"select count(player_mapping_master.id) from player_mapping_master left join player_master on player_mapping_master.player_id=player_master.id where player_master.player_age<37 and player_mapping_master.tournment_id=".$_SESSION["login_user"]." and enrolled_status=1; ");
   $count=mysqli_fetch_row($count);
   mysqli_query($con,"insert into auction_traker(tournment_id,total_player,current_player_count,process) values(".$_SESSION["login_user"].",".$count[0].",1,1)");
   $counter=1; 
-  
+  if($count[0]==1)
+  {
+    $final=1;
+  }
 }
 
 $i=1;
-$mappingresult=mysqli_query($con,"select * from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1 ");
+$mappingresult=mysqli_query($con,"select player_mapping_master.id,player_mapping_master.player_id,player_mapping_master.team_id,player_mapping_master.tournment_id,sold_status,sold_points,player_mapping_master.enrolled_status from player_mapping_master left join player_master on player_mapping_master.player_id=player_master.id where player_master.player_age<37 and player_mapping_master.tournment_id=".$_SESSION["login_user"]." and enrolled_status=1; ");
 $mappingdata=0;
 while($mappingdata=mysqli_fetch_row($mappingresult) )
 {
