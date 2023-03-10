@@ -291,10 +291,10 @@ $tournmentDetail=mysqli_fetch_row($tournmentDetail);
 
         
         <li class="nav-item d-none d-sm-inline-block">
-          <a class="btn btn-primary" href="bpllive.php?back=1">Back</a>
+          <a class="btn btn-primary" href="bplliveunsold.php?back=1">Back</a>
           </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a class="btn btn-outline-warning" href="bpllive.php?edit=1&id=<?php echo $mappingdata[0];?>">Edit</a>
+          <a class="btn btn-outline-warning" href="bplliveunsold.php?edit=1&id=<?php echo $mappingdata[0];?>">Edit</a>
 
           </li>
          
@@ -309,7 +309,7 @@ $tournmentDetail=mysqli_fetch_row($tournmentDetail);
         {
           
           echo '<li class="nav-item">
-          <a class="btn btn-primary" href="bpllive.php?next=1">Next Player</a>
+          <a class="btn btn-primary" href="bplliveunsold.php?next=1">Next Player</a>
              </li>';
         }
         ?>
@@ -449,7 +449,7 @@ while($temp=mysqli_fetch_row($resultteam))
         <div class="card ">
           <div class="card-body">
           <span class="d-block "><h1>BID CONTROLES</h1></span>
-          <form action="bpllive.php" method="post" onsubmit="this.querySelectorAll(\'input\').forEach(i => i.disabled = false)">
+          <form action="bplliveunsold.php" method="post" onsubmit="this.querySelectorAll(\'input\').forEach(i => i.disabled = false)">
             <div class="mb-3 ">
               <label class="form-label" for="exampleFormControlTitleInput2">BIDING TEAM</label>
               <input type="text" id="biding_team_name" name="biding_team_name" class="form-control form-control-light" placeholder="selected team" disabled>
