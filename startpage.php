@@ -4,12 +4,12 @@ include("header.php");
 
 if(isset($_GET["addnewplayer"]))
 {
-  mysqli_query($con,"insert into player_mapping_master(player_id,tournment_id,enrolled_status) values(".$_GET["addnewplayer"].",".$_SESSION["login_user"].",1);");
+  mysqli_query($con,"insert into player_mapping_master(player_id,tournment_id,enrolled_status,sold_status) values(".$_GET["addnewplayer"].",".$_SESSION["login_user"].",1,0);");
   echo "<script>window.location.href='startpage.php';</script>";
 }
 else if(isset($_GET["addplayer"]))
 {
-mysqli_query($con,"update player_mapping_master set tournment_id=".$_SESSION["login_user"].",enrolled_status=1 where id=".$_GET["addplayer"]."");
+mysqli_query($con,"update player_mapping_master set tournment_id=".$_SESSION["login_user"].",enrolled_status=1, sold_status=0 where id=".$_GET["addplayer"]."");
 echo "<script>window.location.href='startpage.php';</script>";
 }
 else if(isset($_GET["removeplayer"]))

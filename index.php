@@ -28,10 +28,10 @@ if($_SESSION["login_role"]!=1)
                 <?php
                 if($process>=2 && $_SESSION["login_role"]==1)
                 {
-                echo '<div class="col-sm-6 col-lg-6 mb-3 mb-lg-5">
+                echo '<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
 
                 <!-- Card -->
-                <a href="live.php" class="card"  style="max-width: 20rem;">
+                <a href="bpllive.php" class="card"  style="max-width: 20rem;">
                   <img class="card-img-top" src="./assets/gif/liveauction.gif" alt="Card image cap">
                   <div class="card-body">
           '; 
@@ -40,6 +40,48 @@ if($_SESSION["login_role"]!=1)
                 echo '
                 <h3 class="card-title">'.$data[1].'</h3>
                 <p class="card-text">Go to  Auction...</p>
+                <p class="card-text">
+                  <small class="text-muted">cricauction is live.</small>
+                </p>
+              </div>
+            </a>
+            <!-- End Card -->
+      </div>
+                ';
+                
+                echo '<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+
+                <!-- Card -->
+                <a href="bpllive37plus.php" class="card"  style="max-width: 20rem;">
+                  <img class="card-img-top" src="./assets/gif/liveauction.gif" alt="Card image cap">
+                  <div class="card-body">
+          '; 
+                $result=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
+                $data=mysqli_fetch_row($result);
+                echo '
+                <h3 class="card-title">'.$data[1].' 37+</h3>
+                <p class="card-text">Go to 37+ Auction...</p>
+                <p class="card-text">
+                  <small class="text-muted">cricauction is live.</small>
+                </p>
+              </div>
+            </a>
+            <!-- End Card -->
+      </div>
+                ';
+                
+                echo '<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+
+                <!-- Card -->
+                <a href="bplliveunsold.php" class="card"  style="max-width: 20rem;">
+                  <img class="card-img-top" src="./assets/gif/liveauction.gif" alt="Card image cap">
+                  <div class="card-body">
+          '; 
+                $result=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
+                $data=mysqli_fetch_row($result);
+                echo '
+                <h3 class="card-title">'.$data[1].' Unsold Auction</h3>
+                <p class="card-text">Go to Unsold Auction...</p>
                 <p class="card-text">
                   <small class="text-muted">cricauction is live.</small>
                 </p>

@@ -38,7 +38,7 @@ $process=$process[0];
         $maxpoint=$team[6]-(($d[4]-$team[7]-1)*$d[3]);
        echo '
        
-      <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
+      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
        <!-- Card -->
        <a class="card" data-bs-toggle="modal" data-bs-target="#TeamData'.$team[0].'" style="max-width: 20rem;">
          <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,'.base64_encode($team[3]).'" alt="Card image cap">
@@ -412,41 +412,16 @@ if($process==3)
 
 
 
-
     
     <!-- Footer -->
 
     <div class="footer">
       <div class="row justify-content-between align-items-center">
         <div class="col">
-          <p class="fs-6 mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2022 Htmlstream.</span></p>
+          <p class="fs-6 mb-0">&copy; Cricauction </p>
         </div>
         <!-- End Col -->
 
-        <div class="col-auto">
-          <div class="d-flex justify-content-end">
-            <!-- List Separator -->
-            <ul class="list-inline list-separator">
-              <li class="list-inline-item">
-                <a class="list-separator-link" href="#">FAQ</a>
-              </li>
-
-              <li class="list-inline-item">
-                <a class="list-separator-link" href="#">License</a>
-              </li>
-
-              <li class="list-inline-item">
-                <!-- Keyboard Shortcuts Toggle -->
-                <button class="btn btn-ghost-secondary btn btn-icon btn-ghost-secondary rounded-circle" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasKeyboardShortcuts" aria-controls="offcanvasKeyboardShortcuts">
-                  <i class="bi-command"></i>
-                </button>
-                <!-- End Keyboard Shortcuts Toggle -->
-              </li>
-            </ul>
-            <!-- End List Separator -->
-          </div>
-        </div>
-        <!-- End Col -->
       </div>
       <!-- End Row -->
     </div>
