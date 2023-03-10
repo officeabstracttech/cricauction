@@ -50,63 +50,76 @@ if($_SESSION["login_role"]!=1)
                 ';
             }
                 ?>
-          
-      <br><br>
-      <span class="divider-center"><h1>Tournament Details</h1></span>
-      <br><br><br><br>
-      <h1> </h1>
-      <div class="row">    
-        
-      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
-      <div class="card" style="max-width: 20rem;">
-            <div class="card-body">
-              <h1 class="card-title">Max Points</h1>
-              <h2><?php echo $data[2];?></h2>
+    
+    
+<?php
+if($process>1)
+{
+echo '
+<br><br>
+<span class="divider-center"><h1>Tournament Details</h1></span>
+<br><br><br><br>
+<h1> </h1>
+<div class="row">    
+  
+<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+<div class="card" style="max-width: 20rem;">
+      <div class="card-body">
+        <h1 class="card-title">Max Points</h1>
+        <h2>'.$data[2].'</h2>
 
-            </div>
-          </div>
-        
-    </div>
-      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
-      <div class="card" style="max-width: 20rem;">
-            <div class="card-body">
-              <h1 class="card-title">Base Points</h1>
-              <h2><?php echo $data[3];?></h2>
-
-            </div>
-          </div>
-        
-    </div>
-      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
-      <div class="card" style="max-width: 20rem;">
-            <div class="card-body">
-              <h1 class="card-title">Total Players</h1>
-              <h2><?php $totalplayer=mysqli_query($con,"select count(player_id) from player_mapping_master where tournment_id=".$_SESSION["login_user"]."");
-              $totalplayer=mysqli_fetch_row($totalplayer);
-              echo $totalplayer[0];
-              
-              ?></h2>
-
-            </div>
-          </div>
-        
-    </div>
-      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
-      <div class="card" style="max-width: 20rem;">
-            <div class="card-body">
-              <h1 class="card-title">Total Teams</h1>
-              <?php  $count=mysqli_query($con,"select count(id) from team_master where tournment_id=".$_SESSION["login_user"]."");
-              $count=mysqli_fetch_row($count);
-              echo '
-              <h2>'.$count[0].'</h2>';
-              ?>
-
-            </div>
-          </div>
-        
-    </div>
-      
       </div>
+    </div>
+  
+</div>
+<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+<div class="card" style="max-width: 20rem;">
+      <div class="card-body">
+        <h1 class="card-title">Base Points</h1>
+        <h2>'.$data[3].'</h2>
+
+      </div>
+    </div>
+  
+</div>
+<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+<div class="card" style="max-width: 20rem;">
+      <div class="card-body">
+        <h1 class="card-title">Total Players</h1>
+        <h2>';
+        $totalplayer=mysqli_query($con,"select count(player_id) from player_mapping_master where tournment_id=".$_SESSION["login_user"]."");
+        $totalplayer=mysqli_fetch_row($totalplayer);
+        echo $totalplayer[0];
+        
+        echo '</h2>
+
+      </div>
+    </div>
+  
+</div>
+<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+<div class="card" style="max-width: 20rem;">
+      <div class="card-body">
+        <h1 class="card-title">Total Teams</h1>';
+          $count=mysqli_query($con,"select count(id) from team_master where tournment_id=".$_SESSION["login_user"]."");
+        $count=mysqli_fetch_row($count);
+        echo '
+        <h2>'.$count[0].'</h2>';
+        
+            echo '
+      </div>
+    </div>
+  
+</div>
+
+</div>';
+          }
+
+?>
+
+
+
+
       <?php 
     if($process>=3 && $_SESSION["login_role"]==1)
     {  

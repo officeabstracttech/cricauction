@@ -22,7 +22,7 @@ if(isset($_POST["sub_btn"]))
         $imgContent = addslashes(file_get_contents($image)); 
      
         // Insert image content into database 
-        $insert = mysqli_query($con,"insert into player_master(player_name,player_role,player_dob,player_jersy_size,player_jersy_no,phone_no,pass,player_logo,status) values('".$_POST['player_name']."','".$_POST['player_role']."','".$_POST['player_dob']."','".$_POST['player_jersy_size']."',".$_POST['player_jersy_no'].",'".$_POST['phone_no']."','".$_POST['pass']."','".$imgContent."','1')");
+        $insert = mysqli_query($con,"insert into player_master(player_name,player_role,player_dob,player_jersy_size,player_jersy_no,phone_no,pass,additional_layout,status) values('".$_POST['player_name']."','".$_POST['player_role']."','".$_POST['player_dob']."','".$_POST['player_jersy_size']."',".$_POST['player_jersy_no'].",'".$_POST['phone_no']."','".$_POST['pass']."','".$imgContent."','1')");
 
         if($insert){ 
           echo "<script>alert('Player registered Successfully');window.location.href='login.php'; </script>";

@@ -1,3 +1,132 @@
+<?php
+include("config.php");
+
+if(!isset($_SESSION["login_user"]))
+{
+  header("location:landing.php");
+}
+if(isset($_GET["back"]) && $_GET["back"]==1)
+{
+  $currentcounter=mysqli_query($con,"select current_player_count from auction_traker where tournment_id=".$_SESSION["login_user"]."");
+  $currentcounter=mysqli_fetch_row($currentcounter);
+  $currentcounter=$currentcounter[0]-1;
+  if($currentcounter!=0)
+  {
+
+    mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]."");
+  }
+//  header("location:live.php");  
+  
+}
+if(isset($_GET["edit"]) && $_GET["edit"]==1)
+  {
+  $editresult=mysqli_query($con,"select * from player_mapping_master where id=".$_GET["id"]."");
+  $editresult=mysqli_fetch_row($editresult);
+  if($editresult[4]==1)
+  {
+      $teamresult=mysqli_query($con,"select * from team_master where id=".$editresult[2]."");
+      $teamresult=mysqli_fetch_row($teamresult);
+      $updatedplayer=$teamresult[7]-1;
+      $updatedpoints=$teamresult[6]+$editresult[5];
+      mysqli_query($con,"update team_master set team_points=".$updatedpoints.", players_taken=".$updatedplayer." where id=".$teamresult[0]."");
+    mysqli_query($con,"update player_mapping_master set sold_status=0,sold_points=0, team_id=0 where id=".$editresult[0]."");
+ //   header("location:live.php");  
+  
+  }
+  else if($editresult[4]==2)
+  {
+    mysqli_query($con,"update player_mapping_master set sold_status=0 where id=".$_GET["id"]."");
+//    header("location:live.php");
+  }
+
+}
+
+if(isset($_GET["next"]) && $_GET["next"]==1)
+{
+  $currentcounter=mysqli_query($con,"select current_player_count from auction_traker where tournment_id=".$_SESSION["login_user"]."");
+  $currentcounter=mysqli_fetch_row($currentcounter);
+  $currentcounter=$currentcounter[0]+1;
+  mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]."");
+//  header("location:live.php");
+}
+
+
+$soldflag=0;
+if(isset($_POST["sold_btn"]))
+{
+  $maxplayer=mysqli_query($con,"select max_player from tournment_master where id=".$_SESSION["login_user"]."");
+  $teamplayertaken=mysqli_query($con,"select players_taken from team_master where id=".$_POST["biding_team_id"]."");
+  $maxplayer=mysqli_fetch_row($maxplayer);
+  $teamplayertaken=mysqli_fetch_row($teamplayertaken);
+  if($maxplayer[0]==$teamplayertaken[0])
+  {
+    echo "<script>alert('Alert.. Team has taken ".$maxplayer[0]." players. There Team is Ready.');</script>";
+  }
+  else
+  {
+mysqli_query($con,"update player_mapping_master set team_id=".$_POST["biding_team_id"].", sold_status=1,sold_points=".$_POST["biding_team_points"]." where player_id=".$_POST["biding_player_id"]." and tournment_id=".$_SESSION["login_user"]."");
+$teamresult=mysqli_query($con,"select team_points,players_taken from team_master where id=".$_POST["biding_team_id"]."");
+$teamdata=mysqli_fetch_row($teamresult);
+$newteampoints=$teamdata[0]-$_POST["biding_team_points"];
+$newplayertaken=$teamdata[1]+1;
+mysqli_query($con,"update team_master set team_points=".$newteampoints.", players_taken=".$newplayertaken." where id=".$_POST["biding_team_id"]." and tournment_id=".$_SESSION["login_user"]."");
+$soldflag=1;
+  }
+}
+if(isset($_POST["unsold_btn"]))
+{
+ 
+mysqli_query($con,"update player_mapping_master set  sold_status=2, sold_points=0 where player_id=".$_POST["biding_player_id"]." and tournment_id=".$_SESSION["login_user"]."");
+ $soldflag=2;
+}
+
+
+$result=mysqli_query($con,"select * from auction_traker where tournment_id=".$_SESSION["login_user"]."");
+$counter=0;
+$final=0;
+if(mysqli_num_rows($result)>0){
+      $auctiondata=mysqli_fetch_row($result);
+      $counter=$auctiondata[3];
+      if($auctiondata[2]==$counter)
+      {
+        $final=1;
+      }
+ }
+ else
+{
+  $count=mysqli_query($con,"select count(id) from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1");
+  $count=mysqli_fetch_row($count);
+  mysqli_query($con,"insert into auction_traker(tournment_id,total_player,current_player_count,process) values(".$_SESSION["login_user"].",".$count[0].",1,1)");
+  $counter=1; 
+  
+}
+
+$i=1;
+$mappingresult=mysqli_query($con,"select * from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1 ");
+$mappingdata=0;
+while($mappingdata=mysqli_fetch_row($mappingresult) )
+{
+  if($i==$counter)
+  {
+    break;
+  }
+  $i=$i+1;
+}
+
+if($mappingdata[4]==1)
+{
+  $soldflag=1;
+}
+else if($mappingdata[4]==2)
+{
+$soldflag=2;
+}
+
+$tournmentDetail=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
+$tournmentDetail=mysqli_fetch_row($tournmentDetail);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +135,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Title -->
-  <title>live</title>
+  <title>Cric Live</title>
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="./favicon.ico">
@@ -16,7 +145,9 @@
 
   <!-- CSS Implementing Plugins -->
   <link rel="stylesheet" href="./assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="./assets/vendor/hs-mega-menu/dist/hs-mega-menu.min.css">
+
+  <link rel="stylesheet" href="./assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
+  <link rel="stylesheet" href="./assets/vendor/daterangepicker/daterangepicker.css">
 
   <!-- CSS Front Template -->
 
@@ -120,188 +251,380 @@
             </script>
 </head>
 
-<body>
+<body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl   footer-offset">
 
   <script src="./assets/js/hs.theme-appearance.js"></script>
 
+  <script src="./assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js"></script>
+
   <!-- ========== HEADER ========== -->
-  <header id="header" class="navbar navbar-expand-lg navbar-bordered navbar-spacer-y-0 flex-lg-column">
-    <div class="navbar-dark w-100 bg-dark py-2">
-      <div class="container">
-        <div class="navbar-nav-wrap">
-          <!-- Logo -->
-          <a class="navbar-brand" href="./index.php" aria-label="Front">
-            <img class="navbar-brand-logo" src="./assets/cricauctionlogo.png.png" alt="Logo">
-          </a>
-          <!-- End Logo -->
 
-          <!-- Content Start -->
-          <div class="navbar-nav-wrap-content-start">
-          <div class="input-group mb-1">
-  <input type="text" class="form-control" placeholder="teamname" aria-label="teamname" aria-describedby="basic-addon1">
-</div>
-            <!-- Quantity -->
-<div class="quantity-counter">
-  <div class="js-quantity-counter row align-items-center">
-    <div class="col">
-      <span class="d-block small">Bid Amount</span>
-      <input class="js-result form-control form-control-quantity-counter" type="text" value="1">
-    </div>
-    <!-- End Col -->
-
-    <div class="col-auto">
-      <a class="js-minus btn btn-outline-secondary btn-xs btn-icon rounded-circle" href="javascript:;">
-        <svg width="8" height="2" viewBox="0 0 8 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 1C0 0.723858 0.223858 0.5 0.5 0.5H7.5C7.77614 0.5 8 0.723858 8 1C8 1.27614 7.77614 1.5 7.5 1.5H0.5C0.223858 1.5 0 1.27614 0 1Z" fill="currentColor"/>
-        </svg>
+  <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered bg-white">
+    <div class="navbar-nav-wrap">
+      <!-- Logo -->
+      <a class="navbar-brand" href="./index.html" aria-label="Front">
+        <img class="navbar-brand-logo" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="default">
+        <img class="navbar-brand-logo" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="dark">
       </a>
-      <a class="js-plus btn btn-outline-secondary btn-xs btn-icon rounded-circle" href="javascript:;">
-        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 0C4.27614 0 4.5 0.223858 4.5 0.5V3.5H7.5C7.77614 3.5 8 3.72386 8 4C8 4.27614 7.77614 4.5 7.5 4.5H4.5V7.5C4.5 7.77614 4.27614 8 4 8C3.72386 8 3.5 7.77614 3.5 7.5V4.5H0.5C0.223858 4.5 0 4.27614 0 4C0 3.72386 0.223858 3.5 0.5 3.5H3.5V0.5C3.5 0.223858 3.72386 0 4 0Z" fill="currentColor"/>
-        </svg>
-      </a>
-    </div>
-    
-    <!-- End Col -->
-    
-  </div>
-  
-  <!-- End Row -->
-</div>
+      <!-- End Logo -->
+
+      <div class="navbar-nav-wrap-content-start">
+        <!-- Navbar Vertical Toggle -->
+        <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
+          <i class="bi-arrow-bar-left navbar-toggler-short-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse"></i>
+          <i class="bi-arrow-bar-right navbar-toggler-full-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-bs-toggle="tooltip" data-bs-placement="right" title="Expand"></i>
+        </button>
 
 
-<!-- End Quantity -->
-            </div>
-          <!-- End Content Start -->
+        <!-- End Search Form -->
+      </div>
 
-          <!-- Content End -->
-          <div class="navbar-nav-wrap-content-end">
-            <!-- Navbar -->
-            <ul class="navbar-nav">
-              <li class="nav-item d-none d-md-inline-block">
-              <button type="button" class="btn btn-success">Sold</button>
 
-            </li>
+      <div class="navbar-nav-wrap-content-start">
+        <!-- Navbar -->
+        <ul class="navbar-nav">
+          <li class="nav-item d-none d-sm-inline-block">
+            
+          </li>
 
-              <li class="nav-item d-none d-sm-inline-block">
-              <button type="button" class="btn btn-danger">Unsold</button>
-   
-            </li>
 
-              <li class="nav-item d-none d-sm-inline-block">
-              <button type="button" class="btn btn-primary">Back</button>
+        
+        <li class="nav-item d-none d-sm-inline-block">
+          <a class="btn btn-primary" href="live.php?back=1">Back</a>
+          </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a class="btn btn-outline-warning" href="bpllive.php?edit=1&id=<?php echo $mappingdata[0];?>">Edit</a>
 
-              </li>
-              <li class="nav-item d-none d-sm-inline-block">
-              <button type="button" class="btn btn-primary">Edit</button>
+          </li>
+         
+        <?php
+        if($final==1)
+        {
+              echo '<li class="nav-item">
+              <a class="btn btn-danger" href="index.php">End Auction</a>
+                 </li>';
+        }
+        else
+        {
+          
+          echo '<li class="nav-item">
+          <a class="btn btn-primary" href="bpllive.php?next=1">Next Player</a>
+             </li>';
+        }
+        ?>
 
-              </li> <li class="nav-item d-none d-sm-inline-block">
-              <button type="button" class="btn btn-primary">Summery</button>
+          
+        </ul>
+        <!-- End Navbar -->
+      </div>
+      
+      <div class="navbar-nav-wrap-content-end">
+        <!-- Navbar -->
+        <ul class="navbar-nav">
+          <li class="nav-item d-none d-sm-inline-block">
+            
+          </li>
 
-              </li>
-              <li class="nav-item d-none d-sm-inline-block">
-              <button type="button" class="btn btn-secondary">Next Player</button>
-
-              </li>
-              <li class="nav-item">
-                <!-- Style Switcher -->
-                <div class="dropdown ">
-                  <button type="button" class="btn btn-ghost-light btn-icon rounded-circle" id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
-
-                  </button>
-
-                  <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="selectThemeDropdown">
-                    <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
-                      <i class="bi-moon-stars me-2"></i>
-                      <span class="text-truncate" title="Auto (system default)">Auto (system default)</span>
-                    </a>
-                    <a class="dropdown-item" href="#" data-icon="bi-brightness-high" data-value="default">
-                      <i class="bi-brightness-high me-2"></i>
-                      <span class="text-truncate" title="Default (light mode)">Default (light mode)</span>
-                    </a>
-                    <a class="dropdown-item active" href="#" data-icon="bi-moon" data-value="dark">
-                      <i class="bi-moon me-2"></i>
-                      <span class="text-truncate" title="Dark">Dark</span>
-                    </a>
-                  </div>
-                </div>
-
-                <!-- End Style Switcher -->
-              </li>
-
-              
-              <li class="nav-item">
-                <!-- Toggler -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDoubleLineContainerNavDropdown" aria-controls="navbarDoubleLineContainerNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-default">
-                    <i class="bi-list"></i>
-                  </span>
-                  <span class="navbar-toggler-toggled">
-                    <i class="bi-x"></i>
-                  </span>
-                </button>
-                <!-- End Toggler -->
-              </li>
-            </ul>
-            <!-- End Navbar -->
-          </div>
-          <!-- End Content End -->
-        </div>
+          <li class="nav-item">
+          <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" onClick="changeTheme()" aria-expanded="false" data-bs-dropdown-animation=""><i class="bi-brightness-high"></i></button> 
+        </li>
+         
+        
+      
+        <li class="nav-item d-none d-sm-inline-block">
+          <a class="btn btn-outline-success" href="index.php">Home</a>
+          </li>
+         
+          <li class="nav-item d-none d-sm-inline-block">
+          <a class="btn btn-outline-success" href="team_management.php">Summary</a>
+          </li>
+     
+          
+        </ul>
+        <!-- End Navbar -->
       </div>
     </div>
-
-    <div class="container">
-      <nav class="js-mega-menu flex-grow-1">
-        <!-- Collapse -->
-        <div class="collapse navbar-collapse" id="navbarDoubleLineContainerNavDropdown">
-          <ul class="navbar-nav">
-          <li class="hs-has-sub-menu nav-item">
-            <button type="button" class="btn btn-soft-primary">CSK</button>
-            </li>
-            <li class="hs-has-sub-menu nav-item">
-            <button type="button" class="btn btn-soft-primary">MI</button>
-
-            </li>
-            <li class="hs-has-sub-menu nav-item">
-            <button type="button" class="btn btn-soft-primary">RCB</button>
-
-            </li>
-            <li class="hs-has-sub-menu nav-item">
-            <button type="button" class="btn btn-soft-primary">DC</button>
-
-            </li>
-            <li class="hs-has-sub-menu nav-item">
-            <button type="button" class="btn btn-soft-primary">KXIP</button>
-
-            </li>
-            <li class="hs-has-sub-menu nav-item">
-            <button type="button" class="btn btn-soft-primary">RR</button>
-
-            </li>
-            <li class="hs-has-sub-menu nav-item">
-            <button type="button" class="btn btn-soft-primary">KKR</button>
-
-            </li><li class="hs-has-sub-menu nav-item">
-            <button type="button" class="btn btn-soft-primary">SRH</button>
-
-            </li>
-            </ul>
-
-        </div>
-        <!-- End Collapse -->
-      </nav>
-    </div>
   </header>
+
+  <script>
+  var Themeflag=1;   
+function changeTheme()
+{
+if(Themeflag==1)
+{
+
+  HSThemeAppearance.setAppearance("dark")
+  Themeflag=2;
+}
+else
+{ 
+  HSThemeAppearance.setAppearance("default")
+  Themeflag=1;
+}
+}
+
+    </script>
+
   <!-- ========== END HEADER ========== -->
 
   <!-- ========== MAIN CONTENT ========== -->
+  <!-- Navbar Vertical -->
+
+  <aside class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered bg-white  ">
+    <div class="navbar-vertical-container">
+      <div class="navbar-vertical-footer-offset">
+        <!-- Logo -->
+
+        <a class="navbar-brand" href="#" aria-label="Front">
+          <img class="navbar-brand-logo" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="default">
+          <img class="navbar-brand-logo" src="./assets/cricauctionlogo.svg" alt="Logo" data-hs-theme-appearance="dark">
+        </a>
+
+        <!-- End Logo -->
+
+        <!-- Navbar Vertical Toggle -->
+       
+
+        <!-- End Navbar Vertical Toggle -->
+
+        
+        <div class="navbar-vertical-content">
+          <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
+
+<?php
+
+
+$resultteam=mysqli_query($con,"select * from team_master where tournment_id=".$_SESSION["login_user"]."");
+while($temp=mysqli_fetch_row($resultteam))
+{
+  $r=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
+  $d=mysqli_fetch_row($r);
+  $maxpoint=$temp[6]-(($d[4]-$temp[7]-1)*$d[3]);
+  echo '  <button type="button" onclick="teamfunc('.$temp[0].',\''.$temp[2].'\','.$maxpoint.')" class="btn btn-outline-primary" >'.$temp[2].'</button>
+  <h1> </h1>
+  
+';
+}
+
+?>
+
+<script>
+  function teamfunc(id,tname,maxpoint)
+  {
+      var team_name=document.getElementById("biding_team_name");
+      team_name.value=tname;
+      var team_id=document.getElementById("biding_team_id");
+      team_id.value=id;
+      var biding_points=document.getElementById("biding_max_point");
+      biding_points.value=""+maxpoint;
+     
+
+  }
+
+</script>
+          <!-- Team Names -->
+          
+
+
+            
+            </div>
+            <!-- End Team Names -->
+      </div>
+    </div>
+  </aside>
+
   <main id="content" role="main" class="main">
     <!-- Content -->
-    <div class="content container">
-     <img src="./assets/BPL1.jpg" alt="img">
-      <!-- End Row -->
+    <div class="content container-fluid">
+    
+      <!-- Stats -->
+      <div class="row">
+     <?php
+     if($soldflag==0)
+     {
+        echo '<div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
+        <!-- Card -->
+        <div class="card ">
+          <div class="card-body">
+          <span class="d-block "><h1>BID CONTROLES</h1></span>
+          <form action="bpllive.php" method="post" onsubmit="this.querySelectorAll(\'input\').forEach(i => i.disabled = false)">
+            <div class="mb-3 ">
+              <label class="form-label" for="exampleFormControlTitleInput2">BIDING TEAM</label>
+              <input type="text" id="biding_team_name" name="biding_team_name" class="form-control form-control-light" placeholder="selected team" disabled>
+              <input type="text" hidden id="biding_team_id" name="biding_team_id" class="form-control form-control-title" placeholder="selected team" disabled>
+              <input type="text" hidden id="biding_player_id" name="biding_player_id" class="form-control form-control-title" placeholder="selected team" value="'.$mappingdata[1].'" disabled>
+              
+              <input type="text" hidden id="biding_max_point" value="0" class="form-control form-control-title" placeholder="selected team" disabled>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="exampleFormControlTitleInput2">BIDING POINTS</label>
+              <input type="text" id="biding_team_points" name="biding_team_points" value="'.$tournmentDetail[3].'" disabled class="form-control form-control-title" placeholder="points">
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-lg-1 mb-3 mb-lg-5">
+              <button type="button" onclick="decrementpoints()" class="btn btn-outline-primary">-</button>
+              
+              </div>        
+              <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+              <button type="button"  onclick="incrementpoint()" class="btn btn-outline-primary">+</button>
+              </div>        
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-lg-6 mb-3 mb-lg-5">
+              <button type="submit"  name="sold_btn" id="sold_btn" disabled="false" class="btn btn-outline-success">SOLD</button>
+              </div>        
+              <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+              <button type="submit" name="unsold_btn" class="btn btn-outline-danger">UNSOLD</button>
+              </div>        
+            </div>
+
+            <div class="mb-3">
+                <label for="formControlLightFullName" class="form-label">SET BIDING INCREMENTOR</label>
+                <input type="number" class="form-control form-control-light" id="biding_incrementor" placeholder="Incrementor" value="5" aria-label="Mark Williams">
+              </div>
+          </form>
+          </div>
+        </div>
+        <!-- End Card -->
+      </div>
+   ';
+     }
+     
+     ?>   
+      
+<script>
+function incrementpoint()
+{
+  var bidingteampoints=document.getElementById("biding_team_points");
+  var ele=document.getElementById("biding_incrementor");
+  let i=parseInt(ele.value);
+  let num=parseInt(bidingteampoints.value);
+  let bid=num+i;
+  let maxpoint=parseInt(document.getElementById("biding_max_point").value);
+  if(maxpoint<bid)
+  {
+      document.getElementById("sold_btn").disabled=true;
+  }
+  else
+  {
+    document.getElementById("sold_btn").disabled=false;
+  }
+  bidingteampoints.value=""+(bid);
+
+}
+
+function decrementpoints()
+{
+  var bidingteampoints=document.getElementById("biding_team_points");
+  var ele=document.getElementById("biding_incrementor");
+  let i=parseInt(ele.value);
+  let num=parseInt(bidingteampoints.value);
+  let bid=num-i;
+  let maxpoint=parseInt(document.getElementById("biding_max_point").value);
+  if(maxpoint<bid)
+  {
+      document.getElementById("sold_btn").disabled=true;
+  }
+  else
+  {
+    document.getElementById("sold_btn").disabled=false;
+  }
+  bidingteampoints.value=""+(bid);
+
+}
+
+</script>
+
+<?php
+if($soldflag==0)
+{
+echo '    <div class="col-sm-6 col-lg-9 mb-3 mb-lg-5">
+';
+}
+else
+{
+  
+echo '    <div class="col-sm-6 col-lg-12 mb-3 mb-lg-5">
+';
+}
+
+$playerdata=mysqli_query($con,"select * from player_master where id=".$mappingdata[1]."");
+$playerdata=mysqli_fetch_row($playerdata);
+
+?>
+        <!-- Card -->
+        <div class="card p-3 mb-2 bg-soft-primary text-primary " style="background:url('data:image/jpg;charset=utf8;base64,<?php  echo base64_encode($playerdata[10]);?>');  background-repeat: no-repeat, repeat; background-color: #cccccc;
+  height: 750px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;">
+          <?php
+                      
+                      if($soldflag==1)
+                      {
+                        echo '
+                        <div style="position:absolute; right:350px; bottom:50px; "><img src="./assets/gif/congratsfinal.gif" style="background:transparent;"></img></div>
+                        
+                  <div style="position:absolute; left:400px; top:100px;  "><img src="./assets/gif/soldresized.gif" style="background:transparent;"></img></div>
+                        ';
+                      }
+                      else if($soldflag==2)
+                      {
+                          echo '<div style="position:absolute; bottom:-80px; left:300px; "><img src="./assets/gif/sadfinal.gif" style="background:transparent;"></img></div>
+                          ';
+                      }
+                  ?>
+
+
+          <div class="card-body ">
+           
+
+
+          </div>
+
+        </div>
+        <!-- End Card -->
+        
+      </div>
+
+
+      </div>
+      <!-- End Stats -->
+
     </div>
     <!-- End Content -->
+
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+
+    <!-- Footer -->
+
+    <div class="footer">
+      <div class="row justify-content-between align-items-center">
+        <div class="col">
+        
+          <p class="fs-6 mb-0">&copy; CricAuction. <span class="d-none d-sm-inline-block">2023 Abstract Tech Solution.</span></p>
+        </div>
+        <!-- End Col -->
+
+        <div class="col-auto">
+          <div class="d-flex justify-content-end">
+            <!-- List Separator -->
+           
+              <li class="list-inline-item">
+               
+            </ul>
+            <!-- End List Separator -->
+          </div>
+        </div>
+        <!-- End Col -->
+      </div>
+      <!-- End Row -->
+    </div>
+
+    <!-- End Footer -->
   </main>
   <!-- ========== END MAIN CONTENT ========== -->
 
@@ -312,43 +635,129 @@
   <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- JS Implementing Plugins -->
-  <script src="./assets/vendor/hs-mega-menu/dist/hs-mega-menu.min.js"></script>
+  <script src="./assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
   <script src="./assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
   <script src="./assets/vendor/hs-quantity-counter/dist/hs-quantity-counter.min.js"></script>
 
+  <script src="./assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
+  <script src="./assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="./assets/vendor/clipboard/dist/clipboard.min.js"></script>
+  <script src="./assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+  <script src="./assets/vendor/daterangepicker/moment.min.js"></script>
+  <script src="./assets/vendor/daterangepicker/daterangepicker.js"></script>
+
   <!-- JS Front -->
   <script src="./assets/js/theme.min.js"></script>
+  <script src="./assets/js/hs.theme-appearance-charts.js"></script>
 
   <!-- JS Plugins Init. -->
   <script>
+    $(document).on('ready', function () {
+      // INITIALIZATION OF DATATABLES
+      // =======================================================
+      HSCore.components.HSDatatables.init($('#datatable'), {
+        select: {
+          style: 'multi',
+          selector: 'td:first-child input[type="checkbox"]',
+          classMap: {
+            checkAll: '#datatableCheckAll',
+            counter: '#datatableCounter',
+            counterInfo: '#datatableCounterInfo'
+          }
+        },
+        language: {
+          zeroRecords: `<div class="text-center p-4">
+              <img class="mb-3" src="./assets/svg/illustrations/oc-error.svg" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="default">
+              <img class="mb-3" src="./assets/svg/illustrations-light/oc-error.svg" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="dark">
+            <p class="mb-0">No data to show</p>
+            </div>`
+        }
+      });
+
+      const datatable = HSCore.components.HSDatatables.getItem(0)
+
+
+      // INITIALIZATION OF DATERANGEPICKER
+      // =======================================================
+      $('.js-daterangepicker').daterangepicker();
+
+      $('.js-daterangepicker-times').daterangepicker({
+        timePicker: true,
+        startDate: moment().startOf('hour'),
+        endDate: moment().startOf('hour').add(32, 'hour'),
+        locale: {
+          format: 'M/DD hh:mm A'
+        }
+      });
+
+      var start = moment();
+      var end = moment();
+
+      function cb(start, end) {
+        $('#js-daterangepicker-predefined .js-daterangepicker-predefined-preview').html(start.format('MMM D') + ' - ' + end.format('MMM D, YYYY'));
+      }
+
+      $('#js-daterangepicker-predefined').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+          'Today': [moment(), moment()],
+          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+      }, cb);
+
+      cb(start, end);
+    });
+  </script>
+
+  <!-- JS Plugins Init. -->
+  <script>
+    (function() {
+      window.onload = function () {
+        
+
+        // INITIALIZATION OF NAVBAR VERTICAL ASIDE
+        // =======================================================
+        new HSSideNav('.js-navbar-vertical-aside').init()
+
+
+        // INITIALIZATION OF FORM SEARCH
+        // =======================================================
+        new HSFormSearch('.js-form-search')
+
+
+        // INITIALIZATION OF BOOTSTRAP DROPDOWN
+        // =======================================================
+        HSBsDropdown.init()
+
+
+        // INITIALIZATION OF SELECT
+        // =======================================================
+        HSCore.components.HSTomSelect.init('.js-select')
+
+
+        // INITIALIZATION OF CLIPBOARD
+        // =======================================================
+        HSCore.components.HSClipboard.init('.js-clipboard')
+
+
+        // INITIALIZATION OF CHARTJS
+        // =======================================================
+        HSCore.components.HSChartJS.init('.js-chart')
+      }
+    })()
+  </script>
+<script>
   (function() {
     // INITIALIZATION OF  QUANTITY COUNTER
     // =======================================================
     new HSQuantityCounter('.js-quantity-counter')
   })();
 </script>
-  <script>
-    (function() {
-      // INITIALIZATION OF BOOTSTRAP DROPDOWN
-      // =======================================================
-      HSBsDropdown.init()
-
-
-      // INITIALIZATION OF MEGA MENU
-      // =======================================================
-      new HSMegaMenu('.js-mega-menu', {
-        desktop: {
-          position: 'left'
-        }
-      })
-
-
-      // INITIALIZATION OF FORM SEARCH
-      // =======================================================
-      new HSFormSearch('.js-form-search')
-    })()
-  </script>
-
   <!-- Style Switcher JS -->
 
   <script>
@@ -386,7 +795,6 @@
         })
       })()
     </script>
-
   <!-- End Style Switcher JS -->
 </body>
 </html>
