@@ -34,7 +34,7 @@ if(isset($_POST["sub_btn"]))
         
 
         // Insert image content into database 
-        $insert = mysqli_query($con,"insert into player_master(player_name,player_role,player_dob,player_jersy_size,player_jersy_no,phone_no,pass,additional_layout,status,player_age) values('".$_POST['player_name']."','".$_POST['player_role']."','".$_POST['player_dob']."','".$_POST['player_jersy_size']."',".$_POST['player_jersy_no'].",'".$_POST['phone_no']."','".$_POST['pass']."','".$imgContent."','1',".ageCalculator($_POST["player_dob"]).")");
+        $insert = mysqli_query($con,"insert into player_master(player_name,player_role,player_dob,player_jersy_size,player_jersy_no,phone_no,pass,additional_layout,status,player_age,tshirt_name,trouser_length) values('".$_POST['player_name']."','".$_POST['player_role']."','".$_POST['player_dob']."','".$_POST['player_jersy_size']."',".$_POST['player_jersy_no'].",'".$_POST['phone_no']."','cric@123','".$imgContent."','1',".ageCalculator($_POST["player_dob"]).",'".$_POST["t_shirt_name"]."',".$_POST["trouser_no"].")");
 
         if($insert){ 
           echo "<script>alert('Player registered Successfully');window.location.href='login.php'; </script>";
@@ -222,15 +222,7 @@ if(isset($_POST["sub_btn"]))
                                     
                    <div class="d-flex gap-3 ms-4">
                      <div class="form-attachment-btn btn btn-sm btn-primary">Upload photo
-                       <input type="file" required class="js-file-attach form-attachment-btn-label" id="avatarUploader" name="player_logo"
-                              data-hs-file-attach-options='{
-                                 "textTarget": "#avatarImg",
-                                 "mode": "image",
-                                 "targetAttr": "src",
-                                 "resetTarget": ".js-file-attach-reset-img",
-                                 "resetImg": "../assets/img/160x160/img1.jpg",
-                                 "allowTypes": [".png", ".jpeg", ".jpg"]
-                              }'>
+                       <input type="file" required  name="player_logo">
                      </div>
                      <!-- End Avatar -->
                             
@@ -273,6 +265,7 @@ if(isset($_POST["sub_btn"]))
                     </div>
               <!-- End Form Group -->
 
+
                  <!-- Select -->
               <div class="tom-select-custom">
                 <h1> </h1>
@@ -285,7 +278,7 @@ if(isset($_POST["sub_btn"]))
                       }' name="player_role">
                     <option value="Not Specified">Select a Specialization...</option>
                     <option value="Batsman">Batsman</option>
-                    <option value="Baller">Baller</option>
+                    <option value="Bowler">Bowler</option>
                     <option value="All-Rounder">All-Rounder</option>
                     <option value="Wicket-Keeper">Wicket-Keeper</option>
                   </select>
@@ -300,6 +293,30 @@ if(isset($_POST["sub_btn"]))
                 <span class="invalid-feedback">Please enter a valid Mobile address.</span>
               </div>
               <!-- End Form -->
+
+
+
+
+   <!-- Form -->
+              <div class="mb-4">
+                <h1> </h1>
+                <label class="form-label" for="signupSrMob">T-shirt name</label>
+                <input type="text" class="form-control form-control-lg" name="t_shirt_name" id="signupSrEmail" placeholder="" aria-label="" required>
+                <span class="invalid-feedback">Please enter a valid Mobile address.</span>
+              </div>
+              <!-- End Form -->
+
+   <!-- Form -->
+              <div class="mb-4">
+                <h1> </h1>
+                <label class="form-label" for="signupSrMob">Trouser Number</label>
+                <input type="text" class="form-control form-control-lg" name="trouser_no" id="signupSrEmail" placeholder="" aria-label="" required>
+                <span class="invalid-feedback">Please enter a valid Mobile address.</span>
+              </div>
+              <!-- End Form -->
+
+
+
 
       
               <!-- Form -->
@@ -336,7 +353,7 @@ if(isset($_POST["sub_btn"]))
                 <label class="form-label" for="signupSrPassword">Password</label>
 
                 <div class="input-group input-group-merge" data-hs-validation-validate-class>
-                  <input type="password" class="js-toggle-password form-control form-control-lg" name="pass" id="signupSrPassword" placeholder="8+ characters required" aria-label="8+ characters required" required minlength="8" data-hs-toggle-password-options='{
+                  <input type="password" class="js-toggle-password form-control form-control-lg" name="pass" id="signupSrPassword" placeholder="8+ characters required" aria-label="8+ characters required"  minlength="8" data-hs-toggle-password-options='{
                            "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
                            "defaultClass": "bi-eye-slash",
                            "showClass": "bi-eye",
@@ -356,7 +373,7 @@ if(isset($_POST["sub_btn"]))
                 <label class="form-label" for="signupSrConfirmPassword">Confirm password</label>
 
                 <div class="input-group input-group-merge" data-hs-validation-validate-class>
-                  <input type="password" class="js-toggle-password form-control form-control-lg" name="confirm_pass" id="signupSrConfirmPassword" placeholder="8+ characters required" aria-label="8+ characters required" required minlength="8" data-hs-toggle-password-options='{
+                  <input type="password" class="js-toggle-password form-control form-control-lg" name="confirm_pass" id="signupSrConfirmPassword" placeholder="8+ characters required" aria-label="8+ characters required"  minlength="8" data-hs-toggle-password-options='{
                            "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
                            "defaultClass": "bi-eye-slash",
                            "showClass": "bi-eye",
@@ -374,7 +391,7 @@ if(isset($_POST["sub_btn"]))
 
               <!-- Form Check -->
               <div class="form-check mb-4">
-                <input class="form-check-input" type="checkbox" value="" id="termsCheckbox" required>
+                <input class="form-check-input" type="checkbox" value="" id="termsCheckbox">
                 <label class="form-check-label" for="termsCheckbox">
                   I accept the <a>Terms and Conditions</a>
                 </label>

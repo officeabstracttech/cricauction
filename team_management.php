@@ -41,7 +41,7 @@ $process=$process[0];
         $playercounter=mysqli_fetch_row($playercounter);
        echo '
        
-      <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+      <div class="col-sm-6 col-lg-2 mb-3 mb-lg-5">
        <!-- Card -->
        <a class="card" data-bs-toggle="modal" data-bs-target="#TeamData'.$team[0].'" style="max-width: 20rem;">
          <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,'.base64_encode($team[3]).'" alt="Card image cap">

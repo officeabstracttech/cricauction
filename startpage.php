@@ -587,6 +587,7 @@ if($process==3)
     <!-- End Footer -->
   </div>
   <!-- End Card -->';
+
 }
 
 ?>
