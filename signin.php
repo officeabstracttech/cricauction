@@ -21,8 +21,7 @@ if(isset($_POST["sub_btn"]))
   }
   if($_FILES["player_logo"]["error"] > 0)
   {
-    echo "<script>alert('"Return Code: " . $_FILES["player_logo"]["error"] . ""');window.location.href='login.php'; </script>";
-    
+    echo "<script>alert('Return Code: " . $_FILES["player_logo"]["error"] . "');window.location.href='login.php'; </script>";
   } 
   if(!empty($_FILES["player_logo"]["name"])) {
 
