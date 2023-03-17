@@ -48,9 +48,9 @@ $process=$process[0];
          <div class="card-body">
            <h1 class="card-title">'.$team[2].'</h1>
           <h3>Remaining Points: <span style="font-size:24px;"> '.$team[6].'</span></h3>
-          <h3>Player Max Points: <span style="font-size:24px;"> '.$maxpoint.'</span></h3>
+          <h3>Player MaxPoints: <span style="font-size:24px;"> '.$maxpoint.'</span></h3>
           <h3>Players Taken : <span style="font-size:24px;">'.$team[7].'</span></h3>
-          <h3>Players Taken Age +37 : <span style="font-size:24px;">'.$playercounter[0].'</span></h3>
+          <h3>Players Taken +37 : <span style="font-size:24px;">'.$playercounter[0].'</span></h3>
          </div>
        </a>
       <!-- End Card -->

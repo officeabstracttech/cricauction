@@ -46,7 +46,7 @@ if(isset($_POST["new_team_btn"]))
       $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
        
       // Allow certain file formats 
-      $allowTypes = array('jpg','png','jpeg'); 
+      $allowTypes = array('jpg','png','jpeg','PNG'); 
       if(in_array($fileType, $allowTypes)){ 
           $image = $_FILES['team_logo']['tmp_name']; 
           $imgContent = addslashes(file_get_contents($image)); 

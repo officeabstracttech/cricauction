@@ -7,13 +7,13 @@ if(!isset($_SESSION["login_user"]))
 }
 if(isset($_GET["back"]) && $_GET["back"]==1)
 {
-  $currentcounter=mysqli_query($con,"select current_player_count from auction_traker where tournment_id=".$_SESSION["login_user"]."");
+  $currentcounter=mysqli_query($con,"select current_player_count from auction_traker where tournment_id=".$_SESSION["login_user"]." and process=2");
   $currentcounter=mysqli_fetch_row($currentcounter);
   $currentcounter=$currentcounter[0]-1;
   if($currentcounter!=0)
   {
 
-    mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]."");
+    mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]." where process=2");
   }
 //  header("location:live.php");  
   
@@ -43,10 +43,10 @@ if(isset($_GET["edit"]) && $_GET["edit"]==1)
 
 if(isset($_GET["next"]) && $_GET["next"]==1)
 {
-  $currentcounter=mysqli_query($con,"select current_player_count from auction_traker where tournment_id=".$_SESSION["login_user"]."");
+  $currentcounter=mysqli_query($con,"select current_player_count from auction_traker where tournment_id=".$_SESSION["login_user"]." and process=2");
   $currentcounter=mysqli_fetch_row($currentcounter);
   $currentcounter=$currentcounter[0]+1;
-  mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]."");
+  mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]." and process=2");
 //  header("location:live.php");
 }
 
@@ -107,7 +107,7 @@ if(mysqli_num_rows($result)>0){
 }
 
 $i=1;
-$mappingresult=mysqli_query($con,"select * from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1 and sold_status=0");
+$mappingresult=mysqli_query($con,"select * from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1 and sold_status=2");
 $mappingdata=0;
 while($mappingdata=mysqli_fetch_row($mappingresult) )
 {
