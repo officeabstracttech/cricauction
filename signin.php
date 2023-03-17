@@ -19,8 +19,13 @@ if(isset($_POST["sub_btn"]))
       echo "<script>alert('Pass and Confirm password not matched.');</script>";
       header("location:signin.php");
   }
+  if($_FILES["player_logo"]["error"] > 0)
+  {
+    echo "<script>alert('"Return Code: " . $_FILES["player_logo"]["error"] . ""');window.location.href='login.php'; </script>";
+    
+  } 
+  if(!empty($_FILES["player_logo"]["name"])) {
 
-  if(!empty($_FILES["player_logo"]["name"])) { 
     // Get file info 
     $fileName = basename($_FILES["player_logo"]["name"]); 
     $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 

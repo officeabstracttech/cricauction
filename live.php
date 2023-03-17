@@ -123,6 +123,7 @@ else if($mappingdata[4]==2)
 {
 $soldflag=2;
 }
+$nextplayerdata=mysqli_fetch_row($mappingresult);
 
 $tournmentDetail=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
 $tournmentDetail=mysqli_fetch_row($tournmentDetail);
@@ -441,10 +442,11 @@ while($temp=mysqli_fetch_row($resultteam))
     
       <!-- Stats -->
       <div class="row">
-     <?php
+      <?php
      if($soldflag==0)
      {
-        echo '<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+        echo '<div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
+        <div class="row">
         <!-- Card -->
         <div class="card ">
           <div class="card-body">
@@ -460,7 +462,8 @@ while($temp=mysqli_fetch_row($resultteam))
             </div>
             <div class="mb-3">
               <label class="form-label" for="exampleFormControlTitleInput2">BIDING POINTS</label>
-              <input type="text" id="biding_team_points" name="biding_team_points" value="'.$tournmentDetail[3].'" disabled class="form-control form-control-title" placeholder="points">
+              <input style="font-size:72px;" type="text" id="biding_team_points" name="biding_team_points" value="'.$tournmentDetail[3].'" disabled class="form-control form-control-title" placeholder="points">
+              
             </div>
             <div class="row">
               <div class="col-sm-6 col-lg-1 mb-3 mb-lg-5">
@@ -480,67 +483,115 @@ while($temp=mysqli_fetch_row($resultteam))
               </div>        
             </div>
 
-            <div class="mb-3">
-                <label for="formControlLightFullName" class="form-label">SET BIDING INCREMENTOR</label>
-                <input type="number" class="form-control form-control-light" id="biding_incrementor" placeholder="Incrementor" value="5" aria-label="Mark Williams">
-              </div>
+            
           </form>
           </div>
         </div>
         <!-- End Card -->
-      </div>
-   ';
+        </div>
+        ';
+
+         if($nextplayerdata!=NULL)
+                  {
+
+ $nextplayerdata=mysqli_query($con,"select * from player_master where id=".$nextplayerdata[1]."");
+
+ $nextplayerdata=mysqli_fetch_row($nextplayerdata);
+             echo '
+             </br>
+             <div class="row">
+                    
+             <!-- Card -->
+             <div class="card p-3 mb-2 bg-soft-primary text-primary " style="background:url(\'data:image/jpg;charset=utf8;base64,'.base64_encode($nextplayerdata[10]).'\');  background-repeat: no-repeat, repeat; background-color: #cccccc;
+      height:200px;
+       background-position: center;
+       background-repeat: no-repeat;
+       background-size: contain;
+       position: relative;">
+              
+                    
+    
+             </div>
+             <!-- End Card -->
+             </div>
+          
+        ';
+         }
+        echo '</div>';
+
      }
      
-     ?>   
-      
-<script>
-function incrementpoint()
-{
-  var bidingteampoints=document.getElementById("biding_team_points");
-  var ele=document.getElementById("biding_incrementor");
-  let i=parseInt(ele.value);
-  let num=parseInt(bidingteampoints.value);
-  let bid=num+i;
-  let maxpoint=parseInt(document.getElementById("biding_max_point").value);
-  if(maxpoint<bid)
-  {
-      document.getElementById("sold_btn").disabled=true;
-  }
-  else
-  {
-    document.getElementById("sold_btn").disabled=false;
-  }
-  bidingteampoints.value=""+(bid);
-
-}
-
-function decrementpoints()
-{
-  var bidingteampoints=document.getElementById("biding_team_points");
-  var ele=document.getElementById("biding_incrementor");
-  let i=parseInt(ele.value);
-  let num=parseInt(bidingteampoints.value);
-  let bid=num-i;
-  let maxpoint=parseInt(document.getElementById("biding_max_point").value);
-  if(maxpoint<bid)
-  {
-      document.getElementById("sold_btn").disabled=true;
-  }
-  else
-  {
-    document.getElementById("sold_btn").disabled=false;
-  }
-  bidingteampoints.value=""+(bid);
-
-}
-
-</script>
-
+     ?>  
+     <script>
+     function incrementpoint()
+     {
+       var bidingteampoints=document.getElementById("biding_team_points");
+       let i=0;
+       let num=parseInt(bidingteampoints.value);
+       if(num<3000)
+       {
+         i=200;
+       }
+       else if(num>=3000 && num<10000)
+       {
+         i=500;
+       }
+       else 
+       {
+         i=1000;
+       }
+       let bid=num+i;
+       let maxpoint=parseInt(document.getElementById("biding_max_point").value);
+       if(maxpoint<bid)
+       {
+           document.getElementById("sold_btn").disabled=true;
+       }
+       else
+       {
+         document.getElementById("sold_btn").disabled=false;
+       }
+       bidingteampoints.value=""+(bid);
+     
+     }
+     
+     function decrementpoints()
+     {
+       var bidingteampoints=document.getElementById("biding_team_points");
+       
+       let i=0;
+       let num=parseInt(bidingteampoints.value);
+       if(num<80)
+       {
+         i=5;
+       }
+       else if(num>=80 && num<120)
+       {
+         i=10;
+       }
+       else 
+       {
+         i=20;
+       }
+       let bid=num-i;
+       let maxpoint=parseInt(document.getElementById("biding_max_point").value);
+       if(maxpoint<bid)
+       {
+           document.getElementById("sold_btn").disabled=true;
+       }
+       else
+       {
+         document.getElementById("sold_btn").disabled=false;
+       }
+       bidingteampoints.value=""+(bid);
+     
+     }
+     
+     </script>
+     
 <?php
 if($soldflag==0)
 {
-echo '    <div class="col-sm-6 col-lg-8 mb-3 mb-lg-5">
+echo '    <div class="col-sm-6 col-lg-9 mb-3 mb-lg-5">
 ';
 }
 else
