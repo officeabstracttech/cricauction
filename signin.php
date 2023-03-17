@@ -34,7 +34,7 @@ if(isset($_POST["sub_btn"]))
         
 
         // Insert image content into database 
-        $insert = mysqli_query($con,"insert into player_master(player_name,player_role,player_dob,player_jersy_size,player_jersy_no,phone_no,pass,additional_layout,status,player_age,tshirt_name,trouser_length) values('".$_POST['player_name']."','".$_POST['player_role']."','".$_POST['player_dob']."','".$_POST['player_jersy_size']."',".$_POST['player_jersy_no'].",'".$_POST['phone_no']."','cric@123','".$imgContent."','1',".ageCalculator($_POST["player_dob"]).",'".$_POST["t_shirt_name"]."',".$_POST["trouser_no"].")");
+        $insert = mysqli_query($con,"insert into player_master(player_name,player_role,player_dob,player_jersy_size,player_jersy_no,phone_no,pass,player_logo,status,player_age,tshirt_name,trouser_length) values('".$_POST['player_name']."','".$_POST['player_role']."','".$_POST['player_dob']."','".$_POST['player_jersy_size']."',".$_POST['player_jersy_no'].",'".$_POST['phone_no']."','cric@123','".$imgContent."','1',".ageCalculator($_POST["player_dob"]).",'".$_POST["t_shirt_name"]."',".$_POST["trouser_no"].")");
 
         if($insert){ 
           echo "<script>alert('Player registered Successfully');window.location.href='login.php'; </script>";
