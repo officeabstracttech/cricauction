@@ -68,7 +68,7 @@ $process=$process[0];
         <div class="row align-items-end">
             <?php
            
-            else if($process==3)
+            if($process==3)
             {
              echo '  <div class="col-sm mb-2 mb-sm-0">
           
@@ -211,8 +211,8 @@ if($process==3)
               <input type="text" name="player_id" value="'.$data[0].'" hidden>
               <input type="file" name="player_logo"">
               
-              Add Photo
-           </a>';
+            
+               ';
               }
               else
               {
@@ -224,19 +224,18 @@ if($process==3)
               
               <td>
               
-              <input type="submit" name="sub_btn" value="" >Submit</input>
+              <input type="submit" name="sub_btn" value="Submit" ></input>
               </form>
               </td>
-            </tr>
+              </tr>
   
               ';
-            }
 
+            }
 
             echo '
 
-    
-        
+         
      
         </tbody>
       </table>
