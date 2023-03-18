@@ -3,31 +3,36 @@
 include("header.php");
 
 if(isset($_POST["sub_btn"]))
-{
+{ 
+  if(!empty($_FILES["player_logo"]["name"])) {
 
-    if(!empty($_FILES["player_logo"]["name"])) {
+    // Get file info 
+    $fileName = basename($_FILES["player_logo"]["name"]); 
+    $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+     
+    // Allow certain file formats 
+    $allowTypes = array('jpg','png','jpeg','JPG','PNG','JPEG'); 
+    if(in_array($fileType, $allowTypes)){ 
+        $image = $_FILES['player_logo']['tmp_name']; 
+        $imgContent = addslashes(file_get_contents($image)); 
+     
+        // Insert image content into database 
+        $insert = mysqli_query($con,"update player_master set player_logo='".$imgContent."' where id=".$_POST["player_id"]."");
 
-        // Get file info 
-        $fileName = basename($_FILES["player_logo"]["name"]); 
-        $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
-         
-        // Allow certain file formats 
-        $allowTypes = array('jpg','png','jpeg','JPG','PNG','JPEG'); 
-        if(in_array($fileType, $allowTypes)){ 
-            $image = $_FILES['player_logo']['tmp_name']; 
-            $imgContent = file_get_contents($image); 
-
-            mysqli_query($con,"update player_master set player_logo='".$imgContent."' where id=".$_POST["player_id"]."");
+        if($insert){ 
+          echo "<script>alert('Player registered Successfully');window.location.href='addplayer.php'; </script>";
        
-        }
-        else
-        {
+        }else{ 
+          echo "<script>alert('Photo not uploaded');window.location.href='addplayer.php'; </script>";
+        }  
+    }else{ 
+      echo "<script>alert('file type only png,jpeg,jpg is supported');window.location.href='addplayer.php'; </script>";
 
-        }
-    }    
+    } 
+}else{ 
+  echo "<script>alert('Please select the photo');window.location.href='signin.php'; </script>";
 
-
-
+}
 }
 
 if(isset($_GET["set"]))
@@ -184,6 +189,8 @@ if($process==3)
             {
               echo '
               <tr>
+              <form action="addplayer.php" method="post" enctype="multipart/form-data">
+
               <td class="table-column-pe-0">
                 '.$data[0].'
               </td>
@@ -206,7 +213,6 @@ if($process==3)
               if($data[8]==NULL)
               { 
               echo  '
-              <form action="addplayers.php" method="post" enctype="multipart/form-data">
 
               <input type="text" name="player_id" value="'.$data[0].'" hidden>
               <input type="file" name="player_logo"">
@@ -224,9 +230,10 @@ if($process==3)
               
               <td>
               
-              <input type="submit" name="sub_btn" value="Submit" ></input>
-              </form>
+              <input type="submit" name="sub_btn" value="Submit"></input>
+              
               </td>
+              </form>
               </tr>
   
               ';
