@@ -560,17 +560,17 @@ while($temp=mysqli_fetch_row($resultteam))
        
        let i=0;
        let num=parseInt(bidingteampoints.value);
-       if(num<80)
+       if(num<3000)
        {
-         i=5;
+         i=200;
        }
-       else if(num>=80 && num<120)
+       else if(num>=3000 && num<10000)
        {
-         i=10;
+         i=500;
        }
        else 
        {
-         i=20;
+         i=1000;
        }
        let bid=num-i;
        let maxpoint=parseInt(document.getElementById("biding_max_point").value);
@@ -679,9 +679,9 @@ echo '    <div class="col-sm-6 col-lg-12 mb-3 mb-lg-5">
                     <div class="col-md-6">
                       <div class="card-body">
                         <h1 class="card-title">#<?php echo $playerdata[0];?></h1>
-                        <h2>Name :<?php echo $playerdata[1];?></h2>
+                        <h3>Name :<?php echo $playerdata[1];?></h3>
                         <h2>Role :<?php echo $playerdata[2];?></h2>
-                        <h2>AGE    :<?php echo ageCalculator($playerdata[3]);?></h2>
+                        <h2>AGE    :<?php echo $playerdata[11];?></h2>
                         <p class="card-text"><small class="text-muted">cricauction</small></p>
                         
                       </div>
