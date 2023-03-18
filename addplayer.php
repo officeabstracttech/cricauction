@@ -73,7 +73,7 @@ $process=$process[0];
         <div class="row align-items-end">
             <?php
            
-            if($process==3)
+            if($process==4)
             {
              echo '  <div class="col-sm mb-2 mb-sm-0">
           
@@ -124,7 +124,7 @@ $process=$process[0];
 
 
 <?php
-if($process==3)
+if($process==4)
 {
   echo '
   <!-- Card -->
