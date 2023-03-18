@@ -13,7 +13,7 @@ if(isset($_GET["back"]) && $_GET["back"]==1)
   if($currentcounter!=0)
   {
 
-    mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]." where process=2");
+    mysqli_query($con,"update auction_traker set current_player_count=".$currentcounter." where tournment_id=".$_SESSION["login_user"]." and process=2");
   }
 //  header("location:live.php");  
   
@@ -29,7 +29,7 @@ if(isset($_GET["edit"]) && $_GET["edit"]==1)
       $updatedplayer=$teamresult[7]-1;
       $updatedpoints=$teamresult[6]+$editresult[5];
       mysqli_query($con,"update team_master set team_points=".$updatedpoints.", players_taken=".$updatedplayer." where id=".$teamresult[0]."");
-    mysqli_query($con,"update player_mapping_master set sold_status=0,sold_points=0, team_id=0 where id=".$editresult[0]."");
+    mysqli_query($con,"update player_mapping_master set sold_status=0,sold_points=0,team_id=0 where id=".$editresult[0]."");
  //   header("location:live.php");  
   
   }
@@ -72,12 +72,14 @@ $newplayertaken=$teamdata[1]+1;
 mysqli_query($con,"update team_master set team_points=".$newteampoints.", players_taken=".$newplayertaken." where id=".$_POST["biding_team_id"]." and tournment_id=".$_SESSION["login_user"]."");
 $soldflag=1;
   }
+//header("location:live.php");
 }
 if(isset($_POST["unsold_btn"]))
 {
  
 mysqli_query($con,"update player_mapping_master set  sold_status=2, sold_points=0 where player_id=".$_POST["biding_player_id"]." and tournment_id=".$_SESSION["login_user"]."");
  $soldflag=2;
+// header("location:live.php");
 }
 
 
@@ -94,20 +96,15 @@ if(mysqli_num_rows($result)>0){
  }
  else
 {
-  $count=mysqli_query($con,"select count(id) from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1 and sold_status=2");
+  $count=mysqli_query($con,"select count(id) from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1 and (sold_status=2 or sold_status=0)");
   $count=mysqli_fetch_row($count);
   mysqli_query($con,"insert into auction_traker(tournment_id,total_player,current_player_count,process) values(".$_SESSION["login_user"].",".$count[0].",1,2)");
-  mysqli_query($con,"update into player_mapping_master set sold_status=0 where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1 and sold_status=2");
   $counter=1; 
-  if($count[0]==1)
-  {
-    $final=1;
-  }
   
 }
 
 $i=1;
-$mappingresult=mysqli_query($con,"select * from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1 and sold_status=2");
+$mappingresult=mysqli_query($con,"select * from player_mapping_master where tournment_id=".$_SESSION["login_user"]." and enrolled_status=1 and (sold_status=2 or sold_status=0)");
 $mappingdata=0;
 while($mappingdata=mysqli_fetch_row($mappingresult))
 {
@@ -296,10 +293,10 @@ $tournmentDetail=mysqli_fetch_row($tournmentDetail);
 
         
         <li class="nav-item d-none d-sm-inline-block">
-          <a class="btn btn-primary" href="bplliveunsold.php?back=1">Back</a>
+          <a class="btn btn-primary" href="unsoldlive.php?back=1">Back</a>
           </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a class="btn btn-outline-warning" href="bplliveunsold.php?edit=1&id=<?php echo $mappingdata[0];?>">Edit</a>
+          <a class="btn btn-outline-warning" href="unsoldlive.php?edit=1&id=<?php echo $mappingdata[0];?>">Edit</a>
 
           </li>
          
@@ -314,7 +311,7 @@ $tournmentDetail=mysqli_fetch_row($tournmentDetail);
         {
           
           echo '<li class="nav-item">
-          <a class="btn btn-primary" href="bplliveunsold.php?next=1">Next Player</a>
+          <a class="btn btn-primary" href="unsoldlive.php?next=1">Next Player</a>
              </li>';
         }
         ?>
@@ -445,7 +442,7 @@ while($temp=mysqli_fetch_row($resultteam))
     
       <!-- Stats -->
       <div class="row">
-     <?php
+      <?php
      if($soldflag==0)
      {
         echo '<div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
@@ -454,7 +451,7 @@ while($temp=mysqli_fetch_row($resultteam))
         <div class="card ">
           <div class="card-body">
           <span class="d-block "><h1>BID CONTROLES</h1></span>
-          <form action="bplliveunsold.php" method="post" onsubmit="this.querySelectorAll(\'input\').forEach(i => i.disabled = false)">
+          <form action="unsoldlive.php" method="post" onsubmit="this.querySelectorAll(\'input\').forEach(i => i.disabled = false)">
             <div class="mb-3 ">
               <label class="form-label" for="exampleFormControlTitleInput2">BIDING TEAM</label>
               <input type="text" id="biding_team_name" name="biding_team_name" class="form-control form-control-light" placeholder="selected team" disabled>
@@ -512,6 +509,7 @@ while($temp=mysqli_fetch_row($resultteam))
        background-size: contain;
        position: relative;">
               
+                    
     
              </div>
              <!-- End Card -->
@@ -523,74 +521,73 @@ while($temp=mysqli_fetch_row($resultteam))
 
      }
      
-     ?>   
-      
-<script>
-function incrementpoint()
-{
-  var bidingteampoints=document.getElementById("biding_team_points");
-  let i=0;
-  let num=parseInt(bidingteampoints.value);
-  if(num<80)
-  {
-    i=5;
-  }
-  else if(num>=80 && num<120)
-  {
-    i=10;
-  }
-  else 
-  {
-    i=20;
-  }
-  let bid=num+i;
-  let maxpoint=parseInt(document.getElementById("biding_max_point").value);
-  if(maxpoint<bid)
-  {
-      document.getElementById("sold_btn").disabled=true;
-  }
-  else
-  {
-    document.getElementById("sold_btn").disabled=false;
-  }
-  bidingteampoints.value=""+(bid);
-
-}
-
-function decrementpoints()
-{
-  var bidingteampoints=document.getElementById("biding_team_points");
-  
-  let i=0;
-  let num=parseInt(bidingteampoints.value);
-  if(num<80)
-  {
-    i=5;
-  }
-  else if(num>=80 && num<120)
-  {
-    i=10;
-  }
-  else 
-  {
-    i=20;
-  }
-  let bid=num-i;
-  let maxpoint=parseInt(document.getElementById("biding_max_point").value);
-  if(maxpoint<bid)
-  {
-      document.getElementById("sold_btn").disabled=true;
-  }
-  else
-  {
-    document.getElementById("sold_btn").disabled=false;
-  }
-  bidingteampoints.value=""+(bid);
-
-}
-
-</script>
-
+     ?>  
+     <script>
+     function incrementpoint()
+     {
+       var bidingteampoints=document.getElementById("biding_team_points");
+       let i=0;
+       let num=parseInt(bidingteampoints.value);
+       if(num<3000)
+       {
+         i=200;
+       }
+       else if(num>=3000 && num<10000)
+       {
+         i=500;
+       }
+       else 
+       {
+         i=1000;
+       }
+       let bid=num+i;
+       let maxpoint=parseInt(document.getElementById("biding_max_point").value);
+       if(maxpoint<bid)
+       {
+           document.getElementById("sold_btn").disabled=true;
+       }
+       else
+       {
+         document.getElementById("sold_btn").disabled=false;
+       }
+       bidingteampoints.value=""+(bid);
+     
+     }
+     
+     function decrementpoints()
+     {
+       var bidingteampoints=document.getElementById("biding_team_points");
+       
+       let i=0;
+       let num=parseInt(bidingteampoints.value);
+       if(num<3000)
+       {
+         i=200;
+       }
+       else if(num>=3000 && num<10000)
+       {
+         i=500;
+       }
+       else 
+       {
+         i=1000;
+       }
+       let bid=num-i;
+       let maxpoint=parseInt(document.getElementById("biding_max_point").value);
+       if(maxpoint<bid)
+       {
+           document.getElementById("sold_btn").disabled=true;
+       }
+       else
+       {
+         document.getElementById("sold_btn").disabled=false;
+       }
+       bidingteampoints.value=""+(bid);
+     
+     }
+     
+     </script>
+     
 <?php
 if($soldflag==0)
 {
@@ -603,38 +600,101 @@ else
 echo '    <div class="col-sm-6 col-lg-12 mb-3 mb-lg-5">
 ';
 }
-
-$playerdata=mysqli_query($con,"select * from player_master where id=".$mappingdata[1]."");
-$playerdata=mysqli_fetch_row($playerdata);
-
 ?>
+  
         <!-- Card -->
-        <div class="card p-3 mb-2 bg-soft-primary text-primary " style="background:url('data:image/jpg;charset=utf8;base64,<?php  echo base64_encode($playerdata[10]);?>');  background-repeat: no-repeat, repeat; background-color: #cccccc;
-  height: 750px;
+        <div class="card p-3 mb-2 bg-soft-primary text-primary " style="background:url(./assets/gif/backgroundcricketfinal.jpg);  background-repeat: no-repeat, repeat; background-color: #cccccc;
+  height: 800px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   position: relative;">
-          <?php
+          <div class="card-body ">
+            <!-- Profile Cover -->
+            <div class="profile-cover">
+            </div>
+            <!-- End Profile Cover -->
+
+              <!-- End Profile Cover -->
+              <!-- Profile Header -->
+              <div class="text-center mb-5 p-3 mb-2 bg-soft-light ">
+              <!-- Avatar -->
+             <!-- Avatar -->
+  <div class="avatar avatar-xxl avatar-circle profile-cover-avatar">
+    <img class="avatar-img" src="./assets/gif/ball.gif" alt="Image Description">
+    
+  </div>
+  <!-- End Avatar -->         
+              <!-- End Avatar -->
+
+              <div class="row">
+                
+              <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5"></div>
+              
+              <div class="col-sm-6 col-lg-8 mb-3 mb-lg-5">
+              
+              <?php
+                    $playerdata=mysqli_query($con,"select * from player_master where id=".$mappingdata[1]."");
+                    $playerdata=mysqli_fetch_row($playerdata);
+                    ?>
+
+              <!-- Card -->
+                <div class="card mb-6" style="max-width: 540px;<?php if($soldflag>0){echo 'position:relative;';}?> ">
+                      <?php
                       
                       if($soldflag==1)
                       {
                         echo '
-                        <div style="position:absolute; right:350px; bottom:50px; "><img src="./assets/gif/congratsfinal.gif" style="background:transparent;"></img></div>
+                        <div style="position:absolute; top:-200px; "><img src="./assets/gif/congratsfinal.gif" style="background:transparent;"></img></div>
                         
                   <div style="position:absolute; left:400px; top:100px;  "><img src="./assets/gif/soldresized.gif" style="background:transparent;"></img></div>
                         ';
                       }
                       else if($soldflag==2)
                       {
-                          echo '<div style="position:absolute; bottom:-80px; left:300px; "><img src="./assets/gif/sadfinal.gif" style="background:transparent;"></img></div>
+                          echo '<div style="position:absolute; top:-10px; left:150px; "><img src="./assets/gif/sadfinal.gif" style="background:transparent;"></img></div>
                           ';
                       }
-                  ?>
 
 
-          <div class="card-body ">
-           
+                      function ageCalculator($dob){
+                        if(!empty($dob)){
+                            $birthdate = new DateTime($dob);
+                            $today   = new DateTime('today');
+                            $age = $birthdate->diff($today)->y;
+                            return $age;
+                        }else{
+                            return 0;
+                        }
+                    }
+
+                      ?>
+                  <div class="row no-gutters">
+                    <div class="col-md-4">
+                 
+              <span class="avatar avatar-xxl avatar-4x3">
+                <img class="avatar-img" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($playerdata[8]);?>" alt="player image">
+              </span>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card-body">
+                        <h1 class="card-title">#<?php echo $playerdata[0];?></h1>
+                        <h3>Name :<?php echo $playerdata[1];?></h3>
+                        <h2>Role :<?php echo $playerdata[2];?></h2>
+                        <h2>AGE    :<?php echo $playerdata[11];?></h2>
+                        <p class="card-text"><small class="text-muted">cricauction</small></p>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Card -->
+
+              </div>
+
+             </div>
+              <!-- End Profile Header -->
+
 
 
           </div>
