@@ -251,6 +251,14 @@ $process=0;
                   </a>
                 </div>
                 ';
+                
+                echo '<div class="nav-item">
+                  <a class="nav-link" href="addplayers.php" data-placement="left">
+                    <i class="bi-house nav-icon"></i>
+                    <span class="nav-link-title">add player</span>
+                  </a>
+                </div>
+                ';
                 }
                 else
                 {
