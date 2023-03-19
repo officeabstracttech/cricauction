@@ -145,7 +145,7 @@ function Header()
 {
     // Title
     $this->SetFont('Arial','',18);
-    $this->Cell(0,6,'CricAuction - ',0,1,'C');
+    $this->Cell(0,6,'CricAuction Report',0,1,'C');
     $this->Ln(10);
     // Ensure table header is printed
     parent::Header();
@@ -153,11 +153,41 @@ function Header()
 }
 
 
-$pdf = new PDF();
+if(isset($_GET["report"]) && $_GET["report"]==1)// if true then all  player sold data 
+{
+    $pdf = new PDF();
+    $pdf->AddPage();
+$pdf->Table($con,'SELECT player_name,player_role,player_master.phone_no,player_dob,sold_status,sold_points,team_name from player_master inner join player_mapping_master on player_master.id=player_mapping_master.player_id inner join team_master on player_mapping_master.team_id=team_master.id and player_mapping_master.tournment_id='.$_SESSION["login_user"].' and player_mapping_master.enrolled_status=1 and sold_status=1;');
 $pdf->AddPage();
+$pdf->Output();
+}
+else if(isset($_GET["report"]) && $_GET["report"]==2)// if true then all  player unsold data 
+{
+    $pdf = new PDF();
+    $pdf->AddPage();
+$pdf->Table($con,'SELECT player_name,player_role,player_master.phone_no,player_dob,sold_status,sold_points from player_master inner join player_mapping_master on player_master.id=player_mapping_master.player_id  and player_mapping_master.tournment_id='.$_SESSION["login_user"].' and player_mapping_master.enrolled_status=1 and sold_status=2;');
+$pdf->AddPage();
+$pdf->Output();
+}
+else if(isset($_GET["report"]) && isset($_GET["team_id"]) && $_GET["report"]==3)// if true then all  player unsold data 
+{
+    $pdf = new PDF();
+    $pdf->AddPage();
+$pdf->Table($con,'  SELECT player_name,player_role,phone_no,player_dob,sold_points from player_master inner join player_mapping_master on player_master.id=player_mapping_master.player_id and player_mapping_master.team_id='.$_GET["team_id"].';');
+$pdf->AddPage();
+$pdf->Output();
+}
+else
+{
+    $pdf = new PDF();
+    $pdf->AddPage();
 // First table: output all columns
 $pdf->Table($con,'select player_master.id as Player_ID,player_master.player_name as Player_Name,player_master.player_role as Role,player_master.player_age as Age from player_master left join player_mapping_master on player_mapping_master.player_id=player_master.id where enrolled_status=1;');
 $pdf->AddPage();
 $pdf->Output();
+    
+
+
+}
 
 ?>

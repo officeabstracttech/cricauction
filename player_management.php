@@ -19,7 +19,9 @@ $process=$process[0];
         <div class="row align-items-end">
                       
           <!-- End Col -->
-
+      <a href="report.php?report=1" class="btn btn-outline-sucess"> Sold Player Report</a>
+          <!-- End Col -->
+      <a href="report.php?report=2"> UnSold Player Report</a>
           
           <!-- End Col -->
         </div>

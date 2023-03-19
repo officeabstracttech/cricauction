@@ -64,8 +64,11 @@ $process=$process[0];
       
             <div class="modal-header">
               <h5 class="modal-title h4" id="myExtraLargeModalLabel">'.$team[2].'</h5>
+              
+            <a href="report.php?report=3&team_id='.$team[0].'"> Team Report</a>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            
             <div class="modal-body">
             <!-- Card -->
             <div class="card ">
@@ -83,7 +86,6 @@ $process=$process[0];
                     <!-- End Search -->
                   </form>
                 </div>
-          
               </div>
               <!-- End Header -->
           
