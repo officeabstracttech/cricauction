@@ -173,7 +173,7 @@ else if(isset($_GET["report"]) && isset($_GET["team_id"]) && $_GET["report"]==3)
 {
     $pdf = new PDF();
     $pdf->AddPage();
-$pdf->Table($con,'  SELECT player_name,player_role,phone_no,player_dob,sold_points from player_master inner join player_mapping_master on player_master.id=player_mapping_master.player_id and player_mapping_master.team_id='.$_GET["team_id"].';');
+$pdf->Table($con,'  SELECT player_name,player_role,phone_no,player_age,sold_points from player_master inner join player_mapping_master on player_master.id=player_mapping_master.player_id and player_mapping_master.team_id='.$_GET["team_id"].';');
 $pdf->AddPage();
 $pdf->Output();
 }
