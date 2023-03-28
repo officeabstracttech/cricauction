@@ -1,452 +1,441 @@
-<?php
-include("header.php");
-if($_SESSION["login_role"]!=1)
-{
-  echo "<script>windows.location.href='logout.php';</script>";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Required Meta Tags Always Come First -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Title -->
+  <title>CricAuction</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="./favicon.ico">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="./assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="./assets/vendor/hs-img-compare/hs-img-compare.css">
+
+  <!-- CSS Front Template -->
+
+  <link rel="preload" href="./assets/css/theme.min.css" data-hs-appearance="default" as="style">
+  <link rel="preload" href="./assets/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
+
+  <style data-hs-appearance-onload-styles>
+    *
+    {
+      transition: unset !important;
+    }
+
+    body
+    {
+      opacity: 0;
+    }
+  </style>
+
+  <script>
+            window.hs_config = {"autopath":"@@autopath","deleteLine":"hs-builder:delete","deleteLine:build":"hs-builder:build-delete","deleteLine:dist":"hs-builder:dist-delete","previewMode":false,"startPath":"/index.html","vars":{"themeFont":"https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap","version":"?v=1.0"},"layoutBuilder":{"extend":{"switcherSupport":true},"header":{"layoutMode":"default","containerMode":"container-fluid"},"sidebarLayout":"default"},"themeAppearance":{"layoutSkin":"default","sidebarSkin":"default","styles":{"colors":{"primary":"#377dff","transparent":"transparent","white":"#fff","dark":"132144","gray":{"100":"#f9fafc","900":"#1e2022"}},"font":"Inter"}},"languageDirection":{"lang":"en"},"skipFilesFromBundle":{"dist":["assets/js/hs.theme-appearance.js","assets/js/hs.theme-appearance-charts.js","assets/js/demo.js"],"build":["assets/css/theme.css","assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js","assets/js/demo.js","assets/css/theme-dark.css","assets/css/docs.css","assets/vendor/icon-set/style.css","assets/js/hs.theme-appearance.js","assets/js/hs.theme-appearance-charts.js","node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js","assets/js/demo.js"]},"minifyCSSFiles":["assets/css/theme.css","assets/css/theme-dark.css"],"copyDependencies":{"dist":{"*assets/js/theme-custom.js":""},"build":{"*assets/js/theme-custom.js":"","node_modules/bootstrap-icons/font/*fonts/**":"assets/css"}},"buildFolder":"","replacePathsToCDN":{},"directoryNames":{"src":"./src","dist":"./dist","build":"./build"},"fileNames":{"dist":{"js":"theme.min.js","css":"theme.min.css"},"build":{"css":"theme.min.css","js":"theme.min.js","vendorCSS":"vendor.min.css","vendorJS":"vendor.min.js"}},"fileTypes":"jpg|png|svg|mp4|webm|ogv|json"}
+            window.hs_config.gulpRGBA = (p1) => {
+  const options = p1.split(',')
+  const hex = options[0].toString()
+  const transparent = options[1].toString()
+
+  var c;
+  if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+    c= hex.substring(1).split('');
+    if(c.length== 3){
+      c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+    }
+    c= '0x'+c.join('');
+    return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',' + transparent + ')';
+  }
+  throw new Error('Bad Hex');
 }
-?>
-  <main id="content" role="main" class="main">
-    <!-- Content -->
-    <div class="content container-fluid">
-      <!-- Page Header -->
-      <div class="page-header">
-        <div class="row align-items-center">
-          <div class="col">
-            <h1 class="page-header-title">Welcome</h1>
-          </div>
-          <!-- End Col -->
+            window.hs_config.gulpDarken = (p1) => {
+  const options = p1.split(',')
 
-          <!-- End Col -->
-        </div>
-        <!-- End Row -->
-      </div>
-      <!-- End Page Header -->
+  let col = options[0].toString()
+  let amt = -parseInt(options[1])
+  var usePound = false
 
-      <!-- Stats -->
-      <div class="row">
-        
-                <?php
-                if($process>=2 && $_SESSION["login_role"]==1)
-                {
-                echo '<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+  if (col[0] == "#") {
+    col = col.slice(1)
+    usePound = true
+  }
+  var num = parseInt(col, 16)
+  var r = (num >> 16) + amt
+  if (r > 255) {
+    r = 255
+  } else if (r < 0) {
+    r = 0
+  }
+  var b = ((num >> 8) & 0x00FF) + amt
+  if (b > 255) {
+    b = 255
+  } else if (b < 0) {
+    b = 0
+  }
+  var g = (num & 0x0000FF) + amt
+  if (g > 255) {
+    g = 255
+  } else if (g < 0) {
+    g = 0
+  }
+  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
+}
+            window.hs_config.gulpLighten = (p1) => {
+  const options = p1.split(',')
 
-                <!-- Card -->
-                <a href="live.php" class="card"  style="max-width: 20rem;">
-                  <img class="card-img-top" src="./assets/gif/liveauction.gif" alt="Card image cap">
-                  <div class="card-body">
-          '; 
-                $result=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
-                $data=mysqli_fetch_row($result);
-                echo '
-                <h3 class="card-title">'.$data[1].'</h3>
-                <p class="card-text">Go to  Auction...</p>
-                <p class="card-text">
-                  <small class="text-muted">cricauction is live.</small>
-                </p>
-              </div>
-            </a>
-            <!-- End Card -->
-      </div>
-                ';
-                
-            }
-                ?>
-    
-    
-<?php
-if($process>1)
-{
-echo '
-<br><br>
-<span class="divider-center"><h1>Tournament Details</h1></span>
-<br><br><br><br>
-<h1> </h1>
-<div class="row">    
-  
-<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
-<div class="card" style="max-width: 20rem;">
-      <div class="card-body">
-        <h1 class="card-title">Max Points</h1>
-        <h2>'.$data[2].'</h2>
+  let col = options[0].toString()
+  let amt = parseInt(options[1])
+  var usePound = false
 
-      </div>
-    </div>
-  
-</div>
-<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
-<div class="card" style="max-width: 20rem;">
-      <div class="card-body">
-        <h1 class="card-title">Base Points</h1>
-        <h2>'.$data[3].'</h2>
+  if (col[0] == "#") {
+    col = col.slice(1)
+    usePound = true
+  }
+  var num = parseInt(col, 16)
+  var r = (num >> 16) + amt
+  if (r > 255) {
+    r = 255
+  } else if (r < 0) {
+    r = 0
+  }
+  var b = ((num >> 8) & 0x00FF) + amt
+  if (b > 255) {
+    b = 255
+  } else if (b < 0) {
+    b = 0
+  }
+  var g = (num & 0x0000FF) + amt
+  if (g > 255) {
+    g = 255
+  } else if (g < 0) {
+    g = 0
+  }
+  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
+}
+            </script>
+</head>
 
-      </div>
-    </div>
-  
-</div>
-<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
-<div class="card" style="max-width: 20rem;">
-      <div class="card-body">
-        <h1 class="card-title">Total Players</h1>
-        <h2>';
-        $totalplayer=mysqli_query($con,"select count(player_id) from player_mapping_master where tournment_id=".$_SESSION["login_user"]."");
-        $totalplayer=mysqli_fetch_row($totalplayer);
-        echo $totalplayer[0];
-        
-        echo '</h2>
-
-      </div>
-    </div>
-  
-</div>
-<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
-<div class="card" style="max-width: 20rem;">
-      <div class="card-body">
-        <h1 class="card-title">Total Teams</h1>';
-          $count=mysqli_query($con,"select count(id) from team_master where tournment_id=".$_SESSION["login_user"]."");
-        $count=mysqli_fetch_row($count);
-        echo '
-        <h2>'.$count[0].'</h2>';
-        
-            echo '
-      </div>
-    </div>
-  
-</div>
-
-</div>';
-          }
-
-?>
-
-
-
-
-      <?php 
-    if($process>=3 && $_SESSION["login_role"]==1)
-    {  
-      echo '
-      <br><br>
-  <span class="divider-center"><h1>All Teams</h1></span>
-  <h1> <br><br></h1>
-  <div class="row">
-    ';
-      $teamresult=mysqli_query($con,"select * from team_master where tournment_id=".$_SESSION["login_user"]."");
-      
-  $r=mysqli_query($con,"select * from tournment_master where id=".$_SESSION["login_user"]."");
-  $d=mysqli_fetch_row($r);
-      while($team=mysqli_fetch_row($teamresult))
+<body>
+  <style type="text/css">
+    @media (min-width: 1400px)
+    {
+      .container-lg
       {
-  $maxpoint=$team[6]-(($d[4]-$team[7]-1)*$d[3]);
-       
-  $playercounter=mysqli_query($con,"SELECT count(player_mapping_master.id) from player_mapping_master left join player_master on player_mapping_master.player_id=player_master.id where team_id=".$team[0]." and player_age>=37");
-  $playercounter=mysqli_fetch_row($playercounter);
- echo '
- 
-<div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
- <!-- Card -->
- <a class="card" data-bs-toggle="modal" data-bs-target="#TeamData'.$team[0].'" style="max-width: 20rem;">
-   <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,'.base64_encode($team[3]).'" alt="Card image cap">
-   <div class="card-body">
-     <h1 class="card-title">'.$team[2].'</h1>
-    <h3>Remaining Points: <span style="font-size:24px;"> '.$team[6].'</span></h3>
-    <h3>Player Max Points: <span style="font-size:24px;"> '.$maxpoint.'</span></h3>
-    <h3>Players Taken : <span style="font-size:24px;">'.$team[7].'</span></h3>
-    <h3>Players Taken Age +37 : <span style="font-size:24px;">'.$playercounter[0].'</span></h3>
-   </div>
- </a>
-<!-- End Card -->
-</div>
-
-      ';  
+        max-width: 1140px;
       }
-      echo ' </div>
-      </div>
-      <!-- End Stats -->
-';
-    } 
-      ?>
-     
-    </div>
-    <!-- End Content -->
+    }
+  </style>
 
-    <!-- Footer -->
+  <script src="./assets/js/hs.theme-appearance.js"></script>
 
-    <div class="footer">
-      <div class="row justify-content-between align-items-center">
-        <div class="col">
-          <p class="fs-6 mb-0">&copy; CricAuction. <span class="d-none d-sm-inline-block">2023 Abstract Tech Solution.</span></p>
+  <!-- ========== HEADER ========== -->
+  <header id="header" class="navbar navbar-expand-lg navbar-center navbar-light bg-white navbar-absolute-top navbar-show-hide" data-hs-header-options='{
+            "fixMoment": 0,
+            "fixEffect": "slide"
+          }'>
+    <div class="container-lg">
+      <nav class="js-mega-menu navbar-nav-wrap">
+        <!-- Logo -->
+
+        <a class="navbar-brand" href="./index.php" aria-label="Front">
+          
+        </a>
+
+        <!-- End Logo -->
+
+        <!-- Secondary Content -->
+        <div class="navbar-nav-wrap-secondary-content">
+          
+          <a class="btn btn-primary navbar-btn" href="./contact.php">Contact Us</a>
         </div>
-        <!-- End Col -->
+        <!-- End Secondary Content -->
 
-        <div class="col-auto">
-          <div class="d-flex justify-content-end">
-            <!-- List Separator -->
-            <ul class="list-inline list-separator">
-             
-              <li class="list-inline-item">
-               
-              </li>
-            </ul>
-            <!-- End List Separator -->
+        <!-- Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContainerNavDropdown" aria-controls="navbarContainerNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-default">
+            <i class="bi-list"></i>
+          </span>
+          <span class="navbar-toggler-toggled">
+            <i class="bi-x"></i>
+          </span>
+        </button>
+        <!-- End Toggler -->
+
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="navbarContainerNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link py-2 py-lg-3" href="./login.php">Login<span class="badge bg-dark rounded-pill ms-1"></span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link py-2 py-lg-3" href="./signin.php" >Sign Up </a>
+            </li>
+            
+          </ul>
+        </div>
+        <!-- End Collapse -->
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== END HEADER ========== -->
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main id="content" role="main" class="main">
+    <!-- Hero -->
+    <div class="overflow-hidden gradient-radial-sm-primary">
+      <div class="container-lg content-space-t-3 content-space-t-lg-4 content-space-b-2">
+        <div class="w-lg-75 text-center mx-lg-auto text-center mx-auto">
+          <!-- Heading -->
+          <div class="mb-7 animated fadeInUp">
+            <h1 class="display-2 mb-3">Cric<span class="text-primary text-highlight-warning">Auction</span></h1>
+            <p class="fs-2">An Absolute Cricketing Solution</p>
           </div>
+          <!-- End Heading -->
+        </div>
+      </div>
+    </div>
+    <!-- End Hero -->
+
+    <!-- Card Grid -->
+    <div class="container-lg content-space-t-lg-2 content-space-b-2 content-space-b-lg-3">
+      <!-- Heading -->
+      <div class="w-lg-75 text-center mx-lg-auto mb-7 mb-md-10">
+        <h2 class="display-4">About <span class="text-primary">CricAuction</span></h2>
+        <p class="lead">CricAuction is a type of software that is designed to help businesses and individuals manage their auction operations. The CricAuction software typically provides features and tools for creating and managing auctions, managing bidders and bids, tracking sales and payments, generating reports, and more.
+
+CricAuction can be used for a variety of different types of auctions, including online auctions, live auctions, silent auctions, and more. Many auction management software solutions are web-based, which means they can be accessed from anywhere with an internet connection.</p>
+      </div>
+      <!-- End Heading -->
+
+      
         </div>
         <!-- End Col -->
       </div>
       <!-- End Row -->
     </div>
+    <!-- End Card Grid -->
 
-    <!-- End Footer -->
+   
+
+    <!-- Card Grid -->
+    <div class="container-lg content-space-2 content-space-lg-3">
+      <!-- Heading -->
+      <div class="w-lg-75 text-center mx-lg-auto mb-7 mb-md-10">
+        <h2 class="display-4">Packed with <span class="text-primary">features</span> you already love</h2>
+        <p class="lead">CricAuction is used to facilitate online auctions, and typically includes a range of features to help sellers and buyers participate in the auction process. Some common features of auction software include:</p>
+      </div>
+      <!-- End Heading -->
+
+      <div class="row">
+        <div class="col-md-7 mb-4">
+          <!-- Card -->
+          <div class="card card-lg h-100 bg-light border-0 shadow-none overflow-hidden">
+            <div class="card-body">
+              <h2 class="card-title h1 text-inherit">Player registration</h2>
+              <p class="card-text lead"> Players can register to participate in auctions and create their own profiles.</p>
+            </div>
+           
+          </div>
+          <!-- End Card -->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-md-5 mb-4">
+          <!-- Card -->
+          <div class="card card-lg h-100 bg-light border-0 shadow-none overflow-hidden">
+            <div class="card-body">
+              <h2 class="card-title h1 text-inherit">Team listings</h2>
+              <p class="card-text lead">Team Owners can list Team in the auction, with details such as photos, descriptions.</p>
+            </div>
+           
+          </div>
+          <!-- End Card -->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-md-5 mb-4">
+          <!-- Card -->
+          <div class="card card-lg h-100 bg-light border-0 shadow-none overflow-hidden">
+            <div class="card-body">
+              <h2 class="card-title h1 text-inherit">Bidding system</h2>
+              <p class="card-text lead">Buyers can place bids on items, with the auction software automatically updating the current highest bid.</p>
+            </div>
+            
+          </div>
+          <!-- End Card -->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-md-7 mb-4">
+          <!-- Card -->
+          <div class="card card-lg h-100 bg-light border-0 shadow-none overflow-hidden">
+            <div class="card-body">
+              <h2 class="card-title h1 text-inherit">Bid history</h2>
+              <p class="card-text lead"> Users can view the bidding history for an item, including the bids placed, the time they were placed, and the bidder's username.</p>
+            </div>
+          </div>
+          <!-- End Card -->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-md-7 mb-4 mb-md-0">
+          <!-- Card -->
+          <div class="card card-lg h-100 bg-light border-0 shadow-none overflow-hidden">
+            <div class="card-body">
+              <h2 class="card-title h1 text-inherit">Reports and analytics</h2>
+              <p class="card-text lead">CricAuction can generate reports and analytics to help teams track their spending, analyze their bidding strategy, and optimize their team composition.</p>
+            </div>
+          </div>
+          <!-- End Card -->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-md-5">
+          <!-- Card -->
+          <div class="card card-lg h-100 bg-light border-0 shadow-none overflow-hidden">
+            <div class="card-body">
+              <h2 class="card-title h1 text-inherit">Team management</h2>
+              <p class="card-text lead">CricAuction allows teams to manage their bidding strategy, track their purchases, and manage their player roster.</p>
+          </div>
+          <!-- End Card -->
+        </div>
+        <!-- End Col -->
+      </div>
+      <!-- End Row -->
+    </div>
+    <!-- End Card Grid -->
+
+    
+
+    <!-- Sliding Image -->
+    <div class="content-space-b-2">
+      <!-- Heading -->
+      <div class="container-lg">
+        <div class="w-lg-75 text-center mx-lg-auto mb-7 mb-md-10">
+          <h2 class="display-4">Some Auctions That We Hosted</h2>
+          
+        </div>
+      </div>
+      <!-- End Heading -->
+
+      <div class="sliding-img mb-5">
+        <div class="sliding-img-frame-to-start" style="background-image: url(./assets/img/others/img1.png);" data-hs-theme-appearance="default"></div>
+        
+      </div>
+
+      <div class="sliding-img">
+        <div class="sliding-img-frame-to-end" style="background-image: url(./assets/img/others/img2.png);" data-hs-theme-appearance="default"></div>
+       
+      </div>
+    </div>
+    <!-- End Sliding Image -->
+   
+      </div>
+
+      <div class="d-grid mx-auto" style="max-width: 15rem;">
+        <a class="btn btn-primary btn-lg" href="./contact.php">Get Quote</a>
+      </div>
+    </div>
+    <!-- End Tools -->
+
+   
   </main>
   <!-- ========== END MAIN CONTENT ========== -->
 
+  <!-- ========== FOOTER ========== -->
+  <footer class="container-lg text-center py-10">
+    <!-- Socials -->
+    <ul class="list-inline mb-3">
+      <li class="list-inline-item">
+        <a class="btn btn-soft-secondary btn-sm btn-icon rounded-circle" href="#">
+          <i class="bi-facebook"></i>
+        </a>
+      </li>
+
+      <li class="list-inline-item">
+        <a class="btn btn-soft-secondary btn-sm btn-icon rounded-circle" href="#">
+          <i class="bi-twitter"></i>
+        </a>
+      </li>
+
+      <li class="list-inline-item">
+        <a class="btn btn-soft-secondary btn-sm btn-icon rounded-circle" href="#">
+          <i class="bi-github"></i>
+        </a>
+      </li>
+
+      <li class="list-inline-item">
+        <a class="btn btn-soft-secondary btn-sm btn-icon rounded-circle" href="https://instagram.com/abstract_tech_solutions?igshid=YmMyMTA2M2Y=">
+          <i class="bi-instagram"></i>
+        </a>
+      </li>
+    </ul>
+    <!-- End Socials -->
+
+    <p class="mb-0">&copy; CricAuction. 2023 Abstract Tech Solution. All rights reserved.</p>
+  </footer>
+  <!-- ========== END FOOTER ========== -->
+
 
   <!-- JS Global Compulsory  -->
-  <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
-  <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="./assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+  <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- JS Implementing Plugins -->
-  <script src="assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
-  <script src="assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
-
-  <script src="assets/vendor/chart.js/dist/Chart.min.js"></script>
-  <script src="assets/vendor/chartjs-chart-matrix/dist/chartjs-chart-matrix.min.js"></script>
-  <script src="assets/vendor/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js"></script>
-  <script src="assets/vendor/daterangepicker/moment.min.js"></script>
-  <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
-  <script src="assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
-  <script src="assets/vendor/clipboard/dist/clipboard.min.js"></script>
-  <script src="assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
-  <script src="assets/vendor/datatables.net.extensions/select/select.min.js"></script>
+  <script src="./assets/vendor/hs-header/dist/hs-header.min.js"></script>
+  <script src="./assets/vendor/hs-img-compare/hs-img-compare.js"></script>
+  <script src="./assets/vendor/hs-go-to/dist/hs-go-to.min.js"></script>
 
   <!-- JS Front -->
-  <script src="assets/js/theme.min.js"></script>
-  <script src="assets/js/hs.theme-appearance-charts.js"></script>
-
-  <!-- JS Plugins Init. -->
-  <script>
-    $(document).on('ready', function () {
-      // INITIALIZATION OF DATERANGEPICKER
-      // =======================================================
-      $('.js-daterangepicker').daterangepicker();
-
-      $('.js-daterangepicker-times').daterangepicker({
-        timePicker: true,
-        startDate: moment().startOf('hour'),
-        endDate: moment().startOf('hour').add(32, 'hour'),
-        locale: {
-          format: 'M/DD hh:mm A'
-        }
-      });
-
-      var start = moment();
-      var end = moment();
-
-      function cb(start, end) {
-        $('#js-daterangepicker-predefined .js-daterangepicker-predefined-preview').html(start.format('MMM D') + ' - ' + end.format('MMM D, YYYY'));
-      }
-
-      $('#js-daterangepicker-predefined').daterangepicker({
-        startDate: start,
-        endDate: end,
-        ranges: {
-          'Today': [moment(), moment()],
-          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month': [moment().startOf('month'), moment().endOf('month')],
-          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        }
-      }, cb);
-
-      cb(start, end);
-    });
-
-
-    // INITIALIZATION OF DATATABLES
-    // =======================================================
-    HSCore.components.HSDatatables.init($('#datatable'), {
-      select: {
-        style: 'multi',
-        selector: 'td:first-child input[type="checkbox"]',
-        classMap: {
-          checkAll: '#datatableCheckAll',
-          counter: '#datatableCounter',
-          counterInfo: '#datatableCounterInfo'
-        }
-      },
-      language: {
-        zeroRecords: `<div class="text-center p-4">
-              <img class="mb-3" src="./assets/svg/illustrations/oc-error.svg" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="default">
-              <img class="mb-3" src="./assets/svg/illustrations-light/oc-error.svg" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="dark">
-            <p class="mb-0">No data to show</p>
-            </div>`
-      }
-    });
-
-    const datatable = HSCore.components.HSDatatables.getItem(0)
-
-    document.querySelectorAll('.js-datatable-filter').forEach(function (item) {
-      item.addEventListener('change',function(e) {
-        const elVal = e.target.value,
-    targetColumnIndex = e.target.getAttribute('data-target-column-index'),
-    targetTable = e.target.getAttribute('data-target-table');
-
-    HSCore.components.HSDatatables.getItem(targetTable).column(targetColumnIndex).search(elVal !== 'null' ? elVal : '').draw()
-      })
-    })
-  </script>
+  <script src="./assets/js/theme.min.js"></script>
 
   <!-- JS Plugins Init. -->
   <script>
     (function() {
-      localStorage.removeItem('hs_theme')
-
-      window.onload = function () {
-        
-
-        // INITIALIZATION OF NAVBAR VERTICAL ASIDE
-        // =======================================================
-        new HSSideNav('.js-navbar-vertical-aside').init()
+      // INITIALIZATION OF NAVBAR
+      // =======================================================
+      new HSHeader('#header').init()
 
 
-        // INITIALIZATION OF FORM SEARCH
-        // =======================================================
-        const HSFormSearchInstance = new HSFormSearch('.js-form-search')
+      // INITIALIZATION OF GO TO
+      // =======================================================
+      new HSGoTo('.js-go-to')
 
-        if (HSFormSearchInstance.collection.length) {
-          HSFormSearchInstance.getItem(1).on('close', function (el) {
-            el.classList.remove('top-0')
-          })
 
-          document.querySelector('.js-form-search-mobile-toggle').addEventListener('click', e => {
-            let dataOptions = JSON.parse(e.currentTarget.getAttribute('data-hs-form-search-options')),
-              $menu = document.querySelector(dataOptions.dropMenuElement)
+      // TRANSFORMATION
+      // =======================================================
+      const $figure = document.querySelector('.js-img-comp')
 
-            $menu.classList.add('top-0')
-            $menu.style.left = 0
-          })
+      if (window.pageYOffset) {
+        $figure.style.transform = `rotateY(${-18 + window.pageYOffset}deg) rotateX(${window.pageYOffset / 5}deg)`
+      }
+
+      let y = -18 + window.pageYOffset,
+        x = 55 - window.pageYOffset
+
+      const figureTransformation = function () {
+        if (-18 + window.pageYOffset / 5 > 0) {
+          y = 0
         }
 
+        if (55 - window.pageYOffset / 3 < 0) {
+          x = 0
+        }
 
-        // INITIALIZATION OF BOOTSTRAP DROPDOWN
-        // =======================================================
-        HSBsDropdown.init()
-
-
-        // INITIALIZATION OF CHARTJS
-        // =======================================================
-        HSCore.components.HSChartJS.init('.js-chart')
-
-
-        // INITIALIZATION OF CHARTJS
-        // =======================================================
-        HSCore.components.HSChartJS.init('#updatingBarChart')
-        const updatingBarChart = HSCore.components.HSChartJS.getItem('updatingBarChart')
-
-        // Call when tab is clicked
-        document.querySelectorAll('[data-bs-toggle="chart-bar"]').forEach(item => {
-          item.addEventListener('click', e => {
-            let keyDataset = e.currentTarget.getAttribute('data-datasets')
-
-            const styles = HSCore.components.HSChartJS.getTheme('updatingBarChart', HSThemeAppearance.getAppearance())
-
-            if (keyDataset === 'lastWeek') {
-              updatingBarChart.data.labels = ["Apr 22", "Apr 23", "Apr 24", "Apr 25", "Apr 26", "Apr 27", "Apr 28", "Apr 29", "Apr 30", "Apr 31"];
-              updatingBarChart.data.datasets = [
-                {
-                  "data": [120, 250, 300, 200, 300, 290, 350, 100, 125, 320],
-                  "backgroundColor": styles.data.datasets[0].backgroundColor,
-                  "hoverBackgroundColor": styles.data.datasets[0].hoverBackgroundColor,
-                  "borderColor": styles.data.datasets[0].borderColor,
-                  "maxBarThickness": 10
-                },
-                {
-                  "data": [250, 130, 322, 144, 129, 300, 260, 120, 260, 245, 110],
-                  "backgroundColor": styles.data.datasets[1].backgroundColor,
-                  "borderColor": styles.data.datasets[1].borderColor,
-                  "maxBarThickness": 10
-                }
-              ];
-              updatingBarChart.update();
-            } else {
-              updatingBarChart.data.labels = ["May 1", "May 2", "May 3", "May 4", "May 5", "May 6", "May 7", "May 8", "May 9", "May 10"];
-              updatingBarChart.data.datasets = [
-                {
-                  "data": [200, 300, 290, 350, 150, 350, 300, 100, 125, 220],
-                  "backgroundColor": styles.data.datasets[0].backgroundColor,
-                  "hoverBackgroundColor": styles.data.datasets[0].hoverBackgroundColor,
-                  "borderColor": styles.data.datasets[0].borderColor,
-                  "maxBarThickness": 10
-                },
-                {
-                  "data": [150, 230, 382, 204, 169, 290, 300, 100, 300, 225, 120],
-                  "backgroundColor": styles.data.datasets[1].backgroundColor,
-                  "borderColor": styles.data.datasets[1].borderColor,
-                  "maxBarThickness": 10
-                }
-              ]
-              updatingBarChart.update();
-            }
-          })
-        })
-
-
-        // INITIALIZATION OF CHARTJS
-        // =======================================================
-        HSCore.components.HSChartJS.init('.js-chart-datalabels', {
-          plugins: [ChartDataLabels],
-          options: {
-            plugins: {
-              datalabels: {
-                anchor: function (context) {
-                  var value = context.dataset.data[context.dataIndex];
-                  return value.r < 20 ? 'end' : 'center';
-                },
-                align: function (context) {
-                  var value = context.dataset.data[context.dataIndex];
-                  return value.r < 20 ? 'end' : 'center';
-                },
-                color: function (context) {
-                  var value = context.dataset.data[context.dataIndex];
-                  return value.r < 20 ? context.dataset.backgroundColor : context.dataset.color;
-                },
-                font: function (context) {
-                  var value = context.dataset.data[context.dataIndex],
-                    fontSize = 25;
-
-                  if (value.r > 50) {
-                    fontSize = 35;
-                  }
-
-                  if (value.r > 70) {
-                    fontSize = 55;
-                  }
-
-                  return {
-                    weight: 'lighter',
-                    size: fontSize
-                  };
-                },
-                formatter: function (value) {
-                  return value.r
-                },
-                offset: 2,
-                padding: 0
-              }
-            },
-          }
-        })
-
-        // INITIALIZATION OF SELECT
-        // =======================================================
-        HSCore.components.HSTomSelect.init('.js-select')
-
-
-        // INITIALIZATION OF CLIPBOARD
-        // =======================================================
-        HSCore.components.HSClipboard.init('.js-clipboard')
+        y = -18 + window.pageYOffset / 5 < 0 ? -18 + window.pageYOffset / 5 : y
+        x = 55 - window.pageYOffset / 3 > 0 ? 55 - window.pageYOffset / 3 : x
+        $figure.style.transform = `rotateY(${y}deg) rotateX(${x}deg)`
       }
+
+      figureTransformation()
+      window.addEventListener('scroll', figureTransformation)
     })()
   </script>
 

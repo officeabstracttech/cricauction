@@ -322,35 +322,35 @@ if($process==4)
   <!-- ========== END SECONDARY CONTENTS ========== -->
 
   <!-- JS Global Compulsory  -->
-  <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="./assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
-  <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src=".../assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- JS Implementing Plugins -->
-  <script src="./assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
-  <script src="./assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
+  <script src="../assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
+  <script src="../assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
 
-  <script src="./assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js"></script>
-  <script src="./assets/vendor/hs-file-attach/dist/hs-file-attach.min.js"></script>
-  <script src="./assets/vendor/hs-nav-scroller/dist/hs-nav-scroller.min.js"></script>
-  <script src="./assets/vendor/hs-step-form/dist/hs-step-form.min.js"></script>
-  <script src="./assets/vendor/hs-counter/dist/hs-counter.min.js"></script>
-  <script src="./assets/vendor/appear/dist/appear.min.js"></script>
-  <script src="./assets/vendor/imask/dist/imask.min.js"></script>
-  <script src="./assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
-  <script src="./assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
-  <script src="./assets/vendor/datatables.net.extensions/select/select.min.js"></script>
-  <script src="./assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="./assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
-  <script src="./assets/vendor/jszip/dist/jszip.min.js"></script>
-  <script src="./assets/vendor/pdfmake/build/pdfmake.min.js"></script>
-  <script src="./assets/vendor/pdfmake/build/vfs_fonts.js"></script>
-  <script src="./assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
-  <script src="./assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
-  <script src="./assets/vendor/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+  <script src="../assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js"></script>
+  <script src="../assets/vendor/hs-file-attach/dist/hs-file-attach.min.js"></script>
+  <script src="../assets/vendor/hs-nav-scroller/dist/hs-nav-scroller.min.js"></script>
+  <script src="../assets/vendor/hs-step-form/dist/hs-step-form.min.js"></script>
+  <script src="../assets/vendor/hs-counter/dist/hs-counter.min.js"></script>
+  <script src="../assets/vendor/appear/dist/appear.min.js"></script>
+  <script src="../assets/vendor/imask/dist/imask.min.js"></script>
+  <script src="../assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
+  <script src="../assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+  <script src="../assets/vendor/datatables.net.extensions/select/select.min.js"></script>
+  <script src="../assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="../assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="../assets/vendor/jszip/dist/jszip.min.js"></script>
+  <script src="../assets/vendor/pdfmake/build/pdfmake.min.js"></script>
+  <script src="../assets/vendor/pdfmake/build/vfs_fonts.js"></script>
+  <script src="../assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="../assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="../assets/vendor/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 
   <!-- JS Front -->
-  <script src="./assets/js/theme.min.js"></script>
+  <script src="../assets/js/theme.min.js"></script>
 
   <!-- JS Plugins Init. -->
   <script>
@@ -392,8 +392,8 @@ if($process==4)
         },
         language: {
           zeroRecords: `<div class="text-center p-4">
-              <img class="mb-3" src="./assets/svg/illustrations/oc-error.svg" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="default">
-              <img class="mb-3" src="./assets/svg/illustrations-light/oc-error.svg" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="dark">
+              <img class="mb-3" src="../assets/svg/illustrations/oc-error.svg" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="default">
+              <img class="mb-3" src="../assets/svg/illustrations-light/oc-error.svg" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="dark">
             <p class="mb-0">No data to show</p>
             </div>`
         }

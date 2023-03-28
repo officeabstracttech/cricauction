@@ -13,7 +13,7 @@ if(isset($_POST["sbtn"]))
         $data=mysqli_fetch_row($result);
         $_SESSION["login_user"]=$data[0];
         $_SESSION["login_role"]='1';
-        header("location:index.php");
+        header("location:management/index.php");
     }
     else
     {
@@ -23,7 +23,7 @@ if(isset($_POST["sbtn"]))
       $data=mysqli_fetch_row($result);
       $_SESSION["login_user"]=$data[0];
       $_SESSION["login_role"]='2';
-      header("location:reviewteam.php");
+      header("location:team/reviewteam.php");
     }
     else
     {
